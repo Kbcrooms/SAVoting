@@ -17,6 +17,7 @@ class HSOMain extends JFrame implements ActionListener{
     JButton btnCertifyElection = new JButton("Certify an Election");
     JButton btnStatistics = new JButton("View Turnout Statistics");
     JButton btnRecount = new JButton("Recount an Election");
+    JButton btnDelete = new JButton("Delete A Vote");
 
     btnCreateElection.setActionCommand("create");
     btnCreateElection.addActionListener(this);
@@ -26,6 +27,8 @@ class HSOMain extends JFrame implements ActionListener{
     btnStatistics.addActionListener(this);
     btnRecount.setActionCommand("recount");
     btnRecount.addActionListener(this);
+    btnDelete.setActionCommand("delete");
+    btnDelete.addActionListener(this);
 
     panelMain.setLayout(layout);
     layout.setAutoCreateGaps(true);
@@ -37,7 +40,8 @@ class HSOMain extends JFrame implements ActionListener{
 			.addComponent(btnCreateElection)
 			.addComponent(btnCertifyElection)
 			.addComponent(btnStatistics)
-			.addComponent(btnRecount))
+			.addComponent(btnRecount)
+			.addComponent(btnDelete))
 		            
     );
     layout.setVerticalGroup(
@@ -46,7 +50,8 @@ class HSOMain extends JFrame implements ActionListener{
 			.addComponent(btnCreateElection)
 			.addComponent(btnCertifyElection)
 			.addComponent(btnStatistics)
-			.addComponent(btnRecount))
+			.addComponent(btnRecount)
+			.addComponent(btnDelete))
 		          
 		);
 		    
