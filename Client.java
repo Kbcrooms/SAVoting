@@ -17,9 +17,7 @@ class Client extends JFrame implements ActionListener{
     Client(String mode){
         JPanel pnlMain = new JPanel();
         pnlMain.setLayout(new BoxLayout(pnlMain,BoxLayout.PAGE_AXIS));
-        Color bgColor = new Color(100,149,237);
-        Color bgColor2 = new Color(176,196,222);
-        Color bgColor3 = new Color(173,216,230);
+        Color bgColor = new Color(176,196,222);
         
         JPanel pnlName = new JPanel();
         JPanel pnlPassword = new JPanel();
@@ -76,8 +74,11 @@ class Client extends JFrame implements ActionListener{
         pnlMain.add(pnlButtons);
         
         pnlName.setBackground(bgColor);
-        pnlPassword.setBackground(bgColor2);
-        pnlButtons.setBackground(bgColor3);
+        pnlPassword.setBackground(bgColor);
+        pnlButtons.setBackground(bgColor);
+        pnlRadios.setBackground(bgColor);
+        adminSelect.setBackground(bgColor);
+        studentSelect.setBackground(bgColor);
         getContentPane().add(pnlMain);
         
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
