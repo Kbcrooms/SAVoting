@@ -27,9 +27,12 @@ class HomePageAdmin extends JFrame implements ActionListener{
 	GroupLayout layout = new GroupLayout(pnlMain);
 	JPanel pnlResultButtons = new JPanel();
 	JPanel pnlElegibilityButtons = new JPanel();
+	Color bgColor = new Color(176,196,222);
+	pnlResultButtons.setBorder(BorderFactory.createLineBorder(Color.black));
+	pnlElegibilityButtons.setBorder(BorderFactory.createLineBorder(Color.black));
 
-	txtElectionTitle = new JTextField(10);
-	txtStartDate = new JTextField(10);
+	txtElectionTitle = new JTextField(20);
+	txtStartDate = new JTextField(20);
 	txtEndDate = new JTextField(10);
 	txtElectionComID = new JTextField(10);
 
@@ -46,6 +49,10 @@ class HomePageAdmin extends JFrame implements ActionListener{
 	chkWinner.setActionCommand("Winner");
 	JCheckBox chkTurnoutStats = new JCheckBox("Turnout Statistics");
 	chkTurnoutStats.setActionCommand("Turnout Statistics");
+	
+	chkRawCount.setBackground(bgColor);
+	chkWinner.setBackground(bgColor);
+	chkTurnoutStats.setBackground(bgColor);
 
 	btnCheckResults = new ArrayList<JCheckBox>();
 	btnCheckResults.add(chkRawCount);
@@ -57,21 +64,25 @@ class HomePageAdmin extends JFrame implements ActionListener{
 	pnlResultButtons.add(chkWinner);
 	pnlResultButtons.add(chkTurnoutStats);
 
-	JLabel lblVoterElegibility = new JLabel("Voter Elegibility:   ");
+	JLabel lblVoterElegibility = new JLabel("Voter Eligibility:   ");
 	lblVoterElegibility.setFont(new Font(lblVoterElegibility.getFont().getName(), Font.PLAIN, 20));
 	JCheckBox chkRank = new JCheckBox("Rank");
 	chkRank.setActionCommand("Rank");
 	JCheckBox chkCollege = new JCheckBox("College");
 	chkCollege.setActionCommand("College");
-	JCheckBox chkClub = new JCheckBox("Club/Orginization");
+	JCheckBox chkClub = new JCheckBox("Club/Organization");
 	chkClub.setActionCommand("Club");
+	
+	chkRank.setBackground(bgColor);
+	chkCollege.setBackground(bgColor);
+	chkClub.setBackground(bgColor);
 
 	btnCheckVoterElegibility = new ArrayList<JCheckBox>();
 	btnCheckVoterElegibility.add(chkRank);
 	btnCheckVoterElegibility.add(chkCollege);
 	btnCheckVoterElegibility.add(chkClub);
 
-        pnlElegibilityButtons.add(lblVoterElegibility);
+    pnlElegibilityButtons.add(lblVoterElegibility);
 	pnlElegibilityButtons.add(chkRank);
 	pnlElegibilityButtons.add(chkCollege);
 	pnlElegibilityButtons.add(chkClub);
@@ -83,45 +94,53 @@ class HomePageAdmin extends JFrame implements ActionListener{
 
 	pnlMain.setLayout(layout);
 	layout.setAutoCreateGaps(true);
-        layout.setAutoCreateContainerGaps(true);
+    layout.setAutoCreateContainerGaps(true);
 
 	layout.setHorizontalGroup(
-	      layout.createSequentialGroup()
-	      .addGroup(layout.createParallelGroup(GroupLayout.Alignment.CENTER)
-				  .addComponent(lElectionTitle)
-				  .addComponent(txtElectionTitle)
-				  .addComponent(lStartDate)
-				  .addComponent(txtStartDate)
-				  .addComponent(lEndDate)
-				  .addComponent(txtEndDate)
-				  .addComponent(lElectionComID)
-				  .addComponent(txtElectionComID)
-				  .addComponent(pnlResultButtons)
-				  .addComponent(pnlElegibilityButtons)
-			.addComponent(btnCreateElection))
+	    layout.createSequentialGroup()
+	      	.addGroup(layout.createParallelGroup(GroupLayout.Alignment.CENTER)
+	      		.addGroup(layout.createSequentialGroup()
+	      			.addGroup(layout.createParallelGroup()
+						  .addComponent(lElectionTitle)
+						  .addComponent(txtElectionTitle)
+						  .addComponent(lElectionComID)
+				  		  .addComponent(txtElectionComID))
+					.addGroup(layout.createParallelGroup()	  
+						  .addComponent(lStartDate)
+						  .addComponent(txtStartDate)
+						  .addComponent(lEndDate)
+						  .addComponent(txtEndDate)))
+				.addComponent(pnlResultButtons)
+				.addComponent(pnlElegibilityButtons)
+			    .addComponent(btnCreateElection))
 				  );
 
 	layout.setVerticalGroup(
-				layout.createParallelGroup()
-				.addGroup(layout.createSequentialGroup()
-				.addComponent(lElectionTitle)
-				.addComponent(txtElectionTitle)
-				.addComponent(lStartDate)
-				.addComponent(txtStartDate)
-				.addComponent(lEndDate)
-				.addComponent(txtEndDate)
-				.addComponent(lElectionComID)
-				.addComponent(txtElectionComID)
+		layout.createParallelGroup()
+			.addGroup(layout.createSequentialGroup()
+				.addGroup(layout.createParallelGroup()
+					.addGroup(layout.createSequentialGroup()
+						  .addComponent(lElectionTitle)
+						  .addComponent(txtElectionTitle)
+						  .addComponent(lElectionComID)
+				  		  .addComponent(txtElectionComID))
+					.addGroup(layout.createSequentialGroup()	  
+						  .addComponent(lStartDate)
+						  .addComponent(txtStartDate)
+						  .addComponent(lEndDate)
+						  .addComponent(txtEndDate)))
 				.addComponent(pnlResultButtons)
 				.addComponent(pnlElegibilityButtons)
-					  .addComponent(btnCreateElection))
+				.addComponent(btnCreateElection))
 				);
 
-	setSize(800,600);
+	setSize(650,300);
 	setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 	setTitle("Create An Election");
 
-	pnlMain.setBackground(Color.blue);
+	pnlMain.setBackground(bgColor);
+	pnlResultButtons.setBackground(bgColor);
+	pnlElegibilityButtons.setBackground(bgColor);
 	getContentPane().add(pnlMain);
 
 	//this centers the window in the screen

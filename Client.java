@@ -13,23 +13,27 @@ class Client extends JFrame implements ActionListener{
     JTextField txtName;
     JPasswordField txtPass;
     ButtonGroup btnGroupRadio;
-    
+        
     Client(String mode){
         JPanel pnlMain = new JPanel();
         pnlMain.setLayout(new BoxLayout(pnlMain,BoxLayout.PAGE_AXIS));
+        Color bgColor = new Color(100,149,237);
+        Color bgColor2 = new Color(176,196,222);
+        Color bgColor3 = new Color(173,216,230);
         
         JPanel pnlName = new JPanel();
         JPanel pnlPassword = new JPanel();
         JPanel pnlButtons = new JPanel();
         JPanel pnlRadios = new JPanel();
         
-        txtName = new JTextField(15);
+        txtName = new JTextField(30);
         JLabel lblName = new JLabel("Name");
+        pnlName.add(Box.createRigidArea(new Dimension(25,0)));
         pnlName.add(lblName);
         pnlName.add(txtName);
         
-        txtPass = new JPasswordField(15);
-        JLabel lblPass = new JLabel("Pass");
+        txtPass = new JPasswordField(30);
+        JLabel lblPass = new JLabel("Password");
         pnlPassword.add(lblPass);
         pnlPassword.add(txtPass);
         
@@ -71,17 +75,20 @@ class Client extends JFrame implements ActionListener{
         pnlMain.add(pnlPassword);
         pnlMain.add(pnlButtons);
         
+        pnlName.setBackground(bgColor);
+        pnlPassword.setBackground(bgColor2);
+        pnlButtons.setBackground(bgColor3);
         getContentPane().add(pnlMain);
         
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setTitle("Login Client");        
-        setSize(500,400);
+        setTitle("Morgantown University Election Login");        
+        setSize(500,150);
         
         Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
         int x = (int) ((dimension.getWidth() - this.getWidth()) / 2);
         int y = (int) ((dimension.getHeight() - this.getHeight()) / 2);
         setLocation(x, y);
-        
+               
         setVisible(true);
         run();
 
