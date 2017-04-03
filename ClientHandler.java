@@ -75,7 +75,8 @@ class ClientHandler extends Thread{
       if(data.length == 5){
         pwOut.println(server.createElection(data[1].trim(),data[2].trim(),data[3].trim(),data[4]).trim());
       }
-      pwOut.println("<error>");
+      else
+        pwOut.println("<error>");
     }
     private void die(){
         try{

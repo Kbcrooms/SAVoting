@@ -103,8 +103,11 @@ class Server extends Thread{
       if(elections.containsKey(eName)){
         return "<dupelection>";
       }
-      elections.put(eName,new Election(eComID,eStart,eEnd));
-      return "<createdelection>";
+      else if(admins.containsKey(eComID)){
+        elections.put(eName,new Election(eComID,eStart,eEnd));
+        return "<createdelection>";
+      }
+      return "<invalidcomid>";
     }
     public static void main(String args[]){
         new Server().start();

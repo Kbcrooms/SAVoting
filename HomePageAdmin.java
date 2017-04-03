@@ -6,6 +6,8 @@ import java.net.*;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 class HomePageAdmin extends JFrame implements ActionListener{
   //Create an election
@@ -21,6 +23,7 @@ class HomePageAdmin extends JFrame implements ActionListener{
   ArrayList<JCheckBox> btnCheckVoterElegibility;
   PrintWriter pwOut;
   BufferedReader brIn;
+  private final String dateRegex = "([0-9]{2})/([0-9]{2})/([0-9]{4})";
   HomePageAdmin(){}
   HomePageAdmin(PrintWriter pwOut,BufferedReader brIn){
     this.pwOut = pwOut;
@@ -39,8 +42,8 @@ class HomePageAdmin extends JFrame implements ActionListener{
   	txtElectionComID = new JTextField(10);
 
   	JLabel lElectionTitle = new JLabel("Election Title");
-  	JLabel lStartDate = new JLabel("Start Date");
-  	JLabel lEndDate = new JLabel("End Date");
+  	JLabel lStartDate = new JLabel("Start Date (Ex: 05/30/2017)");
+  	JLabel lEndDate = new JLabel("End Date (Ex: 05/31/2017)");
   	JLabel lElectionComID = new JLabel("Election Commisioner ID");
 
   	JLabel lblResults = new JLabel("Results Displayed:   ");
@@ -167,13 +170,22 @@ class HomePageAdmin extends JFrame implements ActionListener{
 
 
     public void actionPerformed(ActionEvent e){
-      switch(e.getActionCommand()){
-        case "create":
-          System.out.println("<election>," + txtElectionTitle.getText()+","+txtElectionComID.getText()+","+txtStartDate.getText()+","+txtEndDate.getText());
-          pwOut.println("<election>," + txtElectionTitle.getText()+","+txtElectionComID.getText()+","+txtStartDate.getText()+","+txtEndDate.getText());
-        break;
+      String sDate = txtStartDate.getText();
+      String eDate = txtEndDate.getText();
+      Pattern  datePattern = Pattern.compile(dateRegex);
+      Matcher sDateMatcher = datePattern.matcher(sDate);
+      Matcher dDateMatcher = datePattern.matcher(eDate);
+      if(sDateMatcher.matches()&&dDateMatcher.matches()){
+        switch(e.getActionCommand()){
+          case "create":
+            System.out.println("<election>," + txtElectionTitle.getText()+","+txtElectionComID.getText()+","+txtStartDate.getText()+","+txtEndDate.getText());
+            pwOut.println("<election>," + txtElectionTitle.getText()+","+txtElectionComID.getText()+","+txtStartDate.getText()+","+txtEndDate.getText());
+          break;
 
+        }
       }
+      else
+        JOptionPane.showMessageDialog(this,"Invalid Date","Error Creating Election",JOptionPane.PLAIN_MESSAGE);
     }
 
     public static void main(String args[]){
