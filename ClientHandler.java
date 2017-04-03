@@ -27,12 +27,15 @@ class ClientHandler extends Thread{
                 line = brIn.readLine();
                 System.out.println(line);
                 String [] data = line.split(",");
-                switch (data[0]){
+                switch (data[0].trim()){
                     case "<add>":
                         addUser(data);
                     break;
                     case "<login>":
                         loginUser(data);
+                    break;
+                    case "<election>":
+                      createElection(data);
                     break;
                     case "<die>" :
                         die();
@@ -67,6 +70,12 @@ class ClientHandler extends Thread{
         }else{
             pwOut.println("<error>");
         }
+    }
+    private void createElection(String [] data){
+      if(data.length == 5){
+        pwOut.println(server.createElection(data[1].trim(),data[2].trim(),data[3].trim(),data[4]).trim());
+      }
+      pwOut.println("<error>");
     }
     private void die(){
         try{

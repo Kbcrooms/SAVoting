@@ -8,6 +8,7 @@ class Server extends Thread{
 
     Hashtable<String,String> admins;
     Hashtable<String,String> students;
+    Hashtable<String,Election> elections;
     ServerSocket ss;
 
     File f;
@@ -20,6 +21,7 @@ class Server extends Thread{
     Server(){
         admins = new Hashtable<String,String>();
         students = new Hashtable<String,String>();
+        elections = new Hashtable<String,Election>();
     }
 
     public void run(){
@@ -97,7 +99,13 @@ class Server extends Thread{
         }
         return "<invalid>";
     }
-
+    public String createElection(String eName, String eComID, String eStart, String eEnd){
+      if(elections.containsKey(eName)){
+        return "<dupelection>";
+      }
+      elections.put(eName,new Election(eComID,eStart,eEnd));
+      return "<createdelection>";
+    }
     public static void main(String args[]){
         new Server().start();
     }

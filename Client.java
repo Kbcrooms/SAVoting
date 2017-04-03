@@ -62,10 +62,10 @@ class Client extends JFrame implements ActionListener{
         btnQuit.setActionCommand("quit");
         btnQuit.addActionListener(this);
 
-	if(mode.equals("ADD_DATA")){
-	    pnlButtons.add(btnAdd);
-	    pnlMain.add(pnlRadios);
-	}
+      	if(mode.equals("ADD_DATA")){
+      	    pnlButtons.add(btnAdd);
+      	    pnlMain.add(pnlRadios);
+      	}
         pnlButtons.add(btnLogin);
         pnlButtons.add(btnQuit);
 
@@ -111,7 +111,7 @@ class Client extends JFrame implements ActionListener{
 
                 }else if (strIn.startsWith("<admin>")){
                     JOptionPane.showMessageDialog(this,"Successful Admin Login", "Successful", JOptionPane.PLAIN_MESSAGE);
-                    new HomePageAdmin();
+                    new HomePageAdmin(pwOut,brIn);
                     setVisible(false);
 
                 }else if (strIn.startsWith("<student>")){
