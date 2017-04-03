@@ -8,21 +8,19 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 class HomePageAdmin extends JFrame implements ActionListener{
+  //Create an election
+  //Start Date/EndDate/Election Commisioner's ID
+  //Checkboxes:
+  //Results: Raw Count,Winner,Turnout Stats
+  //Voter Elegibilty:Rank,College,Club/Organization
+  JTextField txtElectionTitle;
+  JTextField txtStartDate;
+  JTextField txtEndDate;
+  JTextField txtElectionComID;
+  ArrayList<JCheckBox> btnCheckResults;
+  ArrayList<JCheckBox> btnCheckVoterElegibility;
 
-    //Create an election
-    //Start Date/EndDate/Election Commisioner's ID
-    //Checkboxes:
-          //Results: Raw Count,Winner,Turnout Stats
-          //Voter Elegibilty:Rank,College,Club/Organization
-
-    JTextField txtElectionTitle;
-    JTextField txtStartDate;
-    JTextField txtEndDate;
-    JTextField txtElectionComID;
-    ArrayList<JCheckBox> btnCheckResults;
-    ArrayList<JCheckBox> btnCheckVoterElegibility;
-    
-    HomePageAdmin(){
+  HomePageAdmin(){
 	JPanel pnlMain = new JPanel();
 	GroupLayout layout = new GroupLayout(pnlMain);
 	JPanel pnlResultButtons = new JPanel();
@@ -49,7 +47,7 @@ class HomePageAdmin extends JFrame implements ActionListener{
 	chkWinner.setActionCommand("Winner");
 	JCheckBox chkTurnoutStats = new JCheckBox("Turnout Statistics");
 	chkTurnoutStats.setActionCommand("Turnout Statistics");
-	
+
 	chkRawCount.setBackground(bgColor);
 	chkWinner.setBackground(bgColor);
 	chkTurnoutStats.setBackground(bgColor);
@@ -72,7 +70,7 @@ class HomePageAdmin extends JFrame implements ActionListener{
 	chkCollege.setActionCommand("College");
 	JCheckBox chkClub = new JCheckBox("Club/Organization");
 	chkClub.setActionCommand("Club");
-	
+
 	chkRank.setBackground(bgColor);
 	chkCollege.setBackground(bgColor);
 	chkClub.setBackground(bgColor);
@@ -82,7 +80,7 @@ class HomePageAdmin extends JFrame implements ActionListener{
 	btnCheckVoterElegibility.add(chkCollege);
 	btnCheckVoterElegibility.add(chkClub);
 
-    pnlElegibilityButtons.add(lblVoterElegibility);
+  pnlElegibilityButtons.add(lblVoterElegibility);
 	pnlElegibilityButtons.add(chkRank);
 	pnlElegibilityButtons.add(chkCollege);
 	pnlElegibilityButtons.add(chkClub);
@@ -90,11 +88,11 @@ class HomePageAdmin extends JFrame implements ActionListener{
 	JButton btnCreateElection = new JButton("Create Election");
 	btnCreateElection.setActionCommand("create");
 	btnCreateElection.addActionListener(this);
-	
+
 
 	pnlMain.setLayout(layout);
 	layout.setAutoCreateGaps(true);
-    layout.setAutoCreateContainerGaps(true);
+  layout.setAutoCreateContainerGaps(true);
 
 	layout.setHorizontalGroup(
 	    layout.createSequentialGroup()
@@ -105,7 +103,7 @@ class HomePageAdmin extends JFrame implements ActionListener{
 						  .addComponent(txtElectionTitle)
 						  .addComponent(lElectionComID)
 				  		  .addComponent(txtElectionComID))
-					.addGroup(layout.createParallelGroup()	  
+					.addGroup(layout.createParallelGroup()
 						  .addComponent(lStartDate)
 						  .addComponent(txtStartDate)
 						  .addComponent(lEndDate)
@@ -124,7 +122,7 @@ class HomePageAdmin extends JFrame implements ActionListener{
 						  .addComponent(txtElectionTitle)
 						  .addComponent(lElectionComID)
 				  		  .addComponent(txtElectionComID))
-					.addGroup(layout.createSequentialGroup()	  
+					.addGroup(layout.createSequentialGroup()
 						  .addComponent(lStartDate)
 						  .addComponent(txtStartDate)
 						  .addComponent(lEndDate)
@@ -133,33 +131,29 @@ class HomePageAdmin extends JFrame implements ActionListener{
 				.addComponent(pnlElegibilityButtons)
 				.addComponent(btnCreateElection))
 				);
-
-	setSize(650,300);
-	setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-	setTitle("Create An Election");
-
-	pnlMain.setBackground(bgColor);
-	pnlResultButtons.setBackground(bgColor);
-	pnlElegibilityButtons.setBackground(bgColor);
-	getContentPane().add(pnlMain);
-
-	//this centers the window in the screen
-        Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
-        int x = (int) ((dimension.getWidth() - this.getWidth()) / 2);
-        int y = (int) ((dimension.getHeight() - this.getHeight()) / 2);
-        setLocation(x, y);
-        
-        //make sure you can actually see it, starts off false
-	setVisible(true); 
+      setSize(650,300);
+      setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+      setTitle("Create An Election");
+      pnlMain.setBackground(bgColor);
+      pnlResultButtons.setBackground(bgColor);
+      pnlElegibilityButtons.setBackground(bgColor);
+      getContentPane().add(pnlMain);
+      //this centers the window in the screen
+      Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
+      int x = (int) ((dimension.getWidth() - this.getWidth()) / 2);
+      int y = (int) ((dimension.getHeight() - this.getHeight()) / 2);
+      setLocation(x, y);
+      //make sure you can actually see it, starts off false
+	    setVisible(true);
     }
 
 
     public void actionPerformed(ActionEvent e){
-       
+
     }
 
     public static void main(String args[]){
-	new HomePageAdmin();
+	     new HomePageAdmin();
     }
 
 }

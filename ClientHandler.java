@@ -8,7 +8,7 @@ class ClientHandler extends Thread{
     PrintWriter pwOut;
     Server server;
     Socket socket;
-    
+
     ClientHandler(Socket sock, Server serv){
         try{
             brIn = new BufferedReader(new InputStreamReader(sock.getInputStream()));
@@ -19,7 +19,7 @@ class ClientHandler extends Thread{
             System.out.println("Error initiating ClientHandler");
         }
     }
-    
+
     public void run(){
         String line = new String();
         try{
@@ -38,14 +38,14 @@ class ClientHandler extends Thread{
                         die();
                     default:
                         pwOut.println("<error>");
-                }         
-                
+                }
+
             }
         }catch(SocketException x){
             System.out.println("socket disconnected");
         }catch(Exception e){
             System.out.print("Error: " + line);
-        } 
+        }
     }
     private void addUser(String [] data){
         if (data.length == 4){
@@ -62,20 +62,8 @@ class ClientHandler extends Thread{
     private void loginUser(String [] data){
         String userType;
         if (data.length == 3){
-            userType = server.loginUser(data[1],data[2]);
-            switch(userType){
-                case "<ADMIN>":
-                    pwOut.println("<admin>");
-                break;
-                case "<STUDENT>":
-                    pwOut.println("<student>");
-                break;
-                case "<VOID>":
-                    pwOut.println("<Incorrect User Data>");
-                break;
-                default:
-                    pwOut.println("<error>");
-            }
+            userType = server.loginUser(data[1].trim(),data[2].trim());
+            pwOut.println(userType);
         }else{
             pwOut.println("<error>");
         }
