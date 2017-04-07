@@ -7,18 +7,18 @@ import java.awt.Dimension;
 import java.net.*;
 import java.io.*;
 
-class ECMain extends JFrame implements ActionListener{
-	ECMain(){
+class CandidateMain extends JFrame implements ActionListener{
+	CandidateMain(){
 		JPanel panelMain = new JPanel();
-    	        GroupLayout layout = new GroupLayout(panelMain);	
+    	        GroupLayout layout = new GroupLayout(panelMain);
 
 		JButton btnVote = new JButton("Vote in Election");
-		JButton btnCreateBallot = new JButton("Create a Ballot");
+		JButton btnUpload= new JButton("Upload Candidate Information");
 
 		btnVote.setActionCommand("vote");
 		btnVote.addActionListener(this);
-		btnCreateBallot.setActionCommand("create");
-		btnCreateBallot.addActionListener(this);
+		btnUpload.setActionCommand("upload");
+		btnUpload.addActionListener(this);
 
 		panelMain.setLayout(layout);
 		layout.setAutoCreateGaps(true);
@@ -28,30 +28,29 @@ class ECMain extends JFrame implements ActionListener{
 			layout.createSequentialGroup()
 				.addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
 					.addComponent(btnVote)
-					.addComponent(btnCreateBallot))
+					.addComponent(btnUpload))
 		);
 		layout.setVerticalGroup(
 			layout.createParallelGroup()
 				.addGroup(layout.createSequentialGroup()
 					.addComponent(btnVote)
-					.addComponent(btnCreateBallot))
+					.addComponent(btnUpload))
 		);
 
-	
-        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        setSize(300,200);
-        setTitle("Election Comissioner: Main Menu");
-        getContentPane().add(panelMain);
-        Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();       	    
-        int x = (int) ((dimension.getWidth() - this.getWidth()) / 2);
-        int y = (int) ((dimension.getHeight() - this.getHeight()) / 2);
-        setLocation(x, y);
-        setVisible(true);
+        	setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+		setSize(300,200);
+		setTitle("Candidate: Main Menu");
+		getContentPane().add(panelMain);
+		Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();       	    
+		int x = (int) ((dimension.getWidth() - this.getWidth()) / 2);
+		int y = (int) ((dimension.getHeight() - this.getHeight()) / 2);
+		setLocation(x, y);
+		setVisible(true);
+
 	}
-	
 	public void actionPerformed(ActionEvent evt){
 		switch(evt.getActionCommand()){
-			case "create":
+			case "upload":
 				break;
 			case "vote":
 				break;
@@ -59,6 +58,6 @@ class ECMain extends JFrame implements ActionListener{
 	}
 
 	public static void main(String[] args){
-		new ECMain();
+		new CandidateMain();
 	}
 }
