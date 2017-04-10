@@ -111,8 +111,8 @@ class Client extends JFrame implements ActionListener{
 
                 }else if (strIn.startsWith("<admin>")){
                     JOptionPane.showMessageDialog(this,"Successful Admin Login", "Successful", JOptionPane.PLAIN_MESSAGE);
-                    new HomePageAdmin(pwOut,brIn);
-                    setVisible(false);
+		    setVisible(false);
+                    new HSOMain(pwOut,brIn);
 
                 }else if (strIn.startsWith("<student>")){
                     JOptionPane.showMessageDialog(this,"Successful Student Login", "Successful", JOptionPane.PLAIN_MESSAGE);

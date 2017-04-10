@@ -9,7 +9,7 @@ import java.util.Iterator;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-class HomePageAdmin extends JFrame implements ActionListener{
+class createElection extends JFrame implements ActionListener{
   //Create an election
   //Start Date/EndDate/Election Commisioner's ID
   //Checkboxes:
@@ -24,8 +24,8 @@ class HomePageAdmin extends JFrame implements ActionListener{
   PrintWriter pwOut;
   BufferedReader brIn;
   private final String dateRegex = "([0-9]{2})/([0-9]{2})/([0-9]{4})";
-  HomePageAdmin(){}
-  HomePageAdmin(PrintWriter pwOut,BufferedReader brIn){
+  createElection(){}
+  createElection(PrintWriter pwOut,BufferedReader brIn){
     this.pwOut = pwOut;
     this.brIn = brIn;
   	JPanel pnlMain = new JPanel();
@@ -189,7 +189,7 @@ class HomePageAdmin extends JFrame implements ActionListener{
     }
 
     public static void main(String args[]){
-	     new HomePageAdmin();
+	     new createElection();
     }
 
 }
