@@ -116,7 +116,8 @@ class Client extends JFrame implements ActionListener{
 
                 }else if (strIn.startsWith("<student>")){
                     JOptionPane.showMessageDialog(this,"Successful Student Login", "Successful", JOptionPane.PLAIN_MESSAGE);
-                    //ADD GUI for STUDENT
+                    new StudentMain(pwOut, brIn);
+		    setVisible(false);
 
                 }else{
                     JOptionPane.showMessageDialog(this,strIn,"Error",JOptionPane.PLAIN_MESSAGE);
