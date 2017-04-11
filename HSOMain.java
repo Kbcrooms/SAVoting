@@ -17,6 +17,7 @@ class HSOMain extends JFrame implements ActionListener{
     this.brIn = brIn;
     JPanel panelMain = new JPanel();
     GroupLayout layout = new GroupLayout(panelMain);
+    Color bgColor = new Color(176,196,222);
 
     JButton btnCreateElection = new JButton("Create an Election");
     JButton btnCertifyElection = new JButton("Certify an Election");
@@ -59,7 +60,8 @@ class HSOMain extends JFrame implements ActionListener{
 			.addComponent(btnDelete))
 		          
 		);
-		    
+	
+    panelMain.setBackground(bgColor);	    
     setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
     setSize(300,200);
     setTitle("Head of Student Organizations: Main Menu");
@@ -74,7 +76,7 @@ class HSOMain extends JFrame implements ActionListener{
 
 private void run(){
 	try{
-	    sock = new Socket("127.0.0.1",50000);
+	    sock = new Socket("127.0.0.2",50000);
             brIn = new BufferedReader(new InputStreamReader(sock.getInputStream()));
             pwOut = new PrintWriter(sock.getOutputStream(),true);
 	
