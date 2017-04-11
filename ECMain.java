@@ -9,9 +9,13 @@ import java.io.*;
 
 class ECMain extends JFrame implements ActionListener{
 	ECMain(){
+		getContentPane().setLayout(new GridBagLayout());
+		Color bgColor = new Color(176,196,222);
+		getContentPane().setBackground(bgColor);
+	
 		JPanel panelMain = new JPanel();
-    	        GroupLayout layout = new GroupLayout(panelMain);	
-
+        GroupLayout layout = new GroupLayout(panelMain);
+    	
 		JButton btnVote = new JButton("Vote in Election");
 		JButton btnCreateBallot = new JButton("Create a Ballot");
 
@@ -26,7 +30,7 @@ class ECMain extends JFrame implements ActionListener{
 
 		layout.setHorizontalGroup(
 			layout.createSequentialGroup()
-				.addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+				.addGroup(layout.createParallelGroup(GroupLayout.Alignment.CENTER)
 					.addComponent(btnVote)
 					.addComponent(btnCreateBallot))
 		);
@@ -36,11 +40,13 @@ class ECMain extends JFrame implements ActionListener{
 					.addComponent(btnVote)
 					.addComponent(btnCreateBallot))
 		);
-
+		
+		add(panelMain);	
 	
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        setSize(300,200);
+        setSize(350,120);
         setTitle("Election Comissioner: Main Menu");
+        panelMain.setBackground(bgColor);
         getContentPane().add(panelMain);
         Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();       	    
         int x = (int) ((dimension.getWidth() - this.getWidth()) / 2);

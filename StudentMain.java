@@ -9,9 +9,13 @@ import java.io.*;
 
 class StudentMain extends JFrame implements ActionListener{
 	StudentMain(){
+		getContentPane().setLayout(new GridBagLayout());
+		Color bgColor = new Color(176,196,222);
+		getContentPane().setBackground(bgColor);
+		
 		JPanel panelMain = new JPanel();
-    	        GroupLayout layout = new GroupLayout(panelMain);
-
+        GroupLayout layout = new GroupLayout(panelMain);
+        
 		JButton btnVote = new JButton("Vote in Election");
 
 		btnVote.setActionCommand("vote");
@@ -23,7 +27,7 @@ class StudentMain extends JFrame implements ActionListener{
 
 		layout.setHorizontalGroup(
 			layout.createSequentialGroup()
-				.addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+				.addGroup(layout.createParallelGroup(GroupLayout.Alignment.CENTER)
 					.addComponent(btnVote))
 		);
 		layout.setVerticalGroup(
@@ -31,10 +35,13 @@ class StudentMain extends JFrame implements ActionListener{
 				.addGroup(layout.createSequentialGroup()
 					.addComponent(btnVote))
 		);
+		
+		add(panelMain);
 
-        	setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-		setSize(300,200);
-		setTitle("Candidate: Main Menu");
+    	setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+		setSize(280,80);
+		setTitle("Student: Main Menu");
+		panelMain.setBackground(bgColor);
 		getContentPane().add(panelMain);
 		Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();       	    
 		int x = (int) ((dimension.getWidth() - this.getWidth()) / 2);
