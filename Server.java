@@ -7,7 +7,7 @@ import java.io.*;
 class Server extends Thread{
 
     Hashtable<String,String> admins;
-    Hashtable<String,String> students;
+    Hashtable<String,Student> students;
     Hashtable<String,Election> elections;
     ServerSocket ss;
 
@@ -20,7 +20,7 @@ class Server extends Thread{
 
     Server(){
         admins = new Hashtable<String,String>();
-        students = new Hashtable<String,String>();
+        students = new Hashtable<String,Student>();
         elections = new Hashtable<String,Election>();
     }
 
@@ -32,11 +32,11 @@ class Server extends Thread{
         		FileInputStream fileIn = new FileInputStream(f);
         		ObjectInputStream in = new ObjectInputStream(fileIn);
         		admins = (Hashtable<String,String>)in.readObject();
-        		students = (Hashtable<String,String>)in.readObject();
+        		students = (Hashtable<String,Student>)in.readObject();
     	    }
           //Generates Test Users
           admins.put("testadmin","123");
-          students.put("testuser","123");
+          students.put("testuser",new Student("testuser","123","Computer Science", "Junior", "Statler College of Mineral Resources"));
     	    ss = new ServerSocket(50000);   //high port numbers aren't normally dedicated
     	    System.out.println("Server Started");
     	    while(true){
@@ -73,11 +73,11 @@ class Server extends Thread{
         System.exit(0);
     }
 
-    public boolean addUser(String strUser, String strPass, String authority){
+    public boolean addUser(String strUser, String strPass, String authority, String major, String rank, String college){
         if(authority.equals("<admin>") && !admins.containsKey(strUser)){
             admins.put(strUser,strPass);
         }else if(authority.equals("<student>") && !students.containsKey(strUser)){
-            students.put(strUser,strPass);
+            students.put(strUser,new Student(strUser,strPass,major,rank,college));
         }else{
             return false;
         }
@@ -92,7 +92,7 @@ class Server extends Thread{
                 return "<admin>";
             }
         }else if(students.containsKey(strUser)){
-            tempPass = students.get(strUser);
+            tempPass = students.get(strUser).password;
             if (tempPass != null && tempPass.equals(strPass)){
                 return "<student>";
             }
