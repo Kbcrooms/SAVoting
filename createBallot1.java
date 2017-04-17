@@ -18,6 +18,7 @@ class createBallot1 extends JFrame implements ActionListener{
   	ArrayList<JCheckBox> btnCheckVoterElegibility;
   	PrintWriter pwOut;
   	BufferedReader brIn;
+	Socket sock;
 
 	createBallot1(){}
 	createBallot1(PrintWriter pwOut, BufferedReader brIn){
@@ -78,8 +79,8 @@ class createBallot1 extends JFrame implements ActionListener{
 	  	pnlElegibilityButtons.add(chkCollege);
 	  	pnlElegibilityButtons.add(chkClub);
 	
-  		JButton btnCreateBallot = new JButton("Create Ballot");
-  		btnCreateBallot.setActionCommand("create");
+  		JButton btnCreateBallot = new JButton("Continue");
+  		btnCreateBallot.setActionCommand("continue");
   		btnCreateBallot.addActionListener(this);
 
   		pnlMain.setLayout(layout);
@@ -118,13 +119,43 @@ class createBallot1 extends JFrame implements ActionListener{
 		int y = (int) ((dimension.getHeight() - this.getHeight()) / 2);
 		setLocation(x, y);
 		//make sure you can actually see it, starts off false
-	  	    setVisible(true);
+	  	setVisible(true);
+		run();
+	}
+
+	private void run(){
+		try{
+			sock = new Socket("127.0.0.2", 50000);
+			brIn = new BufferedReader(new InputStreamReader(sock.getInputStream()));
+			pwOut = new PrintWriter(sock.getOutputStream(),true);
+			while(true){
+				String strIn = brIn.readLine();
+				if(strIn.equals("<continueCreateBallot1>")){
+					setVisible(false);
+					new createBallot2(pwOut, brIn);				
+				}else{
+					JOptionPane.showMessageDialog(this,strIn, "Error",JOptionPane.PLAIN_MESSAGE);
+				}
+			}		
+		}catch(IOException e){
+			System.out.println("IOException");
+		}catch(NullPointerException npe){
+			System.out.println("null");		
+		}
+
+
 	}
 
 	public void actionPerformed(ActionEvent e){
-		switch(e.getActionCommand()){
-			case "create":
-			break;
+		if(!sock.isClosed()){
+			switch(e.getActionCommand()){
+				case "continue":
+					System.out.println("<continueCreateBallot1>");
+					pwOut.println("<continueCreateBallot1>");
+				break;
+			}
+		}else{
+			JOptionPane.showMessageDialog(this, "Socket is Closed", "Error", JOptionPane.ERROR_MESSAGE);		
 		}
 	}
 
