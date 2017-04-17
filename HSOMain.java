@@ -10,6 +10,7 @@ import java.io.*;
 class HSOMain extends JFrame implements ActionListener{
    
    HSOMain(){
+
     getContentPane().setLayout(new GridBagLayout());
 	Color bgColor = new Color(176,196,222);
 	getContentPane().setBackground(bgColor);
@@ -65,6 +66,7 @@ class HSOMain extends JFrame implements ActionListener{
     setSize(440,200);
     setTitle("Head of Student Organizations: Main Menu");
     panelMain.setBackground(bgColor);
+
     getContentPane().add(panelMain);
     Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();       	    
     int x = (int) ((dimension.getWidth() - this.getWidth()) / 2);

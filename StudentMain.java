@@ -9,6 +9,7 @@ import java.io.*;
 
 class StudentMain extends JFrame implements ActionListener{
 	StudentMain(){
+
 		getContentPane().setLayout(new GridBagLayout());
 		Color bgColor = new Color(176,196,222);
 		getContentPane().setBackground(bgColor);
@@ -35,6 +36,7 @@ class StudentMain extends JFrame implements ActionListener{
 				.addGroup(layout.createSequentialGroup()
 					.addComponent(btnVote))
 		);
+
 		
 		add(panelMain);
 
@@ -42,6 +44,7 @@ class StudentMain extends JFrame implements ActionListener{
 		setSize(280,80);
 		setTitle("Student: Main Menu");
 		panelMain.setBackground(bgColor);
+
 		getContentPane().add(panelMain);
 		Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();       	    
 		int x = (int) ((dimension.getWidth() - this.getWidth()) / 2);

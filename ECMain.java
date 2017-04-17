@@ -9,6 +9,7 @@ import java.io.*;
 
 class ECMain extends JFrame implements ActionListener{
 	ECMain(){
+
 		getContentPane().setLayout(new GridBagLayout());
 		Color bgColor = new Color(176,196,222);
 		getContentPane().setBackground(bgColor);
@@ -40,13 +41,14 @@ class ECMain extends JFrame implements ActionListener{
 					.addComponent(btnVote)
 					.addComponent(btnCreateBallot))
 		);
-		
+
 		add(panelMain);	
 	
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setSize(350,120);
         setTitle("Election Comissioner: Main Menu");
         panelMain.setBackground(bgColor);
+
         getContentPane().add(panelMain);
         Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();       	    
         int x = (int) ((dimension.getWidth() - this.getWidth()) / 2);
