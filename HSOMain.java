@@ -22,6 +22,7 @@ class HSOMain extends JFrame implements ActionListener{
     JButton btnCreateElection = new JButton("Create an Election");
     JButton btnCertifyElection = new JButton("Certify an Election");
     JButton btnStatistics = new JButton("View Turnout Statistics");
+    JButton btnDemographics = new JButton("View Election Demographics");
     JButton btnRecount = new JButton("Recount an Election");
     JButton btnDelete = new JButton("Delete A Vote");
 
@@ -31,6 +32,8 @@ class HSOMain extends JFrame implements ActionListener{
     btnCertifyElection.addActionListener(this);
     btnStatistics.setActionCommand("stats");
     btnStatistics.addActionListener(this);
+    btnDemographics.setActionCommand("demo");
+    btnDemographics.addActionListener(this);
     btnRecount.setActionCommand("recount");
     btnRecount.addActionListener(this);
     btnDelete.setActionCommand("delete");
@@ -108,8 +111,12 @@ public void actionPerformed(ActionEvent evt){
 			  break;
 		      case "stats":
 			  break;
+		      case "demo":
+		          break;
 		      case "recount":
 			  break;
+		      case "delete":
+		          break;
 
 		   }
 	}else{
