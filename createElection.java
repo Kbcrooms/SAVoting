@@ -28,9 +28,7 @@ class createElection extends JFrame implements ActionListener{
     this.brIn = brIn;
   	JPanel pnlMain = new JPanel();
   	GroupLayout layout = new GroupLayout(pnlMain);
-  	JPanel pnlResultButtons = new JPanel();
-  	JPanel pnlElegibilityButtons = new JPanel();
-  	Color bgColor = new Color(176,196,222);;
+  	Color bgColor = new Color(176,196,222);
   	txtElectionTitle = new JTextField(20);
   	txtStartDate = new JTextField(20);
   	txtEndDate = new JTextField(10);
@@ -64,8 +62,6 @@ class createElection extends JFrame implements ActionListener{
   						  .addComponent(txtStartDate)
   						  .addComponent(lEndDate)
   						  .addComponent(txtEndDate)))
-  				.addComponent(pnlResultButtons)
-  				.addComponent(pnlElegibilityButtons)
   			    .addComponent(btnCreateElection))
   				  );
 
@@ -83,16 +79,12 @@ class createElection extends JFrame implements ActionListener{
   						  .addComponent(txtStartDate)
   						  .addComponent(lEndDate)
   						  .addComponent(txtEndDate)))
-  				.addComponent(pnlResultButtons)
-  				.addComponent(pnlElegibilityButtons)
   				.addComponent(btnCreateElection))
   				);
         setSize(650,300);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setTitle("Create An Election");
-        pnlMain.setBackground(bgColor);
-        pnlResultButtons.setBackground(bgColor);
-        pnlElegibilityButtons.setBackground(bgColor);
+        pnlMain.setBackground(bgColor);;
         getContentPane().add(pnlMain);
         //this centers the window in the screen
         Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
