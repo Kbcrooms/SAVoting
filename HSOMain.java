@@ -8,10 +8,16 @@ import java.net.*;
 import java.io.*;
 
 class HSOMain extends JFrame implements ActionListener{
-   
-   HSOMain(){
+   PrintWriter pwOut;
+   BufferedReader brIn;
+   Socket sock;
+   HSOMain(){}
+   HSOMain(PrintWriter pwOut, BufferedReader brIn){
+    this.pwOut = pwOut;
+    this.brIn = brIn;
     JPanel panelMain = new JPanel();
     GroupLayout layout = new GroupLayout(panelMain);
+    Color bgColor = new Color(176,196,222);
 
     JButton btnCreateElection = new JButton("Create an Election");
     JButton btnCertifyElection = new JButton("Certify an Election");
@@ -54,7 +60,8 @@ class HSOMain extends JFrame implements ActionListener{
 			.addComponent(btnDelete))
 		          
 		);
-		    
+	
+    panelMain.setBackground(bgColor);	    
     setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
     setSize(300,200);
     setTitle("Head of Student Organizations: Main Menu");
@@ -64,20 +71,50 @@ class HSOMain extends JFrame implements ActionListener{
     int y = (int) ((dimension.getHeight() - this.getHeight()) / 2);
     setLocation(x, y);
     setVisible(true);	
+    run();
+}
+
+private void run(){
+	try{
+	    sock = new Socket("127.0.0.2",50000);
+            brIn = new BufferedReader(new InputStreamReader(sock.getInputStream()));
+            pwOut = new PrintWriter(sock.getOutputStream(),true);
+	
+	    while(true){
+		String strIn = brIn.readLine();
+		if(strIn.equals("<createElection>")){	
+			setVisible(false);
+			new createElection(pwOut,brIn);	
+		}else{
+			JOptionPane.showMessageDialog(this,strIn,"Error",JOptionPane.PLAIN_MESSAGE);
+		}
+
+	    }
+	}catch(IOException e){
+            System.out.println("IOException");
+        }catch(NullPointerException npe){
+            System.out.println("null");
+        }
 }	    
 
 public void actionPerformed(ActionEvent evt){
-    switch(evt.getActionCommand()){
-      case "create":
-	  break;
-      case "certify":
-          break;
-      case "stats":
-	  break;
-      case "recount":
-	  break;
+	if(!sock.isClosed()){
+	    	switch(evt.getActionCommand()){
+		      case "create":
+			  System.out.println("<createElection>");
+			  pwOut.println("<createElection>");
+			  break;
+		      case "certify":
+			  break;
+		      case "stats":
+			  break;
+		      case "recount":
+			  break;
 
-   }
+		   }
+	}else{
+            JOptionPane.showMessageDialog(this,"Socket is Closed","Error",JOptionPane.ERROR_MESSAGE);
+        }
 }
 
 public static void main(String[] args){
