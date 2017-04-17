@@ -17,9 +17,7 @@ class StudentMain extends JFrame implements ActionListener{
 	StudentMain(PrintWriter pwOut, BufferedReader brIn){
 		this.pwOut = pwOut;
 		this.brIn = brIn;
-		JPanel panelMain = new JPanel();
-    	        GroupLayout layout = new GroupLayout(panelMain);
-
+		
 		getContentPane().setLayout(new GridBagLayout());
 		Color bgColor = new Color(176,196,222);
 		getContentPane().setBackground(bgColor);
@@ -46,7 +44,6 @@ class StudentMain extends JFrame implements ActionListener{
 				.addGroup(layout.createSequentialGroup()
 					.addComponent(btnVote))
 		);
-
 		
 		add(panelMain);
 
