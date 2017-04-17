@@ -9,7 +9,7 @@ import java.util.Iterator;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-class HomePageAdmin extends JFrame implements ActionListener{
+class createElection extends JFrame implements ActionListener{
   //Create an election
   //Start Date/EndDate/Election Commisioner's ID
   //Checkboxes:
