@@ -8,6 +8,7 @@ class Server extends Thread{
 
     Hashtable<String,String> admins;
     Hashtable<String,Student> students;
+    Hashtable<String,Student> electionCom;
     Hashtable<String,Election> elections;
     ServerSocket ss;
 
@@ -21,6 +22,7 @@ class Server extends Thread{
     Server(){
         admins = new Hashtable<String,String>();
         students = new Hashtable<String,Student>();
+	electionCom = new Hashtable<String,Student>();
         elections = new Hashtable<String,Election>();
     }
 
@@ -35,8 +37,9 @@ class Server extends Thread{
         		students = (Hashtable<String,Student>)in.readObject();
     	    }
           //Generates Test Users
-          admins.put("testadmin","123");
-          students.put("testuser",new Student("testuser","123","Computer Science", "Junior", "Statler College of Mineral Resources"));
+	    admins.put("testadmin","123");
+	    students.put("testuser",new Student("testuser","123","Computer Science", "Junior", "Statler College of Mineral Resources"));
+	    electionCom.put("testC", new Student("testc","password","Computer Science", "Senior", "Statler College of Mineral Resources"));
     	    ss = new ServerSocket(50000);   //high port numbers aren't normally dedicated
     	    System.out.println("Server Started");
     	    while(true){
@@ -91,6 +94,11 @@ class Server extends Thread{
             if (tempPass != null && tempPass.equals(strPass)){
                 return "<admin>";
             }
+	}else if(electionCom.containsKey(strUser)){
+	    tempPass = electionCom.get(strUser).password;
+	    if(tempPass != null && tempPass.equals(strPass)){
+		return "<electionCom>";
+	    }
         }else if(students.containsKey(strUser)){
             tempPass = students.get(strUser).password;
             if (tempPass != null && tempPass.equals(strPass)){
@@ -100,15 +108,15 @@ class Server extends Thread{
         return "<invalid>";
     }
     public String createElection(String eName, String eComID, String eStart, String eEnd){
-      if(elections.containsKey(eName)){
-        return "<dupelection>";
-      }
-      else if(students.containsKey(eComID)){
-        elections.put(eName,new Election(eComID,eStart,eEnd));
-        return "<createdelection>";
-      }
-      return "<invalidcomid>";
+	if(elections.containsKey(eName)){
+	    return "<dupelection>";
+	}else if(students.containsKey(eComID)){
+	    elections.put(eName,new Election(eComID,eStart,eEnd));
+	    return "<createdelection>";
+	}
+	return "<invalidcomid>";
     }
+    
     public static void main(String args[]){
         new Server().start();
     }

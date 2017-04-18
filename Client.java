@@ -119,6 +119,10 @@ class Client extends JFrame implements ActionListener{
                     new StudentMain(pwOut, brIn);
 		    setVisible(false);
 
+		}else if(strIn.startsWith("<electionCom>")){
+		    JOptionPane.showMessageDialog(this,"Successful Election Comm. Login","Successful",JOptionPane.PLAIN_MESSAGE);
+		    new ECMain(pwOut,brIn);
+		    setVisible(false);
                 }else{
                     JOptionPane.showMessageDialog(this,strIn,"Error",JOptionPane.PLAIN_MESSAGE);
                 }

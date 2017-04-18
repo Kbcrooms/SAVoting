@@ -28,26 +28,28 @@ class ClientHandler extends Thread{
                 System.out.println(line);
                 String [] data = line.split(",");
                 switch (data[0].trim()){
-                    case "<add>":
-                        addUser(data);
+		case "<add>":
+		    addUser(data);
                     break;
-                    case "<login>":
-                        loginUser(data);
+		case "<login>":
+		    loginUser(data);
                     break;
-                    case "<election>":
-                      createElection(data);
-                    break;
-		                case "<createElection>":
-		                  pwOut.println("<createElection>");
-	                  break;
-                    case "<getElections>";
-                      pwOut.println(Server.getElections())
-                    case "<die>" :
-                        die();
-                    default:
-                        pwOut.println("<error>");
+		case "<election>":
+		    createElection(data);
+		    break;
+		case "<createElection>":
+		    pwOut.println("<createElection>");
+		    break;
+		case "<getElections>":
+		    //pwOut.println(Server.getElections());
+		    break;
+		case "<die>" :
+		    die();
+		    break;
+		default:
+		    pwOut.println("<error>");
                 }
-
+		
             }
         }catch(SocketException x){
             System.out.println("socket disconnected");
@@ -57,16 +59,13 @@ class ClientHandler extends Thread{
     }
     private void addUser(String [] data){
         if (data.length == 4){
-            if(server.addUser(data[1],data[2],data[3])){
-                pwOut.println("<added>");
-            }else{
-                pwOut.println("<error>");
-            }
-        }else{
-            pwOut.println("<error>");
+            //if(server.addUser(data[1],data[2],data[3])){
+	    pwOut.println("<added>");
+	}else{
+	    pwOut.println("<error>");
         }
     }
-
+    
     private void loginUser(String [] data){
         String userType;
         if (data.length == 3){
