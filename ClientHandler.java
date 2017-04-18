@@ -41,7 +41,7 @@ class ClientHandler extends Thread{
 		                  pwOut.println("<createElection>");
 	                  break;
                     case "<getElections>";
-                      pwOut.println(Server.getElections())
+                      pwOut.println(Server.getElections());
                     case "<die>" :
                         die();
                     default:
