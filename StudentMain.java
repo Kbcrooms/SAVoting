@@ -44,6 +44,7 @@ class StudentMain extends JFrame implements ActionListener{
 				.addGroup(layout.createSequentialGroup()
 					.addComponent(btnVote))
 		);
+
 		
 		add(panelMain);
 
