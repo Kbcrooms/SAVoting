@@ -8,36 +8,6 @@ import java.net.*;
 import java.io.*;
 
 class ECMain extends JFrame implements ActionListener{
-<<<<<<< HEAD
-	PrintWriter pwOut;
-	BufferedReader brIn;
-	Socket sock;
-
-	ECMain(){
-		JPanel panelMain = new JPanel();
-    	        GroupLayout layout = new GroupLayout(panelMain);	
-
-		JButton btnVote = new JButton("Vote in Election");
-		JButton btnCreateBallot = new JButton("Create a Ballot");
-
-		btnVote.setActionCommand("vote");
-		btnVote.addActionListener(this);
-		btnCreateBallot.setActionCommand("create");
-		btnCreateBallot.addActionListener(this);
-
-		panelMain.setLayout(layout);
-		layout.setAutoCreateGaps(true);
-		layout.setAutoCreateContainerGaps(true);
-
-		layout.setHorizontalGroup(
-			layout.createSequentialGroup()
-				.addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-					.addComponent(btnVote)
-					.addComponent(btnCreateBallot))
-		);
-		layout.setVerticalGroup(
-			layout.createParallelGroup()
-=======
     PrintWriter pwOut;
     BufferedReader brIn;
     Socket sock;
@@ -73,7 +43,6 @@ class ECMain extends JFrame implements ActionListener{
 				  );
 	layout.setVerticalGroup(
 				layout.createParallelGroup()
->>>>>>> master
 				.addGroup(layout.createSequentialGroup()
 					  .addComponent(btnVote)
 					  .addComponent(btnCreateBallot))
