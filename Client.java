@@ -18,6 +18,7 @@ class Client extends JFrame implements ActionListener{
         pnlMain = new JPanel();
         pnlMain.setLayout(new BoxLayout(pnlMain,BoxLayout.PAGE_AXIS));
         Color bgColor = new Color(176,196,222);
+        UIManager.put("OptionPane.background", bgColor);
 
         JPanel pnlName = new JPanel();
         JPanel pnlPassword = new JPanel();
