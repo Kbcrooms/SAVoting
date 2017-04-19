@@ -10,6 +10,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 class StudentMain extends JFrame implements ActionListener{
+
 	PrintWriter pwOut;
 	BufferedReader brIn;
 	StudentMain(){}
@@ -19,18 +20,22 @@ class StudentMain extends JFrame implements ActionListener{
 		JPanel panelMain = new JPanel();
     	        GroupLayout layout = new GroupLayout(panelMain);
 
+		getContentPane().setLayout(new GridBagLayout());
+		Color bgColor = new Color(176,196,222);
+		getContentPane().setBackground(bgColor);
+		
 		JButton btnVote = new JButton("Vote in Election");
-
+		
 		btnVote.setActionCommand("vote");
 		btnVote.addActionListener(this);
-
+		
 		panelMain.setLayout(layout);
 		layout.setAutoCreateGaps(true);
 		layout.setAutoCreateContainerGaps(true);
 
 		layout.setHorizontalGroup(
 			layout.createSequentialGroup()
-				.addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+				.addGroup(layout.createParallelGroup(GroupLayout.Alignment.CENTER)
 					.addComponent(btnVote))
 		);
 		layout.setVerticalGroup(
@@ -39,9 +44,14 @@ class StudentMain extends JFrame implements ActionListener{
 					.addComponent(btnVote))
 		);
 
-        	setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-		setSize(300,200);
-		setTitle("Candidate: Main Menu");
+		
+		add(panelMain);
+
+    	setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+		setSize(280,80);
+		setTitle("Student: Main Menu");
+		panelMain.setBackground(bgColor);
+
 		getContentPane().add(panelMain);
 		Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();       	    
 		int x = (int) ((dimension.getWidth() - this.getWidth()) / 2);

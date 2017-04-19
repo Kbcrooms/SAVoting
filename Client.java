@@ -18,6 +18,7 @@ class Client extends JFrame implements ActionListener{
         pnlMain = new JPanel();
         pnlMain.setLayout(new BoxLayout(pnlMain,BoxLayout.PAGE_AXIS));
         Color bgColor = new Color(176,196,222);
+        UIManager.put("OptionPane.background", bgColor);
 
         JPanel pnlName = new JPanel();
         JPanel pnlPassword = new JPanel();
@@ -119,6 +120,10 @@ class Client extends JFrame implements ActionListener{
                     new StudentMain(pwOut, brIn);
 		    setVisible(false);
 
+		}else if(strIn.startsWith("<electionCom>")){
+		    JOptionPane.showMessageDialog(this,"Successful Election Comm. Login","Successful",JOptionPane.PLAIN_MESSAGE);
+		    new ECMain(pwOut,brIn);
+		    setVisible(false);
                 }else{
                     JOptionPane.showMessageDialog(this,strIn,"Error",JOptionPane.PLAIN_MESSAGE);
                 }

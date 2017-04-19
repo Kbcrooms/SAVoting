@@ -8,6 +8,7 @@ import java.net.*;
 import java.io.*;
 
 class HSOMain extends JFrame implements ActionListener{
+
    PrintWriter pwOut;
    BufferedReader brIn;
    Socket sock;
@@ -15,13 +16,17 @@ class HSOMain extends JFrame implements ActionListener{
    HSOMain(PrintWriter pwOut, BufferedReader brIn){
     this.pwOut = pwOut;
     this.brIn = brIn;
+    
+    getContentPane().setLayout(new GridBagLayout());
+    Color bgColor = new Color(176,196,222);
+    getContentPane().setBackground(bgColor);
     JPanel panelMain = new JPanel();
     GroupLayout layout = new GroupLayout(panelMain);
-    Color bgColor = new Color(176,196,222);
-
+    
     JButton btnCreateElection = new JButton("Create an Election");
     JButton btnCertifyElection = new JButton("Certify an Election");
     JButton btnStatistics = new JButton("View Turnout Statistics");
+    JButton btnDemographics = new JButton("View Election Demographics");
     JButton btnRecount = new JButton("Recount an Election");
     JButton btnDelete = new JButton("Delete A Vote");
 
@@ -31,6 +36,8 @@ class HSOMain extends JFrame implements ActionListener{
     btnCertifyElection.addActionListener(this);
     btnStatistics.setActionCommand("stats");
     btnStatistics.addActionListener(this);
+    btnDemographics.setActionCommand("demo");
+    btnDemographics.addActionListener(this);
     btnRecount.setActionCommand("recount");
     btnRecount.addActionListener(this);
     btnDelete.setActionCommand("delete");
@@ -42,7 +49,7 @@ class HSOMain extends JFrame implements ActionListener{
     
     layout.setHorizontalGroup(
 	layout.createSequentialGroup()
-		.addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+		.addGroup(layout.createParallelGroup(GroupLayout.Alignment.CENTER)
 			.addComponent(btnCreateElection)
 			.addComponent(btnCertifyElection)
 			.addComponent(btnStatistics)
@@ -61,10 +68,13 @@ class HSOMain extends JFrame implements ActionListener{
 		          
 		);
 	
-    panelMain.setBackground(bgColor);	    
+	add(panelMain);	
+		    
     setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-    setSize(300,200);
+    setSize(440,200);
     setTitle("Head of Student Organizations: Main Menu");
+    panelMain.setBackground(bgColor);
+
     getContentPane().add(panelMain);
     Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();       	    
     int x = (int) ((dimension.getWidth() - this.getWidth()) / 2);
@@ -108,8 +118,12 @@ public void actionPerformed(ActionEvent evt){
 			  break;
 		      case "stats":
 			  break;
+		      case "demo":
+		          break;
 		      case "recount":
 			  break;
+		      case "delete":
+		          break;
 
 		   }
 	}else{

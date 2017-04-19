@@ -28,11 +28,11 @@ class ClientHandler extends Thread{
                 System.out.println(line);
                 String [] data = line.split(",");
                 switch (data[0].trim()){
-                    case "<add>":
-                        addUser(data);
+		case "<add>":
+		    addUser(data);
                     break;
-                    case "<login>":
-                        loginUser(data);
+		case "<login>":
+		    loginUser(data);
                     break;
                     case "<election>":
                       createElection(data);
@@ -42,11 +42,32 @@ class ClientHandler extends Thread{
 	                  break;
                     case "<getElections>":
                     break;
-
-                    case "<die>" :
-                        die();
-                    default:
-                        pwOut.println("<error>");
+		case "<election>":
+		    createElection(data);
+		    break;
+		case "<createElection>":
+		    pwOut.println("<createElection>");
+	        break;
+		case "<createBallot>":
+			pwOut.println("<createBallot>");
+		break;
+		case "<CreateBallot2>":
+			pwOut.println("<CreateBallot2>");
+		    break;
+		    case "<CreateBallot3>":
+		    	pwOut.println("<CreateBallot3>");
+		    break;
+		    case "<CreateBallot4>":
+		    	pwOut.println("<CreateBallot4>");
+		    break;
+		case "<getElections>":
+		    //pwOut.println(Server.getElections());
+		    break;
+		case "<die>" :
+		    die();
+		    break;
+		default:
+		    pwOut.println("<error>");
                 }
 
             }
@@ -64,7 +85,10 @@ class ClientHandler extends Thread{
                 pwOut.println("<error>");
             }
         }else{
-            pwOut.println("<error>");
+            //if(server.addUser(data[1],data[2],data[3])){
+	    pwOut.println("<added>");
+	}else{
+	    pwOut.println("<error>");
         }
     }
 
