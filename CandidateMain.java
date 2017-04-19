@@ -9,9 +9,14 @@ import java.io.*;
 
 class CandidateMain extends JFrame implements ActionListener{
 	CandidateMain(){
-		JPanel panelMain = new JPanel();
-    	        GroupLayout layout = new GroupLayout(panelMain);
 
+		getContentPane().setLayout(new GridBagLayout());
+		Color bgColor = new Color(176,196,222);
+		getContentPane().setBackground(bgColor);
+	
+		JPanel panelMain = new JPanel();
+        GroupLayout layout = new GroupLayout(panelMain);
+				
 		JButton btnVote = new JButton("Vote in Election");
 		JButton btnUpload= new JButton("Upload Candidate Information");
 
@@ -26,7 +31,7 @@ class CandidateMain extends JFrame implements ActionListener{
 
 		layout.setHorizontalGroup(
 			layout.createSequentialGroup()
-				.addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+				.addGroup(layout.createParallelGroup(GroupLayout.Alignment.CENTER)
 					.addComponent(btnVote)
 					.addComponent(btnUpload))
 		);
@@ -36,10 +41,14 @@ class CandidateMain extends JFrame implements ActionListener{
 					.addComponent(btnVote)
 					.addComponent(btnUpload))
 		);
+		
+		add(panelMain);	
 
-        	setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-		setSize(300,200);
+    	setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+		setSize(315,120);
 		setTitle("Candidate: Main Menu");
+		panelMain.setBackground(bgColor);
+
 		getContentPane().add(panelMain);
 		Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();       	    
 		int x = (int) ((dimension.getWidth() - this.getWidth()) / 2);
