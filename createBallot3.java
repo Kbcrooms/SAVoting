@@ -27,12 +27,15 @@ class createBallot3 extends JFrame implements ActionListener{
 		JPanel pnlCandidateInfo = new JPanel();
 		Color bgColor = new Color(176,196,222);
 
-		txtNameOfRace = new JTextField(20);
+		JTextField txtNameOfRace = new JTextField(20);
 		JLabel lNameOfRace = new JLabel("Name of Race");
-		txtNameofCandidate = new JTextField(20);
+		JTextField txtNameofCandidate = new JTextField(20);
+		JLabel lNameOfRace = new JLabel("Candidate Name");
+		JTextField txtCandidateID = new JTextField(20);
+		JLabel lCandidateID = new JLablel("Candidate Student ID");
 
-		
-		txt
+		btnGro = new ButtonGroup();
+		btn
 
 	}
 }
