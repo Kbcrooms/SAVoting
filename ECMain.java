@@ -8,63 +8,27 @@ import java.net.*;
 import java.io.*;
 
 class ECMain extends JFrame implements ActionListener{
-<<<<<<< HEAD
-	PrintWriter pwOut;
-	BufferedReader brIn;
-	Socket sock;
-
-	ECMain(){
-		JPanel panelMain = new JPanel();
-    	        GroupLayout layout = new GroupLayout(panelMain);	
-
-		JButton btnVote = new JButton("Vote in Election");
-		JButton btnCreateBallot = new JButton("Create a Ballot");
-
-		btnVote.setActionCommand("vote");
-		btnVote.addActionListener(this);
-		btnCreateBallot.setActionCommand("create");
-		btnCreateBallot.addActionListener(this);
-
-		panelMain.setLayout(layout);
-		layout.setAutoCreateGaps(true);
-		layout.setAutoCreateContainerGaps(true);
-
-		layout.setHorizontalGroup(
-			layout.createSequentialGroup()
-				.addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-					.addComponent(btnVote)
-					.addComponent(btnCreateBallot))
-		);
-		layout.setVerticalGroup(
-			layout.createParallelGroup()
-=======
-    PrintWriter pwOut;
-    BufferedReader brIn;
-    Socket sock;
-    ECMain(){}
-    ECMain(PrintWriter pwOut, BufferedReader brIn){
+  PrintWriter pwOut;
+  BufferedReader brIn;
+  Socket sock;
+  ECMain(){}
+  ECMain(PrintWriter pwOut, BufferedReader brIn){
 	this.pwOut = pwOut;
 	this.brIn = brIn;
-	
 	getContentPane().setLayout(new GridBagLayout());
 	Color bgColor = new Color(176,196,222);
 	getContentPane().setBackground(bgColor);
-	
 	JPanel panelMain = new JPanel();
-        GroupLayout layout = new GroupLayout(panelMain);
-    	
-	JButton btnVote = new JButton("Vote in Election");
+  GroupLayout layout = new GroupLayout(panelMain);
+  JButton btnVote = new JButton("Vote in Election");
 	JButton btnCreateBallot = new JButton("Create a Ballot");
-	
 	btnVote.setActionCommand("vote");
 	btnVote.addActionListener(this);
 	btnCreateBallot.setActionCommand("create");
 	btnCreateBallot.addActionListener(this);
-	
 	panelMain.setLayout(layout);
 	layout.setAutoCreateGaps(true);
 	layout.setAutoCreateContainerGaps(true);
-	
 	layout.setHorizontalGroup(
 				  layout.createSequentialGroup()
 				  .addGroup(layout.createParallelGroup(GroupLayout.Alignment.CENTER)
@@ -73,28 +37,27 @@ class ECMain extends JFrame implements ActionListener{
 				  );
 	layout.setVerticalGroup(
 				layout.createParallelGroup()
->>>>>>> master
 				.addGroup(layout.createSequentialGroup()
 					  .addComponent(btnVote)
 					  .addComponent(btnCreateBallot))
 				);
-	
-	add(panelMain);	
-	
+
+	add(panelMain);
+
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setSize(350,120);
         setTitle("Election Comissioner: Main Menu");
         panelMain.setBackground(bgColor);
-	
+
         getContentPane().add(panelMain);
-        Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();       	    
+        Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
         int x = (int) ((dimension.getWidth() - this.getWidth()) / 2);
         int y = (int) ((dimension.getHeight() - this.getHeight()) / 2);
         setLocation(x, y);
         setVisible(true);
 	run();
 	}
-	
+
 	private void run(){
 		try{
 			sock = new Socket("127.0.0.2", 50000);
@@ -104,18 +67,18 @@ class ECMain extends JFrame implements ActionListener{
 				String strIn = brIn.readLine();
 				if(strIn.equals("<createBallot>")){
 					setVisible(false);
-					new createBallot1(pwOut, brIn);				
+					new createBallot1(pwOut, brIn);
 				}else{
 					JOptionPane.showMessageDialog(this,strIn, "Error",JOptionPane.PLAIN_MESSAGE);
 				}
-			}		
+			}
 		}catch(IOException e){
 			System.out.println("IOException");
 		}catch(NullPointerException npe){
-			System.out.println("null");		
+			System.out.println("null");
 		}
 	}
-	
+
 	public void actionPerformed(ActionEvent evt){
 		if(!sock.isClosed()){
 			switch(evt.getActionCommand()){
@@ -127,7 +90,7 @@ class ECMain extends JFrame implements ActionListener{
 					break;
 			}
 		}else{
-			JOptionPane.showMessageDialog(this, "Socket is Closed", "Error", JOptionPane.ERROR_MESSAGE);		
+			JOptionPane.showMessageDialog(this, "Socket is Closed", "Error", JOptionPane.ERROR_MESSAGE);
 		}
 	}
 
