@@ -16,12 +16,13 @@ class Server extends Thread{
     FileInputStream fileIn = null;
     ObjectOutputStream out = null;
     ObjectInputStream in = null;
-
+    File electionsFile;
 
     Server(){
         admins = new Hashtable<String,String>();
         students = new Hashtable<String,Student>();
         elections = new Hashtable<String,Election>();
+        electionsFile = new File("elections.bin");
     }
 
     public void run(){
@@ -59,7 +60,7 @@ class Server extends Thread{
       }
     public void die(){
         try{
-	    //Saveing Hashtables through serialization
+	    //Saving Hashtables through serialization
 	    fileOut = new FileOutputStream("storedLoginInfo.bin");
 	    out = new ObjectOutputStream(fileOut);
 	    out.writeObject(admins);
@@ -72,7 +73,17 @@ class Server extends Thread{
         }
         System.exit(0);
     }
-
+    private void writeElections(){
+      try{
+        ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("elections.bin"));
+        out.writeObject(elections);
+        out.flush();
+        out.close();
+      }
+      catch(IOException e){
+        return;
+      }
+    }
     public boolean addUser(String strUser, String strPass, String authority, String major, String rank, String college){
         if(authority.equals("<admin>") && !admins.containsKey(strUser)){
             admins.put(strUser,strPass);
@@ -105,6 +116,7 @@ class Server extends Thread{
       }
       else if(students.containsKey(eComID)){
         elections.put(eName,new Election(eComID,eStart,eEnd));
+        writeElections();
         return "<createdelection>";
       }
       return "<invalidcomid>";

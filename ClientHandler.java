@@ -37,9 +37,12 @@ class ClientHandler extends Thread{
                     case "<election>":
                       createElection(data);
                     break;
-		    case "<createElection>":
-		    pwOut.println("<createElection>");
-	            break;
+		                case "<createElection>":
+		                  pwOut.println("<createElection>");
+	                  break;
+                    case "<getElections>":
+                    break;
+
                     case "<die>" :
                         die();
                     default:
@@ -55,7 +58,7 @@ class ClientHandler extends Thread{
     }
     private void addUser(String [] data){
         if (data.length == 4){
-            if(server.addUser(data[1],data[2],data[3])){
+            if(server.addUser(data[1],data[2],data[3],data[4],data[5],data[6])){
                 pwOut.println("<added>");
             }else{
                 pwOut.println("<error>");
