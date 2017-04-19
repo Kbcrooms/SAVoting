@@ -17,19 +17,18 @@ class StudentMain extends JFrame implements ActionListener{
 	StudentMain(PrintWriter pwOut, BufferedReader brIn){
 		this.pwOut = pwOut;
 		this.brIn = brIn;
-		
+		JPanel panelMain = new JPanel();
+    	        GroupLayout layout = new GroupLayout(panelMain);
+
 		getContentPane().setLayout(new GridBagLayout());
 		Color bgColor = new Color(176,196,222);
 		getContentPane().setBackground(bgColor);
 		
-		JPanel panelMain = new JPanel();
-        GroupLayout layout = new GroupLayout(panelMain);
-        
 		JButton btnVote = new JButton("Vote in Election");
-
+		
 		btnVote.setActionCommand("vote");
 		btnVote.addActionListener(this);
-
+		
 		panelMain.setLayout(layout);
 		layout.setAutoCreateGaps(true);
 		layout.setAutoCreateContainerGaps(true);

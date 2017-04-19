@@ -18,8 +18,8 @@ class HSOMain extends JFrame implements ActionListener{
     this.brIn = brIn;
     
     getContentPane().setLayout(new GridBagLayout());
-	Color bgColor = new Color(176,196,222);
-	getContentPane().setBackground(bgColor);
+    Color bgColor = new Color(176,196,222);
+    getContentPane().setBackground(bgColor);
     JPanel panelMain = new JPanel();
     GroupLayout layout = new GroupLayout(panelMain);
     
