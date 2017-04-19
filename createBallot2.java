@@ -30,7 +30,7 @@ class createBallot2 extends JFrame implements ActionListener{
 
 		JLabel lNumberOfRaces = new JLabel("Number of Races");
 		JButton btnNext = new JButton("Next");
-		btnNext.setActionCommand("create");
+		btnNext.setActionCommand("Next");
 		btnNext.addActionListener(this);
 	
 		pnlMain.setLayout(layout);
@@ -67,32 +67,55 @@ class createBallot2 extends JFrame implements ActionListener{
 		setLocation(x, y);
 		//make sure you can actually see it, starts off false
 	  	setVisible(true);
+		run();
 
 	}
+	private void run(){
+		try{
+			sock = new Socket("127.0.0.2", 50000);
+			brIn = new BufferedReader(new InputStreamReader(sock.getInputStream()));
+			pwOut = new PrintWriter(sock.getOutputStream(),true);
+			while(true){
+				String strIn = brIn.readLine();
+				if(strIn.equals("<CreateBallot3>")){
+					setVisible(false);
+					new createBallot3(pwOut, brIn, numberOfRaces);		
+				}else{
+					JOptionPane.showMessageDialog(this,strIn, "Error",JOptionPane.PLAIN_MESSAGE);
+				}
+			}		
+		}catch(IOException e){
+			System.out.println("IOException");
+		}catch(NullPointerException npe){
+			System.out.println("null");		
+		}
+		
+	}
+
+
 	public void actionPerformed(ActionEvent e){
-		String numElections = txtNumberOfRaces.getText();
-		Pattern numPattern = Pattern.compile(numRace);
-		Matcher numElectionMatcher = numPattern.matcher(numElections);
-		numberOfElections = numElection;
-		if(numElectionMatcher.matches()){		
-			switch(e.getActionCommand()){
-				case "Next":
-				break;
+		if(!sock.isClosed()){
+			String numElections = txtNumberOfRaces.getText();
+			Pattern numPattern = Pattern.compile(numRace);
+			Matcher numElectionMatcher = numPattern.matcher(numElections);
+			numberOfRaces = numElections;
+			if(numElectionMatcher.matches()){		
+				switch(e.getActionCommand()){
+					case "Next":
+						System.out.println("<CreateBallot3>");
+						pwOut.println("<CreateBallot3>");
+					break;
+				}
+			}else{
+				JOptionPane.showMessageDialog(this, "Invalid Date", "Error with Number of Races", JOptionPane.PLAIN_MESSAGE); 		
 			}
 		}else{
-			JOptionPane.showMessageDialog(this, "Invalid Date", "Error with Number of Races", JOptionPane.PLAIN_MESSAGE); 		
+			JOptionPane.showMessageDialog(this, "Socket is Closed", "Error", JOptionPane.ERROR_MESSAGE);		
 		}
 	}
-	public static void main(String arggs[]){
+
+	public static void main(String args[]){
 		new createBallot2();
 	}
-
-
-
-
-
-
-
-
 
 }

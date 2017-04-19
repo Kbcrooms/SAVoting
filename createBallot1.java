@@ -19,6 +19,9 @@ class createBallot1 extends JFrame implements ActionListener{
   	PrintWriter pwOut;
   	BufferedReader brIn;
 	Socket sock;
+	JPanel pnlResultButtons;
+	JPanel pnlElegibilityButtons;
+	
 
 	createBallot1(){}
 	createBallot1(PrintWriter pwOut, BufferedReader brIn){
@@ -26,8 +29,8 @@ class createBallot1 extends JFrame implements ActionListener{
     		this.brIn = brIn;
   		JPanel pnlMain = new JPanel();
   		GroupLayout layout = new GroupLayout(pnlMain);
-  		JPanel pnlResultButtons = new JPanel();
-  		JPanel pnlElegibilityButtons = new JPanel();
+  		pnlResultButtons = new JPanel();
+  		pnlElegibilityButtons = new JPanel();
   		Color bgColor = new Color(176,196,222);
 		pnlResultButtons.setBorder(BorderFactory.createLineBorder(Color.black));
   		pnlElegibilityButtons.setBorder(BorderFactory.createLineBorder(Color.black));
@@ -88,7 +91,7 @@ class createBallot1 extends JFrame implements ActionListener{
     		layout.setAutoCreateContainerGaps(true);
 		layout.setHorizontalGroup(
 			layout.createSequentialGroup()
-				.addGroup(layout.createParallelGroup(GroupLayout.Alignment.CENTER)
+				.addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
   	      				.addGroup(layout.createSequentialGroup()
   	      					.addGroup(layout.createParallelGroup()	
 							.addComponent(pnlResultButtons)
@@ -130,7 +133,7 @@ class createBallot1 extends JFrame implements ActionListener{
 			pwOut = new PrintWriter(sock.getOutputStream(),true);
 			while(true){
 				String strIn = brIn.readLine();
-				if(strIn.equals("<continueCreateBallot1>")){
+				if(strIn.equals("<CreateBallot2>")){
 					setVisible(false);
 					new createBallot2(pwOut, brIn);				
 				}else{
@@ -150,8 +153,8 @@ class createBallot1 extends JFrame implements ActionListener{
 		if(!sock.isClosed()){
 			switch(e.getActionCommand()){
 				case "continue":
-					System.out.println("<continueCreateBallot1>");
-					pwOut.println("<continueCreateBallot1>");
+					System.out.println("<CreateBallot2>");
+					pwOut.println("<CreateBallot2>");
 				break;
 			}
 		}else{

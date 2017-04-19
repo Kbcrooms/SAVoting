@@ -46,8 +46,14 @@ class ClientHandler extends Thread{
 		    case "<createBallot>":
 			pwOut.println("<createBallot>");
 		    break;
-		    case "<continueCreateBallot1>":
-			pwOut.println("<continueCreateBallot1>");
+		    case "<CreateBallot2>":
+			pwOut.println("<CreateBallot2>");
+		    break;
+		    case "<CreateBallot3>":
+		    	pwOut.println("<CreateBallot3>");
+		    break;
+		    case "<CreateBallot4>":
+		    	pwOut.println("<CreateBallot4>");
 		    break;
                     default:
                         pwOut.println("<error>");
