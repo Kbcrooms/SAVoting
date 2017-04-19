@@ -39,6 +39,18 @@ class ClientHandler extends Thread{
 		    break;
 		case "<createElection>":
 		    pwOut.println("<createElection>");
+	        break;
+		case "<createBallot>":
+			pwOut.println("<createBallot>");
+		break;
+		case "<CreateBallot2>":
+			pwOut.println("<CreateBallot2>");
+		    break;
+		    case "<CreateBallot3>":
+		    	pwOut.println("<CreateBallot3>");
+		    break;
+		    case "<CreateBallot4>":
+		    	pwOut.println("<CreateBallot4>");
 		    break;
 		case "<getElections>":
 		    //pwOut.println(Server.getElections());
@@ -47,7 +59,7 @@ class ClientHandler extends Thread{
 		    die();
 		    break;
 		default:
-		    pwOut.println("<error>");
+		    pwOut.println("<error>");\
                 }
 		
             }
