@@ -24,18 +24,18 @@ class createBallot4 extends JFrame implements ActionListener{
 		JPanel pnlMain = new JPanel();
 		GroupLayout layout = new GroupLayout(pnlMain);
 		Color bgColor = new Color(176,196,222);
-		
+
 		JFrame frame = new JFrame("Input Candidate Information");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		JPanel container = new JPanel();
 		JPanel pTitle = new JPanel(new FlowLayout(FlowLayout.CENTER));
 		JLabel lTitle = new JLabel("Add Candidates to the Race");
 		container.setLayout(new BoxLayout(container, BoxLayout.PAGE_AXIS));
-		pTitle.add(lTitle);		
+		pTitle.add(lTitle);
 		frame.add(container);
 		container.add(pTitle);
 		pTitle.setBackground(bgColor);
-		
+
 		int i = 0;
 		JPanel arrayPanels[] = new JPanel[Integer.valueOf(numberCandidates)];
 		JTextField txtCandidateName[] = new JTextField[Integer.valueOf(numberCandidates)];
@@ -47,11 +47,11 @@ class createBallot4 extends JFrame implements ActionListener{
 			arrayPanels[i].add(new JLabel("Candidate Name"));
 			txtCandidateName[i] = new JTextField(20);
 			arrayPanels[i].add(txtCandidateName[i]);
-		
+
 			arrayPanels[i].add(new JLabel("Candidate Student ID"));
 			txtCandidateName[i] = new JTextField(20);
 			arrayPanels[i].add(txtCandidateID[i]);
-			
+
 			container.add(arrayPanels[i]);
 			arrayPanels[i].setBackground(bgColor);
 			++i;
@@ -61,7 +61,7 @@ class createBallot4 extends JFrame implements ActionListener{
 		setVisible(true);
 
 	}
-	
+
 	public void actionPerformed(ActionEvent e){
 
 	}
