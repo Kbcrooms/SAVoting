@@ -19,6 +19,7 @@ class createBallot3 extends JFrame implements ActionListener{
 	JRadioButton writeIn;
 	JRadioButton candidate;
 	JTextField txtNumCandidates;
+	String myNumCandidates;
 	
 
 	createBallot3(){}
@@ -106,7 +107,7 @@ class createBallot3 extends JFrame implements ActionListener{
 					new createBallot3(pwOut, brIn, numberOfRaces);		
 				}else if(strIn.equals("<CreateBallot4>")){
 					setVisible(false);
-					//new createBallot4();
+					new createBallot4(pwOut, brIn, numberOfRaces, myNumCandidates);
 				}else{
 					JOptionPane.showMessageDialog(this,strIn, "Error",JOptionPane.PLAIN_MESSAGE);
 				}
@@ -127,7 +128,7 @@ class createBallot3 extends JFrame implements ActionListener{
 						int temp = Integer.valueOf(numberOfRaces);
 						temp = temp - 1;
 						numberOfRaces = Integer.toString(temp);
-						if(Integer.valueOf(numberOfRaces) > 0){
+						if(Integer.valueOf(numberOfRaces) >+ 0){
 							System.out.println("<CreateBallot3>");
 							pwOut.println("<CreateBallot3>");	
 						}//else{
@@ -135,15 +136,15 @@ class createBallot3 extends JFrame implements ActionListener{
 							//End page should contain all of the information  concerning the Ballot
 						//}
 					}
-					if(btnGroupTypeOfRace.getSelection().getActionCommand().equals("candidates")){
-						String myNumCandidates = txtNumCandidates.getText();
+					if(btnGroupTypeOfRace.getSelection().getActionCommand().equals("candidate")){
+						myNumCandidates = txtNumCandidates.getText();
 						Pattern numPattern = Pattern.compile(numCandidates);
 						Matcher numElectionMatcher = numPattern.matcher(myNumCandidates);
 						if(numElectionMatcher.matches()){
 							int temp = Integer.valueOf(numberOfRaces);
 							temp = temp - 1;
 							numberOfRaces = Integer.toString(temp);
-							if(Integer.valueOf(numberOfRaces) > 0){
+							if(Integer.valueOf(numberOfRaces) >= 0){
 								System.out.println("<CreateBallot4>");
 								pwOut.println("<CreateBallot4>");
 							}//else{
