@@ -97,7 +97,7 @@ class ClientHandler extends Thread{
         pwOut.println("<error>");
     }
     private void getElections(){
-      String electionsPayload = "<getElections>";
+      String electionsPayload = "<sendElections>";
       ArrayList<Election> elections = Server.elections;
       for(int i = 0; i< elections.size();i++){
         electionsPayload+= "," + elections.get(i).eName;
