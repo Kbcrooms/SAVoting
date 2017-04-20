@@ -8,11 +8,11 @@ import java.net.*;
 import java.io.*;
 
 class ECMain extends JFrame implements ActionListener{
-  PrintWriter pwOut;
-  BufferedReader brIn;
-  Socket sock;
-  ECMain(){}
-  ECMain(PrintWriter pwOut, BufferedReader brIn){
+    PrintWriter pwOut;
+    BufferedReader brIn;
+    Socket sock;
+    ECMain(){}
+    ECMain(PrintWriter pwOut, BufferedReader brIn){
 	this.pwOut = pwOut;
 	this.brIn = brIn;
 	getContentPane().setLayout(new GridBagLayout());

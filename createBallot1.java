@@ -61,25 +61,53 @@ class createBallot1 extends JFrame implements ActionListener{
 
 	  	JLabel lblVoterElegibility = new JLabel("Voter Eligibility:   ");
 	  	lblVoterElegibility.setFont(new Font(lblVoterElegibility.getFont().getName(), Font.PLAIN, 20));
-	  	JCheckBox chkRank = new JCheckBox("Rank");
-	  	chkRank.setActionCommand("Rank");
-	  	JCheckBox chkCollege = new JCheckBox("College");
-	  	chkCollege.setActionCommand("College");
+	  	JCheckBox chkRank1 = new JCheckBox("Rank: Freshman");
+	  	chkRank1.setActionCommand("Rank1");
+		JCheckBox chkRank2 = new JCheckBox("Rank: Sophomore");
+	  	chkRank2.setActionCommand("Rank2");
+		JCheckBox chkRank3 = new JCheckBox("Rank: Junior");
+	  	chkRank3.setActionCommand("Rank3");
+		JCheckBox chkRank4 = new JCheckBox("Rank: Senior");
+	  	chkRank4.setActionCommand("Rank4");
+		JCheckBox chkRank5 = new JCheckBox("Rank: Graduate");
+	  	chkRank5.setActionCommand("Rank5");
+		JCheckBox chkRank6 = new JCheckBox("Rank: Professional");
+	  	chkRank6.setActionCommand("Rank6");
+	  	JCheckBox chkCollege1 = new JCheckBox("College: Engineering");
+	  	chkCollege1.setActionCommand("College1");
+		JCheckBox chkCollege2 = new JCheckBox("College: Medical");
+	  	chkCollege2.setActionCommand("College2");
 	  	JCheckBox chkClub = new JCheckBox("Club/Organization");
 	  	chkClub.setActionCommand("Club");
 
-	  	chkRank.setBackground(bgColor);
-	  	chkCollege.setBackground(bgColor);
-	  	chkClub.setBackground(bgColor);
+	  	chkRank1.setBackground(bgColor);
+	  	chkRank5.setBackground(bgColor);
+	  	chkRank4.setBackground(bgColor);
+	  	chkRank3.setBackground(bgColor);
+	  	chkRank2.setBackground(bgColor);
+	  	chkCollege1.setBackground(bgColor);
+		chkCollege2.setBackground(bgColor);	  	
+		chkClub.setBackground(bgColor);
 
 	  	btnCheckVoterElegibility = new ArrayList<JCheckBox>();
-	  	btnCheckVoterElegibility.add(chkRank);
-	  	btnCheckVoterElegibility.add(chkCollege);
+	  	btnCheckVoterElegibility.add(chkRank1);
+		btnCheckVoterElegibility.add(chkRank2);
+		btnCheckVoterElegibility.add(chkRank3);
+		btnCheckVoterElegibility.add(chkRank4);
+		btnCheckVoterElegibility.add(chkRank5);
+		btnCheckVoterElegibility.add(chkRank6);	  	
+		btnCheckVoterElegibility.add(chkCollege1);		
+		btnCheckVoterElegibility.add(chkCollege2);
 	  	btnCheckVoterElegibility.add(chkClub);
 
 	    pnlElegibilityButtons.add(lblVoterElegibility);
-	  	pnlElegibilityButtons.add(chkRank);
-	  	pnlElegibilityButtons.add(chkCollege);
+	  	pnlElegibilityButtons.add(chkRank1);
+	  	pnlElegibilityButtons.add(chkRank2);
+	  	pnlElegibilityButtons.add(chkRank3);
+	  	pnlElegibilityButtons.add(chkRank4);
+	  	pnlElegibilityButtons.add(chkRank5);
+	  	pnlElegibilityButtons.add(chkCollege1);
+	  	pnlElegibilityButtons.add(chkCollege2);
 	  	pnlElegibilityButtons.add(chkClub);
 	
   		JButton btnCreateBallot = new JButton("Continue");
@@ -109,7 +137,7 @@ class createBallot1 extends JFrame implements ActionListener{
 		);
 
 
-		setSize(650,300);
+		setSize(1450,300);
 		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		setTitle("Create An Ballot");
 		pnlMain.setBackground(bgColor);
