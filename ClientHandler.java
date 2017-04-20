@@ -1,6 +1,6 @@
 import java.io.*;
 import java.net.*;
-
+import java.util.ArrayList;
 
 class ClientHandler extends Thread{
 
@@ -98,7 +98,7 @@ class ClientHandler extends Thread{
     }
     private void getElections(){
       String electionsPayload = "<sendElections>";
-      ArrayList<Election> elections = Server.elections;
+      ArrayList<Election> elections = server.elections;
       for(int i = 0; i< elections.size();i++){
         electionsPayload+= "," + elections.get(i).eName;
       }
