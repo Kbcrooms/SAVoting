@@ -1,13 +1,25 @@
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.*;
-import java.util.ArrayList;
-import java.util.Iterator;
+import java.awt.event.ActionEvent;
+import java.awt.*;
+import java.awt.Toolkit;
+import java.awt.Dimension;
+import java.net.*;
+import java.io.*;
 
 class DeleteVote extends JFrame implements ActionListener
 {
-   DeleteVote()
+
+   PrintWriter pwOut;
+   BufferedReader brIn;
+   Socket sock;
+   JFrame frame;
+
+   DeleteVote(){}
+   DeleteVote(PrintWriter pwOut, BufferedReader brIn)
 	 {
+    this.pwOut = pwOut;
+    this.brIn = brIn;
     JFrame frame = new JFrame("Delete a Vote");
     frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		JPanel container = new JPanel();

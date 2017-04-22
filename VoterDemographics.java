@@ -1,13 +1,23 @@
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.*;
-import java.util.ArrayList;
-import java.util.Iterator;
+import java.awt.event.ActionEvent;
+import java.awt.*;
+import java.awt.Toolkit;
+import java.awt.Dimension;
+import java.net.*;
+import java.io.*;
 
 class VoterDemographics extends JFrame implements ActionListener
 {
-   VoterDemographics()
-	 {
+   PrintWriter pwOut;
+   BufferedReader brIn;
+   Socket sock;
+   JFrame frame;
+
+   VoterDemographics(){}
+   VoterDemographics(PrintWriter pwOut, BufferedReader brIn){
+    this.pwOut = pwOut;
+    this.brIn = brIn;
     JFrame frame = new JFrame("View Election Demographics");
     frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		JPanel container = new JPanel();
@@ -54,7 +64,7 @@ class VoterDemographics extends JFrame implements ActionListener
 			switch(e.getActionCommand()){
 			case "demo":
 							JOptionPane.showMessageDialog(this, "Males:  " /*+ # here*/ + "\nFemales: "  /*# here*/ + "\nFreshman: "  /*# here*/ + "\nSophmore: "  /*# here*/+ "\nJunior: "  /*# here*/+ "\nSenior: "  /*# here*/+ "\nGraduate: "  /*# here*/+ "\nProfessional: " /*# here*/ + "\nMedical College: " /*# here*/ + "\nEngineering College: " /*# here*/ + "\nClub/Organization: " /*# here*/, "Demographics Information", JOptionPane.PLAIN_MESSAGE);
-							break;
+			break;
 							}
     }
     public static void main(String args[]){
