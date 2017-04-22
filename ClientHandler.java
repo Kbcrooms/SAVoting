@@ -1,6 +1,6 @@
 import java.io.*;
 import java.net.*;
-
+import java.util.ArrayList;
 
 class ClientHandler extends Thread{
 
@@ -53,7 +53,7 @@ class ClientHandler extends Thread{
                  pwOut.println("<CreateBallot4>");
                 break;
                 case "<getElections>":
-                //pwOut.println(Server.getElections());
+                  getElections();
                 break;
 		case "<certifyElection>":
 		  pwOut.println("<certifyElection>");
@@ -92,7 +92,6 @@ class ClientHandler extends Thread{
             }
         }
     }
-
     private void loginUser(String [] data){
         String userType;
         if (data.length == 3){
@@ -108,6 +107,17 @@ class ClientHandler extends Thread{
       }
       else
         pwOut.println("<error>");
+    }
+    private void getElections(){
+      String electionsPayload = "<sendElections>";
+      ArrayList<Election> elections = server.elections;
+      for(int i = 0; i< elections.size();i++){
+        electionsPayload+= "," + elections.get(i).eName;
+      }
+      pwOut.println(electionsPayload);
+    }
+    private void createBallot(){
+
     }
     private void die(){
         try{

@@ -23,12 +23,12 @@ class StudentMain extends JFrame implements ActionListener{
 		getContentPane().setLayout(new GridBagLayout());
 		Color bgColor = new Color(176,196,222);
 		getContentPane().setBackground(bgColor);
-		
+
 		JButton btnVote = new JButton("Vote in Election");
-		
+
 		btnVote.setActionCommand("vote");
 		btnVote.addActionListener(this);
-		
+
 		panelMain.setLayout(layout);
 		layout.setAutoCreateGaps(true);
 		layout.setAutoCreateContainerGaps(true);
@@ -44,7 +44,7 @@ class StudentMain extends JFrame implements ActionListener{
 					.addComponent(btnVote))
 		);
 
-		
+
 		add(panelMain);
 
     	setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -53,7 +53,7 @@ class StudentMain extends JFrame implements ActionListener{
 		panelMain.setBackground(bgColor);
 
 		getContentPane().add(panelMain);
-		Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();       	    
+		Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
 		int x = (int) ((dimension.getWidth() - this.getWidth()) / 2);
 		int y = (int) ((dimension.getHeight() - this.getHeight()) / 2);
 		setLocation(x, y);
@@ -63,6 +63,8 @@ class StudentMain extends JFrame implements ActionListener{
 	public void actionPerformed(ActionEvent evt){
 		switch(evt.getActionCommand()){
 			case "vote":
+				setVisible(false);
+				new StudentElectionsDisplay(pwOut,brIn);
 				break;
 		}
 	}

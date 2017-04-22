@@ -20,7 +20,7 @@ class createBallot3 extends JFrame implements ActionListener{
 	JRadioButton candidate;
 	JTextField txtNumCandidates;
 	String myNumCandidates;
-	
+
 
 	createBallot3(){}
 	createBallot3(PrintWriter pwOut, BufferedReader brIn, String numberOfRaces){
@@ -91,10 +91,10 @@ class createBallot3 extends JFrame implements ActionListener{
 		setLocation(x, y);
 		//make sure you can actually see it, starts off false
 	  	setVisible(true);
-		run();		
+		run();
 
 	}
-	
+
 	private void run(){
 		try{
 			sock = new Socket("127.0.0.2", 50000);
@@ -104,18 +104,18 @@ class createBallot3 extends JFrame implements ActionListener{
 				String strIn = brIn.readLine();
 				if(strIn.equals("<CreateBallot3>")){
 					setVisible(false);
-					new createBallot3(pwOut, brIn, numberOfRaces);		
+					new createBallot3(pwOut, brIn, numberOfRaces);
 				}else if(strIn.equals("<CreateBallot4>")){
 					setVisible(false);
 					new createBallot4(pwOut, brIn, numberOfRaces, myNumCandidates);
 				}else{
 					JOptionPane.showMessageDialog(this,strIn, "Error",JOptionPane.PLAIN_MESSAGE);
 				}
-			}		
+			}
 		}catch(IOException e){
 			System.out.println("IOException");
 		}catch(NullPointerException npe){
-			System.out.println("null");		
+			System.out.println("null");
 		}
 	}
 
@@ -130,7 +130,7 @@ class createBallot3 extends JFrame implements ActionListener{
 						numberOfRaces = Integer.toString(temp);
 						if(Integer.valueOf(numberOfRaces) >+ 0){
 							System.out.println("<CreateBallot3>");
-							pwOut.println("<CreateBallot3>");	
+							pwOut.println("<CreateBallot3>");
 						}//else{
 							//Goes to end page
 							//End page should contain all of the information  concerning the Ballot
@@ -152,7 +152,7 @@ class createBallot3 extends JFrame implements ActionListener{
 							//End page should contain all of the information concerning the Ballot
 							//}
 						}else{
-							JOptionPane.showMessageDialog(this, "Invalid Number of Candidates", "Error with Number of Races", JOptionPane.PLAIN_MESSAGE); 		
+							JOptionPane.showMessageDialog(this, "Invalid Number of Candidates", "Error with Number of Races", JOptionPane.PLAIN_MESSAGE);
 						}
 					}
 				break;
@@ -161,9 +161,6 @@ class createBallot3 extends JFrame implements ActionListener{
 			JOptionPane.showMessageDialog(this, "Socket is Closed", "Error", JOptionPane.ERROR_MESSAGE);
 		}
 	}
-		
-
-
 	public static void main(String args[]){
 		new createBallot3();
 	}
