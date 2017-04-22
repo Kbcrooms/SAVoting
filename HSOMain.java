@@ -80,7 +80,7 @@ class HSOMain extends JFrame implements ActionListener{
     int x = (int) ((dimension.getWidth() - this.getWidth()) / 2);
     int y = (int) ((dimension.getHeight() - this.getHeight()) / 2);
     setLocation(x, y);
-    setVisible(true);	
+    setVisible(true);
     run();
 }
 
@@ -95,6 +95,21 @@ private void run(){
 		if(strIn.equals("<createElection>")){	
 			setVisible(false);
 			new createElection(pwOut,brIn);	
+		}else if(strIn.equals("<certifyElection>")){
+			setVisible(false);
+			new CertifyElection(pwOut,brIn);
+		}else if(strIn.equals("<recountElection>")){
+			setVisible(false);
+			new RecountElection(pwOut,brIn);
+		}else if(strIn.equals("<turnoutStatistics>")){
+			setVisible(false);
+			new ViewTurnoutStat(pwOut,brIn);
+		}else if(strIn.equals("<voterDemographics>")){
+			setVisible(false);
+			new VoterDemographics(pwOut,brIn);
+		}else if(strIn.equals("<deleteVote>")){
+			setVisible(false);
+			new DeleteVote(pwOut,brIn);
 		}else{
 			JOptionPane.showMessageDialog(this,strIn,"Error",JOptionPane.PLAIN_MESSAGE);
 		}
@@ -115,14 +130,24 @@ public void actionPerformed(ActionEvent evt){
 			  pwOut.println("<createElection>");
 			  break;
 		      case "certify":
+			  System.out.println("<certifyElection>");
+			  pwOut.println("<certifyElection>");
 			  break;
 		      case "stats":
+			  System.out.println("<turnoutStatistics>");
+			  pwOut.println("<turnoutStatistics>");
 			  break;
 		      case "demo":
+			  System.out.println("<voterDemographics>");
+			  pwOut.println("<voterDemographics>");
 		          break;
 		      case "recount":
+			  System.out.println("<recountElection>");
+			  pwOut.println("<recountElection>");
 			  break;
 		      case "delete":
+			  System.out.println("<deleteVote>");
+			  pwOut.println("<deleteVote>");
 		          break;
 
 		   }

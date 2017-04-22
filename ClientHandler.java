@@ -55,7 +55,22 @@ class ClientHandler extends Thread{
                 case "<getElections>":
                   getElections();
                 break;
-                case "<die>" :
+		case "<certifyElection>":
+		  pwOut.println("<certifyElection>");
+		break;
+		case "<HSOMain>":
+		  pwOut.println("<HSOMain>");
+		break;
+		case "<recountElection>":
+		  pwOut.println("<recountElection>");
+		break;
+		case "<turnoutStatistics>":
+		  pwOut.println("<turnoutStatistics>");
+		break;
+		case "<deleteVote>":
+		  pwOut.println("<deleteVote>");		
+		break;
+		case "<die>" :
                  die();
                 break;
                 default:
@@ -92,6 +107,7 @@ class ClientHandler extends Thread{
     private void createElection(String [] data){
       if(data.length == 5){
         pwOut.println(server.createElection(data[1].trim(),data[2].trim(),data[3].trim(),data[4]).trim());
+	pwOut.println("<createdelection>");
       }
       else
         pwOut.println("<error>");
