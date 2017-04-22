@@ -55,6 +55,18 @@ class ClientHandler extends Thread{
                 case "<getElections>":
                 //pwOut.println(Server.getElections());
                 break;
+		case "<certifyElection>":
+		  pwOut.println("<certifyElection>");
+		break;
+		case "<HSOMain>":
+		  pwOut.println("<HSOMain>");
+		break;
+		case "<recountElection>":
+		  pwOut.println("<recountElection>");
+		break;
+		case "<turnoutStatistics>":
+		  pwOut.println("<turnoutStatistics>");
+		break;
                 case "<die>" :
                  die();
                 break;
