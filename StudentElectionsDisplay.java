@@ -6,33 +6,47 @@ import java.net.*;
 import java.io.*;
 
 class StudentElectionsDisplay extends JFrame implements ActionListener{
+  JPanel panelMain;
+  PrintWriter pwOut;
+  BufferedReader brIn;
+  Socket sock;
   StudentElectionsDisplay(PrintWriter pwOut, BufferedReader brIn){
-    getContentPane().setLayout(new GridBagLayout());
     JPanel panelMain = new JPanel();
-    setLayout(new BorderLayout());
-    panelMain.setLayout(new FlowLayout());
-    pwOut.println("<getElections>");
+    getContentPane().add(panelMain,BorderLayout.CENTER);
+    setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+    setSize(640,480);
+    setVisible(true);
+    this.pwOut = pwOut;
+    this.brIn = brIn;
+    run();
+  }
+  private void run(){
     try{
+      pwOut.println("<getElections>");
+      System.out.println("Waiting");
       String electionsPayload = brIn.readLine();
+      System.out.println(electionsPayload);
       if(electionsPayload.contains("<sendElections>")){
         String elections[] = electionsPayload.split(",");
-        add(panelMain,BorderLayout.CENTER);
-        setSize(640,480);
-        setVisible(true);
+
         for(int i = 1; i < elections.length;i++){
           JButton electionBtn = new JButton(elections[i]);
           electionBtn.setActionCommand(elections[i]);
           electionBtn.addActionListener(this);
-          add(electionBtn, BorderLayout.SOUTH);
+          panelMain.add(electionBtn);
         }
+      }
+      else{
+        System.out.println("Error");
       }
     }
     catch(Exception e){
 
     }
-    System.out.println("Error");
   }
   public void actionPerformed(ActionEvent e){
-
   }
+  public static void main(String args[]){
+  }
+
 }

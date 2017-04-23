@@ -15,10 +15,10 @@ class StudentMain extends JFrame implements ActionListener{
 	BufferedReader brIn;
 	StudentMain(){}
 	StudentMain(PrintWriter pwOut, BufferedReader brIn){
-		this.pwOut = pwOut;
 		this.brIn = brIn;
+		this.pwOut = pwOut;
 		JPanel panelMain = new JPanel();
-    	        GroupLayout layout = new GroupLayout(panelMain);
+    GroupLayout layout = new GroupLayout(panelMain);
 
 		getContentPane().setLayout(new GridBagLayout());
 		Color bgColor = new Color(176,196,222);
@@ -64,7 +64,7 @@ class StudentMain extends JFrame implements ActionListener{
 		switch(evt.getActionCommand()){
 			case "vote":
 				setVisible(false);
-				new StudentElectionsDisplay(pwOut,brIn);
+				new StudentElectionsDisplay(pwOut, brIn);
 				break;
 		}
 	}

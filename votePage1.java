@@ -15,7 +15,7 @@ class votePage1 extends JFrame implements ActionListener{
 	JFrame frame;
 
 	votePage1(){}
-	
+
 	votePage1(PrintWriter pwOut, BufferedReader brIn){
 	  	this.pwOut = pwOut;
 	  	this.brIn = brIn;
@@ -70,7 +70,7 @@ class votePage1 extends JFrame implements ActionListener{
 			pwOut = new PrintWriter(sock.getOutputStream(),true);
 			while(true){
 				String strIn = brIn.readLine();
-				if(){
+				if(true){
 					//need to fill in this if statement
 					// first if statement should take the student to the ballot
 					//second if statement takes student to candidate into
@@ -82,12 +82,12 @@ class votePage1 extends JFrame implements ActionListener{
 			System.out.println("IOException");
 		}catch(NullPointerException npe){
 			System.out.println("null");
-		}	
+		}
 	}
 
 	public void actionPerformed(ActionEvent e){
 		if(!sock.isClosed()){
-			switch(e.getActionCommand(){
+			switch(e.getActionCommand()){
 				case "vote":
 				//fill in action
 				break;

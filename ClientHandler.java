@@ -53,7 +53,8 @@ class ClientHandler extends Thread{
                  pwOut.println("<CreateBallot4>");
                 break;
                 case "<getElections>":
-                  getElections();
+                  System.out.println("Get Elections Case");
+                  pwOut.println(getElections());
                 break;
 		case "<certifyElection>":
 		  pwOut.println("<certifyElection>");
@@ -112,13 +113,13 @@ class ClientHandler extends Thread{
       else
         pwOut.println("<error>");
     }
-    private void getElections(){
+    private String getElections(){
       String electionsPayload = "<sendElections>";
       ArrayList<Election> elections = server.elections;
       for(int i = 0; i< elections.size();i++){
         electionsPayload+= "," + elections.get(i).eName;
       }
-      pwOut.println(electionsPayload);
+      return electionsPayload;
     }
     private void createBallot(){
 
