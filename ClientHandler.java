@@ -94,6 +94,7 @@ class ClientHandler extends Thread{
         }
         catch(Exception e){
             System.out.print("Error: " + line);
+            e.printStackTrace();
         }
     }
     private void addUser(String [] data){
@@ -164,7 +165,7 @@ class ClientHandler extends Thread{
           ballot.raceNames.add(race[0]);
           ArrayList<Candidate> candidates = new ArrayList<Candidate>();
           for(int i = 1; i< race.length;i=i+2){
-            candidates.add(new Candidate(new Student(race[i],race[i+1])));
+            //candidates.add(new Candidate(new Student(race[i],race[i+1])));
           }
           ballot.raceCandidates.add(candidates);
           parseLine = brIn.readLine();

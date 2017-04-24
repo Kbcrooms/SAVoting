@@ -98,6 +98,7 @@ class createBallot4 extends JFrame implements ActionListener{
 			System.out.println("IOException");
 		}catch(NullPointerException npe){
 			System.out.println("null CB4");
+			npe.printStackTrace();
 		}
 	}
 

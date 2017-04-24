@@ -19,6 +19,7 @@ class createBallotEnd extends JFrame implements ActionListener{
 	createBallotEnd(){}
 	createBallotEnd(PrintWriter pwOut, BufferedReader brIn, Ballot ballot,String username){
 		this.username = username;
+		this.ballot = ballot;
 		JPanel pnlMain = new JPanel();
 		GroupLayout layout = new GroupLayout(pnlMain);
 		Color bgColor = new Color(176,196,222);
@@ -79,11 +80,6 @@ class createBallotEnd extends JFrame implements ActionListener{
 			arrayPanel[i] = new JPanel(new FlowLayout(FlowLayout.LEFT));
 
 			arrayPanel[i].add(new JLabel("Race : " + ballot.raceNames.get(i) + "    "));
-			if(ballot.numOfCandidates.get(i) >= 0){
-				arrayPanel[i].add(new JLabel("Number of Candidates: " + ballot.numOfCandidates.get(i)));
-			}else{
-				arrayPanel[i].add(new JLabel("No Candidates"));
-			}
 
 			container.add(arrayPanel[i]);
 			arrayPanel[i].setBackground(bgColor);
