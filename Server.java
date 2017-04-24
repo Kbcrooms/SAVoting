@@ -3,13 +3,15 @@ import java.util.Hashtable;
 import java.io.IOException;
 import java.lang.ClassNotFoundException;
 import java.io.*;
+import java.util.ArrayList;
 
 class Server extends Thread{
 
     Hashtable<String,String> admins;
     Hashtable<String,Student> students;
     Hashtable<String,Student> electionCom;
-    Hashtable<String,Election> elections;
+    ArrayList<Election> elections;
+    Election testElection;
     ServerSocket ss;
 
     File f;
@@ -22,8 +24,9 @@ class Server extends Thread{
     Server(){
         admins = new Hashtable<String,String>();
         students = new Hashtable<String,Student>();
-	electionCom = new Hashtable<String,Student>();
-        elections = new Hashtable<String,Election>();
+	      electionCom = new Hashtable<String,Student>();
+        elections = new ArrayList<Election>();
+        testElection = new Election();
         electionsFile = new File("elections.bin");
     }
 
@@ -38,9 +41,12 @@ class Server extends Thread{
         		students = (Hashtable<String,Student>)in.readObject();
     	    }
           //Generates Test Users
-	    admins.put("testadmin","123");
-	    students.put("testuser",new Student("testuser","123","Computer Science", "Junior", "Statler College of Mineral Resources"));
-	    electionCom.put("testC", new Student("testc","password","Computer Science", "Senior", "Statler College of Mineral Resources"));
+    	    admins.put("testadmin","123");
+    	    students.put("testuser",new Student("testuser","123","Computer Science", "Junior", "Statler College of Mineral Resources"));
+    	    electionCom.put("testc", new Student("testc","password","Computer Science", "Senior", "Statler College of Mineral Resources"));
+    	    electionCom.put("testc1", new Student("testc","123","Computer Science", "Senior", "Statler College of Mineral Resources"));
+          //Generates Test Election
+          elections.add(new Election("testElection","testc","Today","Tomorrow"));
     	    ss = new ServerSocket(50000);   //high port numbers aren't normally dedicated
     	    System.out.println("Server Started");
     	    while(true){
@@ -60,39 +66,31 @@ class Server extends Thread{
         catch(ClassNotFoundException e){
 	         System.out.print("Error reading stored data!");
 	      }
-      }
-    public void die(){
-        try{
-	    //Saving Hashtables through serialization
-	    fileOut = new FileOutputStream("storedLoginInfo.bin");
-	    out = new ObjectOutputStream(fileOut);
-	    out.writeObject(admins);
-	    out.writeObject(students);
-	    out.flush();
-	    out.close();
-            ss.close();
-        }catch(IOException e){
-            //don't care, shutting down
-        }
-        System.exit(0);
     }
-    private void writeElections(){
+    public void die(){
       try{
-        ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("elections.bin"));
-        out.writeObject(elections);
+        //Saving Hashtables through serialization
+        fileOut = new FileOutputStream("storedLoginInfo.bin");
+        out = new ObjectOutputStream(fileOut);
+        out.writeObject(admins);
+        out.writeObject(students);
         out.flush();
         out.close();
+        ss.close();
       }
       catch(IOException e){
-        return;
+            //don't care, shutting down
       }
+      System.exit(0);
     }
     public boolean addUser(String strUser, String strPass, String authority, String major, String rank, String college){
         if(authority.equals("<admin>") && !admins.containsKey(strUser)){
             admins.put(strUser,strPass);
-        }else if(authority.equals("<student>") && !students.containsKey(strUser)){
+        }
+        else if(authority.equals("<student>") && !students.containsKey(strUser)){
             students.put(strUser,new Student(strUser,strPass,major,rank,college));
-        }else{
+        }
+        else{
             return false;
         }
 	return true;
@@ -105,30 +103,32 @@ class Server extends Thread{
             if (tempPass != null && tempPass.equals(strPass)){
                 return "<admin>";
             }
-	}else if(electionCom.containsKey(strUser)){
-	    tempPass = electionCom.get(strUser).password;
-	    if(tempPass != null && tempPass.equals(strPass)){
-		return "<electionCom>";
-	    }
-        }else if(students.containsKey(strUser)){
-            tempPass = students.get(strUser).password;
-            if (tempPass != null && tempPass.equals(strPass)){
-                return "<student>";
-            }
+        }
+        else if(electionCom.containsKey(strUser)){
+	        tempPass = electionCom.get(strUser).password;
+          if(tempPass != null && tempPass.equals(strPass)){
+		          return "<electionCom>," +strUser;
+	        }
+        }
+        else if(students.containsKey(strUser)){
+          tempPass = students.get(strUser).password;
+          if (tempPass != null && tempPass.equals(strPass)){
+            return "<student>";
+          }
         }
         return "<invalid>";
     }
     public String createElection(String eName, String eComID, String eStart, String eEnd){
-      if(elections.containsKey(eName)){
-        return "<dupelection>";
+      for(int i=0; i<elections.size();i++){
+        if(elections.get(i).eName.equals(eName))
+          return "<dupelection>";
       }
-      else if(students.containsKey(eComID)){
-        elections.put(eName,new Election(eComID,eStart,eEnd));
-        writeElections();
+      if(electionCom.containsKey(eComID)){
+        elections.add(new Election(eName,eComID,eStart,eEnd));
         return "<createdelection>";
       }
       return "<invalidcomid>";
-    }    
+    }
     public static void main(String args[]){
         new Server().start();
     }

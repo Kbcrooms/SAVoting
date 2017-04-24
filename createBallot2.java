@@ -18,11 +18,14 @@ class createBallot2 extends JFrame implements ActionListener{
 	private final String numRace = "[0-9]+";
 	public String numberOfRaces;
 	Socket sock;
-
+	Ballot ballot;
+	String username;
 	createBallot2(){}
-	createBallot2(PrintWriter pwOut, BufferedReader brIn){
+	createBallot2(PrintWriter pwOut, BufferedReader brIn, Ballot ballot, String username){
 		this.pwOut = pwOut;
 		this.brIn= brIn;
+		this.ballot = ballot;
+		this.username = username;
   		JPanel pnlMain = new JPanel();
   		GroupLayout layout = new GroupLayout(pnlMain);
   		Color bgColor = new Color(176,196,222);
@@ -32,7 +35,7 @@ class createBallot2 extends JFrame implements ActionListener{
 		JButton btnNext = new JButton("Next");
 		btnNext.setActionCommand("Next");
 		btnNext.addActionListener(this);
-	
+
 		pnlMain.setLayout(layout);
 	  	layout.setAutoCreateGaps(true);
     		layout.setAutoCreateContainerGaps(true);
@@ -52,10 +55,10 @@ class createBallot2 extends JFrame implements ActionListener{
 							.addGroup(layout.createSequentialGroup()
 							.addComponent(lNumberOfRaces)
 							.addComponent(txtNumberOfRaces)))
-					.addComponent(btnNext))					
+					.addComponent(btnNext))
 		);
 
-		setSize(650,300);
+		setSize(300,150);
 		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		setTitle("Create An Election");
 		pnlMain.setBackground(bgColor);;
@@ -79,17 +82,17 @@ class createBallot2 extends JFrame implements ActionListener{
 				String strIn = brIn.readLine();
 				if(strIn.equals("<CreateBallot3>")){
 					setVisible(false);
-					new createBallot3(pwOut, brIn, numberOfRaces);		
+					new createBallot3(pwOut, brIn, ballot,username);
 				}else{
 					JOptionPane.showMessageDialog(this,strIn, "Error",JOptionPane.PLAIN_MESSAGE);
 				}
-			}		
+			}
 		}catch(IOException e){
 			System.out.println("IOException");
 		}catch(NullPointerException npe){
-			System.out.println("null");		
+			System.out.println("null CB2");
 		}
-		
+
 	}
 
 
@@ -99,7 +102,9 @@ class createBallot2 extends JFrame implements ActionListener{
 			Pattern numPattern = Pattern.compile(numRace);
 			Matcher numElectionMatcher = numPattern.matcher(numElections);
 			numberOfRaces = numElections;
-			if(numElectionMatcher.matches()){		
+			ballot.numOfRaces = Integer.valueOf(numberOfRaces);
+
+			if(numElectionMatcher.matches()){
 				switch(e.getActionCommand()){
 					case "Next":
 						System.out.println("<CreateBallot3>");
@@ -107,10 +112,10 @@ class createBallot2 extends JFrame implements ActionListener{
 					break;
 				}
 			}else{
-				JOptionPane.showMessageDialog(this, "Invalid Date", "Error with Number of Races", JOptionPane.PLAIN_MESSAGE); 		
+				JOptionPane.showMessageDialog(this, "Invalid Date", "Error with Number of Races", JOptionPane.PLAIN_MESSAGE);
 			}
 		}else{
-			JOptionPane.showMessageDialog(this, "Socket is Closed", "Error", JOptionPane.ERROR_MESSAGE);		
+			JOptionPane.showMessageDialog(this, "Socket is Closed", "Error", JOptionPane.ERROR_MESSAGE);
 		}
 	}
 

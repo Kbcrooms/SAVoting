@@ -1,6 +1,6 @@
 import java.io.*;
 import java.net.*;
-
+import java.util.ArrayList;
 
 class ClientHandler extends Thread{
 
@@ -52,10 +52,36 @@ class ClientHandler extends Thread{
                 case "<CreateBallot4>":
                  pwOut.println("<CreateBallot4>");
                 break;
+
+                case "<CreateBallotEnd>":
+                  pwOut.println("<CreateBallotEnd>");
+                  break;
                 case "<getElections>":
-                //pwOut.println(Server.getElections());
+                  System.out.println("Get Elections Case");
+                  pwOut.println(getElections());
                 break;
-                case "<die>" :
+                case "<getElectionInfo>":
+                  pwOut.println(getElectionInfo(data[1].trim()));
+                break;
+            		case "<certifyElection>":
+            		  pwOut.println("<certifyElection>");
+            		break;
+            		case "<HSOMain>":
+            		  pwOut.println("<HSOMain>");
+            		break;
+            		case "<recountElection>":
+            		  pwOut.println("<recountElection>");
+            		break;
+            		case "<turnoutStatistics>":
+            		  pwOut.println("<turnoutStatistics>");
+            		break;
+            		case "<deleteVote>":
+            		  pwOut.println("<deleteVote>");
+            		break;
+                case "<startBallot>":
+                  createBallot(data);
+                break;
+            		case "<die>" :
                  die();
                 break;
                 default:
@@ -68,6 +94,7 @@ class ClientHandler extends Thread{
         }
         catch(Exception e){
             System.out.print("Error: " + line);
+            e.printStackTrace();
         }
     }
     private void addUser(String [] data){
@@ -80,7 +107,6 @@ class ClientHandler extends Thread{
             }
         }
     }
-
     private void loginUser(String [] data){
         String userType;
         if (data.length == 3){
@@ -93,9 +119,67 @@ class ClientHandler extends Thread{
     private void createElection(String [] data){
       if(data.length == 5){
         pwOut.println(server.createElection(data[1].trim(),data[2].trim(),data[3].trim(),data[4]).trim());
+	      pwOut.println("<createdelection>");
       }
       else
         pwOut.println("<error>");
+    }
+    private String getElections(){
+      String electionsPayload = "<sendElections>";
+      ArrayList<Election> elections = server.elections;
+      for(int i = 0; i< elections.size();i++){
+        electionsPayload+= "," + elections.get(i).eName;
+      }
+      return electionsPayload;
+    }
+    private String getElectionInfo(String name){
+      String electionInfo = "<sendElectionInfo>";
+      ArrayList<Election> elections = server.elections;
+      Election e = null;
+      for(int i = 0; i< elections.size();i++){
+        if(elections.get(i).eName.equals(name)){
+          e = elections.get(i);
+        }
+      }
+      if(e==null)
+        return "error";
+      else{
+        electionInfo+=","+e.sDate;
+        electionInfo+=","+e.eDate;
+        return electionInfo;
+      }
+    }
+    private void createBallot(String[] data){
+      String username = data[0];
+      Ballot ballot = new Ballot();
+      for(int i=2;i<data.length;i++){
+        if(data[i].equals("true"))
+          ballot.eligibility.add(true);
+        else
+          ballot.eligibility.add(false);
+      }
+      try{
+        String parseLine = brIn.readLine();
+        while(!parseLine.equals("<endBallot>")){
+          String[] race=parseLine.split(",");
+          ballot.raceNames.add(race[0]);
+          ArrayList<Candidate> candidates = new ArrayList<Candidate>();
+          for(int i = 1; i< race.length;i=i+2){
+            //candidates.add(new Candidate(new Student(race[i],race[i+1])));
+          }
+          ballot.raceCandidates.add(candidates);
+          parseLine = brIn.readLine();
+        }
+      }
+      catch(Exception e){
+
+      }
+      ArrayList<Election> elections = server.elections;
+      for(int i =0; i< elections.size(); i++){
+        if(elections.get(i).eComID.equals(username))
+          elections.get(i).ballot = ballot;
+        System.out.println("Added ballot to election");
+      }
     }
     private void die(){
         try{

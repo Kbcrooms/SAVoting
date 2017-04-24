@@ -116,34 +116,39 @@ class Client extends JFrame implements ActionListener{
 
             while (true){
                 String strIn = brIn.readLine();
+                strIn = strIn.trim();
                 if (strIn.startsWith("<added>")){
                     JOptionPane.showMessageDialog(this,"User added","Successful",JOptionPane.PLAIN_MESSAGE);
-
-                }else if (strIn.startsWith("<logged>")){
+                }
+                else if (strIn.startsWith("<logged>")){
                     JOptionPane.showMessageDialog(this,"Successful Login","Successful",JOptionPane.PLAIN_MESSAGE);
-
-                }else if (strIn.startsWith("<admin>")){
+                }
+                else if (strIn.startsWith("<admin>")){
                     JOptionPane.showMessageDialog(this,"Successful Admin Login", "Successful", JOptionPane.PLAIN_MESSAGE);
-		    setVisible(false);
+		                setVisible(false);
                     new HSOMain(pwOut,brIn);
-
-                }else if (strIn.startsWith("<student>")){
+                }
+                else if (strIn.startsWith("<student>")){
                     JOptionPane.showMessageDialog(this,"Successful Student Login", "Successful", JOptionPane.PLAIN_MESSAGE);
                     new StudentMain(pwOut, brIn);
-		    setVisible(false);
+		                setVisible(false);
+                    break;
+                }
+                else if(strIn.startsWith("<electionCom>")){
+		              JOptionPane.showMessageDialog(this,"Successful Election Comm. Login","Successful",JOptionPane.PLAIN_MESSAGE);
+                  String username = strIn.split(",")[1];
 
-		}else if(strIn.startsWith("<electionCom>")){
-		    JOptionPane.showMessageDialog(this,"Successful Election Comm. Login","Successful",JOptionPane.PLAIN_MESSAGE);
-		    new ECMain(pwOut,brIn);
-		    setVisible(false);
-                }else{
-                    JOptionPane.showMessageDialog(this,strIn,"Error",JOptionPane.PLAIN_MESSAGE);
+		              new ECMain(pwOut,brIn,username);
+		              setVisible(false);
+                }
+                else{
+                    //JOptionPane.showMessageDialog(this,strIn,"Error",JOptionPane.PLAIN_MESSAGE);
                 }
             }
         }catch(IOException e){
             System.out.println("IOException");
         }catch(NullPointerException npe){
-            System.out.println("null");
+            System.out.println("null Client");
         }
 
     }

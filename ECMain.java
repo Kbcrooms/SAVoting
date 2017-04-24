@@ -11,25 +11,27 @@ class ECMain extends JFrame implements ActionListener{
   PrintWriter pwOut;
   BufferedReader brIn;
   Socket sock;
+  String username;
   ECMain(){}
-  ECMain(PrintWriter pwOut, BufferedReader brIn){
-	this.pwOut = pwOut;
-	this.brIn = brIn;
-	getContentPane().setLayout(new GridBagLayout());
-	Color bgColor = new Color(176,196,222);
-	getContentPane().setBackground(bgColor);
-	JPanel panelMain = new JPanel();
-  GroupLayout layout = new GroupLayout(panelMain);
-  JButton btnVote = new JButton("Vote in Election");
-	JButton btnCreateBallot = new JButton("Create a Ballot");
-	btnVote.setActionCommand("vote");
-	btnVote.addActionListener(this);
-	btnCreateBallot.setActionCommand("create");
-	btnCreateBallot.addActionListener(this);
-	panelMain.setLayout(layout);
-	layout.setAutoCreateGaps(true);
-	layout.setAutoCreateContainerGaps(true);
-	layout.setHorizontalGroup(
+  ECMain(PrintWriter pwOut, BufferedReader brIn, String username){
+  	this.pwOut = pwOut;
+  	this.brIn = brIn;
+    this.username = username;
+  	getContentPane().setLayout(new GridBagLayout());
+  	Color bgColor = new Color(176,196,222);
+  	getContentPane().setBackground(bgColor);
+  	JPanel panelMain = new JPanel();
+    GroupLayout layout = new GroupLayout(panelMain);
+    JButton btnVote = new JButton("Vote in Election");
+  	JButton btnCreateBallot = new JButton("Create a Ballot");
+  	btnVote.setActionCommand("vote");
+  	btnVote.addActionListener(this);
+  	btnCreateBallot.setActionCommand("create");
+  	btnCreateBallot.addActionListener(this);
+  	panelMain.setLayout(layout);
+  	layout.setAutoCreateGaps(true);
+  	layout.setAutoCreateContainerGaps(true);
+  	layout.setHorizontalGroup(
 				  layout.createSequentialGroup()
 				  .addGroup(layout.createParallelGroup(GroupLayout.Alignment.CENTER)
 					    .addComponent(btnVote)
@@ -67,7 +69,7 @@ class ECMain extends JFrame implements ActionListener{
 				String strIn = brIn.readLine();
 				if(strIn.equals("<createBallot>")){
 					setVisible(false);
-					new createBallot1(pwOut, brIn);
+					new createBallot1(pwOut, brIn,username);
 				}else{
 					JOptionPane.showMessageDialog(this,strIn, "Error",JOptionPane.PLAIN_MESSAGE);
 				}
@@ -75,7 +77,7 @@ class ECMain extends JFrame implements ActionListener{
 		}catch(IOException e){
 			System.out.println("IOException");
 		}catch(NullPointerException npe){
-			System.out.println("null");
+			System.out.println("null ECMain");
 		}
 	}
 

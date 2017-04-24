@@ -21,21 +21,23 @@ class createBallot1 extends JFrame implements ActionListener{
 	Socket sock;
 	JPanel pnlResultButtons;
 	JPanel pnlElegibilityButtons;
-	
+	Ballot ballot;
+	String username;
 
 	createBallot1(){}
-	createBallot1(PrintWriter pwOut, BufferedReader brIn){
-		this.pwOut = pwOut;
-    		this.brIn = brIn;
+	createBallot1(PrintWriter pwOut, BufferedReader brIn,String username){
+			this.pwOut = pwOut;
+    	this.brIn = brIn;
+			this.username = username;
   		JPanel pnlMain = new JPanel();
   		GroupLayout layout = new GroupLayout(pnlMain);
   		pnlResultButtons = new JPanel();
   		pnlElegibilityButtons = new JPanel();
   		Color bgColor = new Color(176,196,222);
-		pnlResultButtons.setBorder(BorderFactory.createLineBorder(Color.black));
+			pnlResultButtons.setBorder(BorderFactory.createLineBorder(Color.black));
   		pnlElegibilityButtons.setBorder(BorderFactory.createLineBorder(Color.black));
 
-		JLabel lblResults = new JLabel("Results Displayed:   ");
+			JLabel lblResults = new JLabel("Results Displayed:   ");
 	  	lblResults.setFont(new Font(lblResults.getFont().getName(), Font.PLAIN, 20));
 	  	JCheckBox chkRawCount = new JCheckBox("Raw Count");
 	  	chkRawCount.setActionCommand("Raw Count");
@@ -61,27 +63,55 @@ class createBallot1 extends JFrame implements ActionListener{
 
 	  	JLabel lblVoterElegibility = new JLabel("Voter Eligibility:   ");
 	  	lblVoterElegibility.setFont(new Font(lblVoterElegibility.getFont().getName(), Font.PLAIN, 20));
-	  	JCheckBox chkRank = new JCheckBox("Rank");
-	  	chkRank.setActionCommand("Rank");
-	  	JCheckBox chkCollege = new JCheckBox("College");
-	  	chkCollege.setActionCommand("College");
+	  	JCheckBox chkRank1 = new JCheckBox("Rank: Freshman");
+	  	chkRank1.setActionCommand("Rank1");
+		JCheckBox chkRank2 = new JCheckBox("Rank: Sophomore");
+	  	chkRank2.setActionCommand("Rank2");
+		JCheckBox chkRank3 = new JCheckBox("Rank: Junior");
+	  	chkRank3.setActionCommand("Rank3");
+		JCheckBox chkRank4 = new JCheckBox("Rank: Senior");
+	  	chkRank4.setActionCommand("Rank4");
+		JCheckBox chkRank5 = new JCheckBox("Rank: Graduate");
+	  	chkRank5.setActionCommand("Rank5");
+		JCheckBox chkRank6 = new JCheckBox("Rank: Professional");
+	  	chkRank6.setActionCommand("Rank6");
+	  	JCheckBox chkCollege1 = new JCheckBox("College: Engineering");
+	  	chkCollege1.setActionCommand("College1");
+		JCheckBox chkCollege2 = new JCheckBox("College: Medical");
+	  	chkCollege2.setActionCommand("College2");
 	  	JCheckBox chkClub = new JCheckBox("Club/Organization");
 	  	chkClub.setActionCommand("Club");
 
-	  	chkRank.setBackground(bgColor);
-	  	chkCollege.setBackground(bgColor);
-	  	chkClub.setBackground(bgColor);
+	  	chkRank1.setBackground(bgColor);
+	  	chkRank5.setBackground(bgColor);
+	  	chkRank4.setBackground(bgColor);
+	  	chkRank3.setBackground(bgColor);
+	  	chkRank2.setBackground(bgColor);
+	  	chkCollege1.setBackground(bgColor);
+		  chkCollege2.setBackground(bgColor);
+		  chkClub.setBackground(bgColor);
 
 	  	btnCheckVoterElegibility = new ArrayList<JCheckBox>();
-	  	btnCheckVoterElegibility.add(chkRank);
-	  	btnCheckVoterElegibility.add(chkCollege);
+	  	btnCheckVoterElegibility.add(chkRank1);
+		  btnCheckVoterElegibility.add(chkRank2);
+		  btnCheckVoterElegibility.add(chkRank3);
+		  btnCheckVoterElegibility.add(chkRank4);
+		  btnCheckVoterElegibility.add(chkRank5);
+		  btnCheckVoterElegibility.add(chkRank6);
+		  btnCheckVoterElegibility.add(chkCollege1);
+		  btnCheckVoterElegibility.add(chkCollege2);
 	  	btnCheckVoterElegibility.add(chkClub);
 
 	    pnlElegibilityButtons.add(lblVoterElegibility);
-	  	pnlElegibilityButtons.add(chkRank);
-	  	pnlElegibilityButtons.add(chkCollege);
+	  	pnlElegibilityButtons.add(chkRank1);
+	  	pnlElegibilityButtons.add(chkRank2);
+	  	pnlElegibilityButtons.add(chkRank3);
+	  	pnlElegibilityButtons.add(chkRank4);
+	  	pnlElegibilityButtons.add(chkRank5);
+	  	pnlElegibilityButtons.add(chkCollege1);
+	  	pnlElegibilityButtons.add(chkCollege2);
 	  	pnlElegibilityButtons.add(chkClub);
-	
+
   		JButton btnCreateBallot = new JButton("Continue");
   		btnCreateBallot.setActionCommand("continue");
   		btnCreateBallot.addActionListener(this);
@@ -93,7 +123,7 @@ class createBallot1 extends JFrame implements ActionListener{
 			layout.createSequentialGroup()
 				.addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
   	      				.addGroup(layout.createSequentialGroup()
-  	      					.addGroup(layout.createParallelGroup()	
+  	      					.addGroup(layout.createParallelGroup()
 							.addComponent(pnlResultButtons)
 							.addComponent(pnlElegibilityButtons)
 							.addComponent(btnCreateBallot))))
@@ -109,7 +139,7 @@ class createBallot1 extends JFrame implements ActionListener{
 		);
 
 
-		setSize(650,300);
+		setSize(1450,300);
 		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		setTitle("Create An Ballot");
 		pnlMain.setBackground(bgColor);
@@ -135,15 +165,15 @@ class createBallot1 extends JFrame implements ActionListener{
 				String strIn = brIn.readLine();
 				if(strIn.equals("<CreateBallot2>")){
 					setVisible(false);
-					new createBallot2(pwOut, brIn);				
+					new createBallot2(pwOut, brIn, createBallotObj(),username);
 				}else{
 					JOptionPane.showMessageDialog(this,strIn, "Error",JOptionPane.PLAIN_MESSAGE);
 				}
-			}		
+			}
 		}catch(IOException e){
 			System.out.println("IOException");
 		}catch(NullPointerException npe){
-			System.out.println("null");		
+			System.out.println("null CB1");
 		}
 
 
@@ -158,12 +188,38 @@ class createBallot1 extends JFrame implements ActionListener{
 				break;
 			}
 		}else{
-			JOptionPane.showMessageDialog(this, "Socket is Closed", "Error", JOptionPane.ERROR_MESSAGE);		
+			JOptionPane.showMessageDialog(this, "Socket is Closed", "Error", JOptionPane.ERROR_MESSAGE);
 		}
 	}
 
-	public static void main(String args[]){
-		new createBallot1();
+	public Ballot createBallotObj(){
+		Iterator<JCheckBox> iterCheckButtonsR = btnCheckResults.iterator();
+		Iterator<JCheckBox> iterCheckButtonsE = btnCheckVoterElegibility.iterator();
+		ArrayList<Boolean> resultDisplayed = new ArrayList<Boolean>();
+		ArrayList<Boolean> eligibility = new ArrayList<Boolean>();
+
+		while(iterCheckButtonsR.hasNext()){
+	        JCheckBox nextBox = iterCheckButtonsR.next();
+	        if(nextBox.isSelected()){
+	            resultDisplayed.add(true);
+	        }else{
+	        	resultDisplayed.add(false);
+	        }
+	    }
+
+	    while(iterCheckButtonsE.hasNext()){
+	        JCheckBox nextBox = iterCheckButtonsE.next();
+	        if(nextBox.isSelected()){
+	            eligibility.add(true);
+	        }else{
+	        	eligibility.add(false);
+	        }
+	    }
+
+	    Ballot ballot = new Ballot();
+	    ballot.results = resultDisplayed;
+	    ballot.eligibility = eligibility;
+	    return ballot;
+
 	}
 }
-
