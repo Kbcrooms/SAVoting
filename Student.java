@@ -4,10 +4,10 @@ class Student{
   String major;
   String rank;
   String college;
-
-  Student(String username, String password){
+  String name;
+  Student(String username, String name){
     this.username = username;
-    this.password = password;
+    this.name = name;
   }
 
   Student(  String username,String password,String major,String rank,String college){

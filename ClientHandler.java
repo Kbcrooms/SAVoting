@@ -78,6 +78,9 @@ class ClientHandler extends Thread{
             		case "<deleteVote>":
             		  pwOut.println("<deleteVote>");
             		break;
+                case "<startBallot>":
+                  createBallot(data);
+                break;
             		case "<die>" :
                  die();
                 break;
@@ -145,8 +148,37 @@ class ClientHandler extends Thread{
         return electionInfo;
       }
     }
-    private void createBallot(){
+    private void createBallot(String[] data){
+      String username = data[0];
+      Ballot ballot = new Ballot();
+      for(int i=2;i<data.length;i++){
+        if(data[i].equals("true"))
+          ballot.eligibility.add(true);
+        else
+          ballot.eligibility.add(false);
+      }
+      try{
+        String parseLine = brIn.readLine();
+        while(!parseLine.equals("<endBallot>")){
+          String[] race=parseLine.split(",");
+          ballot.raceNames.add(race[0]);
+          ArrayList<Candidate> candidates = new ArrayList<Candidate>();
+          for(int i = 1; i< race.length;i=i+2){
+            candidates.add(new Candidate(new Student(race[i],race[i+1])));
+          }
+          ballot.raceCandidates.add(candidates);
+          parseLine = brIn.readLine();
+        }
+      }
+      catch(Exception e){
 
+      }
+      ArrayList<Election> elections = server.elections;
+      for(int i =0; i< elections.size(); i++){
+        if(elections.get(i).eComID.equals(username))
+          elections.get(i).ballot = ballot;
+        System.out.println("Added ballot to election");
+      }
     }
     private void die(){
         try{

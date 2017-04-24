@@ -46,7 +46,7 @@ class Server extends Thread{
     	    electionCom.put("testc", new Student("testc","password","Computer Science", "Senior", "Statler College of Mineral Resources"));
     	    electionCom.put("testc1", new Student("testc","123","Computer Science", "Senior", "Statler College of Mineral Resources"));
           //Generates Test Election
-          elections.add(new Election("testElection","testuser","Today","Tomorrow"));
+          elections.add(new Election("testElection","testc","Today","Tomorrow"));
     	    ss = new ServerSocket(50000);   //high port numbers aren't normally dedicated
     	    System.out.println("Server Started");
     	    while(true){

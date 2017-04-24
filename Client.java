@@ -136,7 +136,7 @@ class Client extends JFrame implements ActionListener{
         }catch(IOException e){
             System.out.println("IOException");
         }catch(NullPointerException npe){
-            System.out.println("null");
+            System.out.println("null Client");
         }
 
     }

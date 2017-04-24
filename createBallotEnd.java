@@ -19,7 +19,6 @@ class createBallotEnd extends JFrame implements ActionListener{
 	createBallotEnd(){}
 	createBallotEnd(PrintWriter pwOut, BufferedReader brIn, Ballot ballot,String username){
 		this.username = username;
-		System.out.println("End:"+username);
 		JPanel pnlMain = new JPanel();
 		GroupLayout layout = new GroupLayout(pnlMain);
 		Color bgColor = new Color(176,196,222);
@@ -92,6 +91,7 @@ class createBallotEnd extends JFrame implements ActionListener{
 
 		frame.setSize(800,500);
 		frame.setVisible(true);
+		System.out.println("MADE IT!");
 		run();
 
 
@@ -104,9 +104,21 @@ class createBallotEnd extends JFrame implements ActionListener{
 			pwOut = new PrintWriter(sock.getOutputStream(),true);
 		}catch(IOException e){
 			System.out.println("IOException");
-		}catch(NullPointerException npe){
-			System.out.println("Null");
 		}
+			String startBallot = "<startBallot>,"+username;
+			for(int i=0; i< ballot.eligibility.size();i++){
+				startBallot+= ","+ballot.eligibility.get(i);
+			}
+			pwOut.println(startBallot);
+			for(int i=0; i< ballot.raceNames.size();i++){
+				String race = "<race>,"+ballot.raceNames.get(i);
+				for(int j=0; j<ballot.raceCandidates.get(i).size();j++){
+					race+= ","+ ballot.raceCandidates.get(i).get(j).student.username+","+ballot.raceCandidates.get(i).get(j).student.name;
+				}
+				pwOut.println(race);
+			}
+			pwOut.println("<endBallot>");
+
 	}
 
 	public void actionPerformed(ActionEvent e){

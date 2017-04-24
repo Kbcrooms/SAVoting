@@ -89,6 +89,7 @@ class createBallot4 extends JFrame implements ActionListener{
 				}else if(strIn.equals("<CreateBallotEnd>")){
 					setVisible(false);
 					new createBallotEnd(pwOut,brIn,ballot,username);
+					break;
 				}else{
 					JOptionPane.showMessageDialog(this,strIn, "Error1",JOptionPane.PLAIN_MESSAGE);
 				}
@@ -96,7 +97,7 @@ class createBallot4 extends JFrame implements ActionListener{
 		}catch(IOException e){
 			System.out.println("IOException");
 		}catch(NullPointerException npe){
-			System.out.println("null");
+			System.out.println("null CB4");
 		}
 	}
 
@@ -106,7 +107,7 @@ class createBallot4 extends JFrame implements ActionListener{
 		switch(e.getActionCommand()){
 			case "Next":
 				for(int i = 0; i < ballot.currentNumberOfCandidates; i++){
-					temp = new Student(txtCandidateName[i].getText(), txtCandidateID[i].getText());
+					temp = new Student(txtCandidateID[i].getText(),txtCandidateName[i].getText());
 					current = new Candidate(temp);
 					currentRaceCandidates.add(current);
 				}
