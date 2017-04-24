@@ -15,21 +15,16 @@ class StudentElectionsDisplay extends JFrame implements ActionListener{
     getContentPane().add(panelMain,BorderLayout.CENTER);
     setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
     setSize(640,480);
-    setVisible(true);
     this.pwOut = pwOut;
     this.brIn = brIn;
-    run();
-  }
-  private void run(){
     try{
       pwOut.println("<getElections>");
-      System.out.println("Waiting");
       String electionsPayload = brIn.readLine();
       System.out.println(electionsPayload);
       if(electionsPayload.contains("<sendElections>")){
         String elections[] = electionsPayload.split(",");
-
         for(int i = 1; i < elections.length;i++){
+          System.out.println("Ran the loop");
           JButton electionBtn = new JButton(elections[i]);
           electionBtn.setActionCommand(elections[i]);
           electionBtn.addActionListener(this);
@@ -43,8 +38,13 @@ class StudentElectionsDisplay extends JFrame implements ActionListener{
     catch(Exception e){
 
     }
+    setVisible(true);
+
   }
   public void actionPerformed(ActionEvent e){
+    switch(e.getActionCommand()){
+      
+    }
   }
   public static void main(String args[]){
   }
