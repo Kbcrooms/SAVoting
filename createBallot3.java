@@ -24,13 +24,14 @@ class createBallot3 extends JFrame implements ActionListener{
 	JTextField txtNameOfRace;
 	String myNumCandidates;
 	Ballot ballot;
-	
+	String username;
 
 	createBallot3(){}
-	createBallot3(PrintWriter pwOut, BufferedReader brIn, Ballot ballot){
+	createBallot3(PrintWriter pwOut, BufferedReader brIn, Ballot ballot, String username){
 		this.pwOut = pwOut;
 		this.brIn = brIn;
 		this.ballot = ballot;
+		this.username = username;
 		//this.numberOfRaces = numberOfRaces;
 
 		JPanel pnlMain = new JPanel();
@@ -98,10 +99,10 @@ class createBallot3 extends JFrame implements ActionListener{
 		setLocation(x, y);
 		//make sure you can actually see it, starts off false
 	  	setVisible(true);
-		run();		
+		run();
 
 	}
-	
+
 
 	private void run(){
 		try{
@@ -112,21 +113,21 @@ class createBallot3 extends JFrame implements ActionListener{
 				String strIn = brIn.readLine();
 				if(strIn.equals("<CreateBallot3>")){
 					setVisible(false);
-					new createBallot3(pwOut, brIn, ballot);		
+					new createBallot3(pwOut, brIn, ballot,username);
 				}else if(strIn.equals("<CreateBallot4>")){
 					setVisible(false);
-					new createBallot4(pwOut, brIn, ballot); //, myNumCandidates);
+					new createBallot4(pwOut, brIn, ballot,username); //, myNumCandidates);
 				}else if(strIn.equals("<CreateBallotEnd>")){
 					setVisible(false);
 					//new createBallotEnd(pwOut, brIn, ballot);
 				}else{
 					JOptionPane.showMessageDialog(this,strIn, "Error",JOptionPane.PLAIN_MESSAGE);
 				}
-			}		
+			}
 		}catch(IOException e){
 			System.out.println("IOException");
 		}catch(NullPointerException npe){
-			System.out.println("null");		
+			System.out.println("null");
 
 		}
 	}
@@ -142,7 +143,7 @@ class createBallot3 extends JFrame implements ActionListener{
 						ballot.numOfRaces--;
 						if(ballot.numOfRaces >= 0){
 							System.out.println("<CreateBallot3>");
-							pwOut.println("<CreateBallot3>");	
+							pwOut.println("<CreateBallot3>");
 						}else{
 							//Goes to end page
 							//End page should contain all of the information  concerning the Ballot
@@ -169,7 +170,7 @@ class createBallot3 extends JFrame implements ActionListener{
 								pwOut.println("<CreateBallotEnd>");
 							}
 						}else{
-							JOptionPane.showMessageDialog(this, "Invalid Number of Candidates", "Error with Number of Races", JOptionPane.PLAIN_MESSAGE); 		
+							JOptionPane.showMessageDialog(this, "Invalid Number of Candidates", "Error with Number of Races", JOptionPane.PLAIN_MESSAGE);
 
 						}
 					}

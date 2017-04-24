@@ -20,19 +20,20 @@ class createBallot4 extends JFrame implements ActionListener{
 	ArrayList<Candidate> currentRaceCandidates;
 	JTextField txtCandidateName[];
 	JTextField txtCandidateID[];
-
+	String username;
 	createBallot4(){}
-	createBallot4(PrintWriter pwOut, BufferedReader brIn, Ballot ballot){
+	createBallot4(PrintWriter pwOut, BufferedReader brIn, Ballot ballot,String username){
 		this.pwOut = pwOut;
 		this.brIn = brIn;
 		this.ballot = ballot;
+		this.username = username;
 		currentRaceCandidates = new ArrayList<Candidate>();
 		//this.numberOfRaces = numberOfRaces;
 		//this.numberCandidates = numberCandidates;
 		JPanel pnlMain = new JPanel();
 		GroupLayout layout = new GroupLayout(pnlMain);
 		Color bgColor = new Color(176,196,222);
-		
+
 
 		JFrame frame = new JFrame("Input Candidate Information");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -40,11 +41,11 @@ class createBallot4 extends JFrame implements ActionListener{
 		JPanel pTitle = new JPanel(new FlowLayout(FlowLayout.CENTER));
 		JLabel lTitle = new JLabel("Add Candidates to the Race");
 		container.setLayout(new BoxLayout(container, BoxLayout.PAGE_AXIS));
-		pTitle.add(lTitle);		
+		pTitle.add(lTitle);
 		frame.add(container);
 		container.add(pTitle);
 		pTitle.setBackground(bgColor);
-		
+
 		int i = 0;
 		JPanel arrayPanels[] = new JPanel[ballot.currentNumberOfCandidates];
 		txtCandidateName = new JTextField[ballot.currentNumberOfCandidates];
@@ -56,11 +57,11 @@ class createBallot4 extends JFrame implements ActionListener{
 			arrayPanels[i].add(new JLabel("Candidate Name"));
 			txtCandidateName[i] = new JTextField(20);
 			arrayPanels[i].add(txtCandidateName[i]);
-		
+
 			arrayPanels[i].add(new JLabel("Candidate Student ID"));
 			txtCandidateID[i] = new JTextField(20);
 			arrayPanels[i].add(txtCandidateID[i]);
-			
+
 			container.add(arrayPanels[i]);
 			arrayPanels[i].setBackground(bgColor);
 			++i;
@@ -84,21 +85,21 @@ class createBallot4 extends JFrame implements ActionListener{
 				String strIn = brIn.readLine();
 				if(strIn.equals("<CreateBallot3>")){
 					setVisible(false);
-					new createBallot3(pwOut, brIn, ballot);		
+					new createBallot3(pwOut, brIn, ballot,username);
 				}else if(strIn.equals("<CreateBallotEnd>")){
 					setVisible(false);
-					new createBallotEnd(pwOut,brIn,ballot);
+					new createBallotEnd(pwOut,brIn,ballot,username);
 				}else{
 					JOptionPane.showMessageDialog(this,strIn, "Error1",JOptionPane.PLAIN_MESSAGE);
 				}
-			}		
+			}
 		}catch(IOException e){
 			System.out.println("IOException");
 		}catch(NullPointerException npe){
-			System.out.println("null");		
+			System.out.println("null");
 		}
 	}
-	
+
 	public void actionPerformed(ActionEvent e){
 		Candidate current;
 		Student temp;
@@ -119,7 +120,7 @@ class createBallot4 extends JFrame implements ActionListener{
 					System.out.println("<CreateBallotEnd>");
 					pwOut.println("<CreateBallotEnd>");
 				}
-							
+
 			break;
 		}
 

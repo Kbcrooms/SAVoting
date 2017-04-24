@@ -107,7 +107,7 @@ class Server extends Thread{
         else if(electionCom.containsKey(strUser)){
 	        tempPass = electionCom.get(strUser).password;
           if(tempPass != null && tempPass.equals(strPass)){
-		          return "<electionCom>";
+		          return "<electionCom>," +strUser;
 	        }
         }
         else if(students.containsKey(strUser)){
@@ -123,7 +123,7 @@ class Server extends Thread{
         if(elections.get(i).eName.equals(eName))
           return "<dupelection>";
       }
-      if(students.containsKey(eComID)){
+      if(electionCom.containsKey(eComID)){
         elections.add(new Election(eName,eComID,eStart,eEnd));
         return "<createdelection>";
       }

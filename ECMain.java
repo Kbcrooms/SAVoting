@@ -11,10 +11,12 @@ class ECMain extends JFrame implements ActionListener{
   PrintWriter pwOut;
   BufferedReader brIn;
   Socket sock;
+  String username;
   ECMain(){}
-  ECMain(PrintWriter pwOut, BufferedReader brIn){
+  ECMain(PrintWriter pwOut, BufferedReader brIn, String username){
   	this.pwOut = pwOut;
   	this.brIn = brIn;
+    this.username = username;
   	getContentPane().setLayout(new GridBagLayout());
   	Color bgColor = new Color(176,196,222);
   	getContentPane().setBackground(bgColor);
@@ -67,7 +69,7 @@ class ECMain extends JFrame implements ActionListener{
 				String strIn = brIn.readLine();
 				if(strIn.equals("<createBallot>")){
 					setVisible(false);
-					new createBallot1(pwOut, brIn);
+					new createBallot1(pwOut, brIn,username);
 				}else{
 					JOptionPane.showMessageDialog(this,strIn, "Error",JOptionPane.PLAIN_MESSAGE);
 				}

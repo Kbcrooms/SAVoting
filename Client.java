@@ -104,6 +104,7 @@ class Client extends JFrame implements ActionListener{
 
             while (true){
                 String strIn = brIn.readLine();
+                strIn = strIn.trim();
                 if (strIn.startsWith("<added>")){
                     JOptionPane.showMessageDialog(this,"User added","Successful",JOptionPane.PLAIN_MESSAGE);
                 }
@@ -123,7 +124,9 @@ class Client extends JFrame implements ActionListener{
                 }
                 else if(strIn.startsWith("<electionCom>")){
 		              JOptionPane.showMessageDialog(this,"Successful Election Comm. Login","Successful",JOptionPane.PLAIN_MESSAGE);
-		              new ECMain(pwOut,brIn);
+                  String username = strIn.split(",")[1];
+
+		              new ECMain(pwOut,brIn,username);
 		              setVisible(false);
                 }
                 else{

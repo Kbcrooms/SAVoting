@@ -19,13 +19,13 @@ class createBallot2 extends JFrame implements ActionListener{
 	public String numberOfRaces;
 	Socket sock;
 	Ballot ballot;
-
+	String username;
 	createBallot2(){}
-	createBallot2(PrintWriter pwOut, BufferedReader brIn, Ballot ballot){
+	createBallot2(PrintWriter pwOut, BufferedReader brIn, Ballot ballot, String username){
 		this.pwOut = pwOut;
 		this.brIn= brIn;
 		this.ballot = ballot;
-
+		this.username = username;
   		JPanel pnlMain = new JPanel();
   		GroupLayout layout = new GroupLayout(pnlMain);
   		Color bgColor = new Color(176,196,222);
@@ -35,7 +35,7 @@ class createBallot2 extends JFrame implements ActionListener{
 		JButton btnNext = new JButton("Next");
 		btnNext.setActionCommand("Next");
 		btnNext.addActionListener(this);
-	
+
 		pnlMain.setLayout(layout);
 	  	layout.setAutoCreateGaps(true);
     		layout.setAutoCreateContainerGaps(true);
@@ -55,7 +55,7 @@ class createBallot2 extends JFrame implements ActionListener{
 							.addGroup(layout.createSequentialGroup()
 							.addComponent(lNumberOfRaces)
 							.addComponent(txtNumberOfRaces)))
-					.addComponent(btnNext))					
+					.addComponent(btnNext))
 		);
 
 		setSize(300,150);
@@ -82,17 +82,17 @@ class createBallot2 extends JFrame implements ActionListener{
 				String strIn = brIn.readLine();
 				if(strIn.equals("<CreateBallot3>")){
 					setVisible(false);
-					new createBallot3(pwOut, brIn, ballot);		
+					new createBallot3(pwOut, brIn, ballot,username);
 				}else{
 					JOptionPane.showMessageDialog(this,strIn, "Error",JOptionPane.PLAIN_MESSAGE);
 				}
-			}		
+			}
 		}catch(IOException e){
 			System.out.println("IOException");
 		}catch(NullPointerException npe){
-			System.out.println("null");		
+			System.out.println("null");
 		}
-		
+
 	}
 
 
@@ -104,7 +104,7 @@ class createBallot2 extends JFrame implements ActionListener{
 			numberOfRaces = numElections;
 			ballot.numOfRaces = Integer.valueOf(numberOfRaces);
 
-			if(numElectionMatcher.matches()){		
+			if(numElectionMatcher.matches()){
 				switch(e.getActionCommand()){
 					case "Next":
 						System.out.println("<CreateBallot3>");
@@ -112,10 +112,10 @@ class createBallot2 extends JFrame implements ActionListener{
 					break;
 				}
 			}else{
-				JOptionPane.showMessageDialog(this, "Invalid Date", "Error with Number of Races", JOptionPane.PLAIN_MESSAGE); 		
+				JOptionPane.showMessageDialog(this, "Invalid Date", "Error with Number of Races", JOptionPane.PLAIN_MESSAGE);
 			}
 		}else{
-			JOptionPane.showMessageDialog(this, "Socket is Closed", "Error", JOptionPane.ERROR_MESSAGE);		
+			JOptionPane.showMessageDialog(this, "Socket is Closed", "Error", JOptionPane.ERROR_MESSAGE);
 		}
 	}
 

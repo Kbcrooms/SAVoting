@@ -22,21 +22,22 @@ class createBallot1 extends JFrame implements ActionListener{
 	JPanel pnlResultButtons;
 	JPanel pnlElegibilityButtons;
 	Ballot ballot;
-	
+	String username;
 
 	createBallot1(){}
-	createBallot1(PrintWriter pwOut, BufferedReader brIn){
-		this.pwOut = pwOut;
+	createBallot1(PrintWriter pwOut, BufferedReader brIn,String username){
+			this.pwOut = pwOut;
     	this.brIn = brIn;
+			this.username = username;
   		JPanel pnlMain = new JPanel();
   		GroupLayout layout = new GroupLayout(pnlMain);
   		pnlResultButtons = new JPanel();
   		pnlElegibilityButtons = new JPanel();
   		Color bgColor = new Color(176,196,222);
-		pnlResultButtons.setBorder(BorderFactory.createLineBorder(Color.black));
+			pnlResultButtons.setBorder(BorderFactory.createLineBorder(Color.black));
   		pnlElegibilityButtons.setBorder(BorderFactory.createLineBorder(Color.black));
 
-		JLabel lblResults = new JLabel("Results Displayed:   ");
+			JLabel lblResults = new JLabel("Results Displayed:   ");
 	  	lblResults.setFont(new Font(lblResults.getFont().getName(), Font.PLAIN, 20));
 	  	JCheckBox chkRawCount = new JCheckBox("Raw Count");
 	  	chkRawCount.setActionCommand("Raw Count");
@@ -96,8 +97,8 @@ class createBallot1 extends JFrame implements ActionListener{
 		  btnCheckVoterElegibility.add(chkRank3);
 		  btnCheckVoterElegibility.add(chkRank4);
 		  btnCheckVoterElegibility.add(chkRank5);
-		  btnCheckVoterElegibility.add(chkRank6);	  	
-		  btnCheckVoterElegibility.add(chkCollege1);		
+		  btnCheckVoterElegibility.add(chkRank6);
+		  btnCheckVoterElegibility.add(chkCollege1);
 		  btnCheckVoterElegibility.add(chkCollege2);
 	  	btnCheckVoterElegibility.add(chkClub);
 
@@ -110,7 +111,7 @@ class createBallot1 extends JFrame implements ActionListener{
 	  	pnlElegibilityButtons.add(chkCollege1);
 	  	pnlElegibilityButtons.add(chkCollege2);
 	  	pnlElegibilityButtons.add(chkClub);
-	
+
   		JButton btnCreateBallot = new JButton("Continue");
   		btnCreateBallot.setActionCommand("continue");
   		btnCreateBallot.addActionListener(this);
@@ -122,7 +123,7 @@ class createBallot1 extends JFrame implements ActionListener{
 			layout.createSequentialGroup()
 				.addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
   	      				.addGroup(layout.createSequentialGroup()
-  	      					.addGroup(layout.createParallelGroup()	
+  	      					.addGroup(layout.createParallelGroup()
 							.addComponent(pnlResultButtons)
 							.addComponent(pnlElegibilityButtons)
 							.addComponent(btnCreateBallot))))
@@ -164,15 +165,15 @@ class createBallot1 extends JFrame implements ActionListener{
 				String strIn = brIn.readLine();
 				if(strIn.equals("<CreateBallot2>")){
 					setVisible(false);
-					new createBallot2(pwOut, brIn, createBallotObj());				
+					new createBallot2(pwOut, brIn, createBallotObj(),username);
 				}else{
 					JOptionPane.showMessageDialog(this,strIn, "Error",JOptionPane.PLAIN_MESSAGE);
 				}
-			}		
+			}
 		}catch(IOException e){
 			System.out.println("IOException");
 		}catch(NullPointerException npe){
-			System.out.println("null");		
+			System.out.println("null");
 		}
 
 
@@ -187,7 +188,7 @@ class createBallot1 extends JFrame implements ActionListener{
 				break;
 			}
 		}else{
-			JOptionPane.showMessageDialog(this, "Socket is Closed", "Error", JOptionPane.ERROR_MESSAGE);		
+			JOptionPane.showMessageDialog(this, "Socket is Closed", "Error", JOptionPane.ERROR_MESSAGE);
 		}
 	}
 
@@ -200,7 +201,7 @@ class createBallot1 extends JFrame implements ActionListener{
 		while(iterCheckButtonsR.hasNext()){
 	        JCheckBox nextBox = iterCheckButtonsR.next();
 	        if(nextBox.isSelected()){
-	            resultDisplayed.add(true);               
+	            resultDisplayed.add(true);
 	        }else{
 	        	resultDisplayed.add(false);
 	        }
@@ -209,7 +210,7 @@ class createBallot1 extends JFrame implements ActionListener{
 	    while(iterCheckButtonsE.hasNext()){
 	        JCheckBox nextBox = iterCheckButtonsE.next();
 	        if(nextBox.isSelected()){
-	            eligibility.add(true);               
+	            eligibility.add(true);
 	        }else{
 	        	eligibility.add(false);
 	        }
@@ -222,4 +223,3 @@ class createBallot1 extends JFrame implements ActionListener{
 
 	}
 }
-

@@ -15,11 +15,11 @@ class createBallotEnd extends JFrame implements ActionListener{
 	BufferedReader brIn;
 	Ballot ballot;
 	Socket sock;
-
+	String username;
 	createBallotEnd(){}
-	createBallotEnd(PrintWriter pwOut, BufferedReader brIn, Ballot ballot){
-
-
+	createBallotEnd(PrintWriter pwOut, BufferedReader brIn, Ballot ballot,String username){
+		this.username = username;
+		System.out.println("End:"+username);
 		JPanel pnlMain = new JPanel();
 		GroupLayout layout = new GroupLayout(pnlMain);
 		Color bgColor = new Color(176,196,222);
@@ -62,7 +62,7 @@ class createBallotEnd extends JFrame implements ActionListener{
 		pEli.add(club);
 
 		container.add(pEli);
-		
+
 		JPanel pResults = new JPanel();
 		JLabel lResultDisplayed = new JLabel("Results Displayed:");
 		JLabel rawCount = new JLabel(" Raw Count: " + ballot.results.get(0));
@@ -102,13 +102,6 @@ class createBallotEnd extends JFrame implements ActionListener{
 			sock = new Socket("127.0.0.2", 50000);
 			brIn = new BufferedReader(new InputStreamReader(sock.getInputStream()));
 			pwOut = new PrintWriter(sock.getOutputStream(),true);
-			//while(true){
-				//if(strIn.equals("<>")){
-				//	String strIn = brIn.readLine();
-				//}else{
-				//	JOptionPane.showMessageDialog(this,strIn, "Error",JOptionPane.PLAIN_MESSAGE);
-				//}
-			//}
 		}catch(IOException e){
 			System.out.println("IOException");
 		}catch(NullPointerException npe){
