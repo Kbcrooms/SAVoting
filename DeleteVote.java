@@ -59,10 +59,45 @@ class DeleteVote extends JFrame implements ActionListener
 
 		frame.setSize(600, 350);
     frame.setVisible(true);
+	run();
 		
    }
+
+    private void run(){
+	try{
+	    sock = new Socket("127.0.0.2",50000);
+            brIn = new BufferedReader(new InputStreamReader(sock.getInputStream()));
+            pwOut = new PrintWriter(sock.getOutputStream(),true);
+	
+	    while(true){
+		String strIn = brIn.readLine();
+		if(strIn.equals("<DeleteSingleVote>")){	
+			setVisible(false);
+			new SelectVoteToDelete(pwOut,brIn);	
+		}else{
+			JOptionPane.showMessageDialog(this,strIn,"Error",JOptionPane.PLAIN_MESSAGE);
+		}
+
+	    }
+	}catch(IOException e){
+            System.out.println("IOException");
+        }catch(NullPointerException npe){
+            System.out.println("null");
+        }
+
+    }
     
     public void actionPerformed(ActionEvent e){
+	if(!sock.isClosed()){
+		switch(e.getActionCommand()){
+			case "vote":
+			  System.out.println("<DeleteSingleVote>");
+			  pwOut.println("<DeleteSingleVote>");
+			break;			
+		}
+	}else{
+            JOptionPane.showMessageDialog(this,"Socket is Closed","Error",JOptionPane.ERROR_MESSAGE);
+        }
 
     }
     public static void main(String args[]){
