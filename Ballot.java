@@ -27,7 +27,6 @@ class Ballot{
     raceCandidates = new ArrayList<ArrayList<Candidate>>();
     raceNames = new ArrayList<String>();
   }
-
   public boolean vote(String candidateID){
     for(int i=0; i<candidates.size();i++){
       if(candidates.get(i).student.username.equals(candidateID)){

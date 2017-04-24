@@ -9,26 +9,21 @@ class StudentElectionsDisplay extends JFrame implements ActionListener{
   JPanel panelMain;
   PrintWriter pwOut;
   BufferedReader brIn;
-  Socket sock;
   StudentElectionsDisplay(PrintWriter pwOut, BufferedReader brIn){
     JPanel panelMain = new JPanel();
     getContentPane().add(panelMain,BorderLayout.CENTER);
     setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
     setSize(640,480);
-    setVisible(true);
+    //int x = (int) ((dimension.getWidth() - this.getWidth()) / 2);
+    //int y = (int) ((dimension.getHeight() - this.getHeight()) / 2);
     this.pwOut = pwOut;
     this.brIn = brIn;
-    run();
-  }
-  private void run(){
     try{
       pwOut.println("<getElections>");
-      System.out.println("Waiting");
       String electionsPayload = brIn.readLine();
       System.out.println(electionsPayload);
       if(electionsPayload.contains("<sendElections>")){
         String elections[] = electionsPayload.split(",");
-
         for(int i = 1; i < elections.length;i++){
           JButton electionBtn = new JButton(elections[i]);
           electionBtn.setActionCommand(elections[i]);
@@ -43,8 +38,13 @@ class StudentElectionsDisplay extends JFrame implements ActionListener{
     catch(Exception e){
 
     }
+
+    setVisible(true);
+
   }
   public void actionPerformed(ActionEvent e){
+    new StudentVotingDisplay(pwOut,brIn,e.getActionCommand());
+    this.setVisible(false);
   }
   public static void main(String args[]){
   }

@@ -33,6 +33,7 @@ class createBallot4 extends JFrame implements ActionListener{
 		GroupLayout layout = new GroupLayout(pnlMain);
 		Color bgColor = new Color(176,196,222);
 		
+
 		JFrame frame = new JFrame("Input Candidate Information");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		JPanel container = new JPanel();

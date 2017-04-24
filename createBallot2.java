@@ -25,6 +25,7 @@ class createBallot2 extends JFrame implements ActionListener{
 		this.pwOut = pwOut;
 		this.brIn= brIn;
 		this.ballot = ballot;
+
   		JPanel pnlMain = new JPanel();
   		GroupLayout layout = new GroupLayout(pnlMain);
   		Color bgColor = new Color(176,196,222);
@@ -102,6 +103,7 @@ class createBallot2 extends JFrame implements ActionListener{
 			Matcher numElectionMatcher = numPattern.matcher(numElections);
 			numberOfRaces = numElections;
 			ballot.numOfRaces = Integer.valueOf(numberOfRaces);
+
 			if(numElectionMatcher.matches()){		
 				switch(e.getActionCommand()){
 					case "Next":

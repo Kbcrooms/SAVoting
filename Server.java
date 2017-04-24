@@ -44,6 +44,7 @@ class Server extends Thread{
     	    admins.put("testadmin","123");
     	    students.put("testuser",new Student("testuser","123","Computer Science", "Junior", "Statler College of Mineral Resources"));
     	    electionCom.put("testc", new Student("testc","password","Computer Science", "Senior", "Statler College of Mineral Resources"));
+    	    electionCom.put("testc1", new Student("testc","123","Computer Science", "Senior", "Statler College of Mineral Resources"));
           //Generates Test Election
           elections.add(new Election("testElection","testuser","Today","Tomorrow"));
     	    ss = new ServerSocket(50000);   //high port numbers aren't normally dedicated

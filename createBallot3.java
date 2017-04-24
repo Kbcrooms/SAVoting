@@ -14,11 +14,13 @@ class createBallot3 extends JFrame implements ActionListener{
 	PrintWriter pwOut;
 	BufferedReader brIn;
 	//String numberOfRaces;
+
 	Socket sock;
 	private final String numCandidates = "[0-9]+";
 	JRadioButton writeIn;
 	JRadioButton candidate;
 	JTextField txtNumCandidates;
+
 	JTextField txtNameOfRace;
 	String myNumCandidates;
 	Ballot ballot;
@@ -30,6 +32,7 @@ class createBallot3 extends JFrame implements ActionListener{
 		this.brIn = brIn;
 		this.ballot = ballot;
 		//this.numberOfRaces = numberOfRaces;
+
 		JPanel pnlMain = new JPanel();
 		GroupLayout layout = new GroupLayout(pnlMain);
 		JPanel pnlButtons = new JPanel();
@@ -38,6 +41,7 @@ class createBallot3 extends JFrame implements ActionListener{
 		txtNameOfRace = new JTextField(20);
 		JLabel lNameOfRace = new JLabel("Name of Race");
 	    txtNumCandidates = new JTextField(20);
+
 		JLabel lNumCandidates = new JLabel("Number of Candidates");
 
 
@@ -98,6 +102,7 @@ class createBallot3 extends JFrame implements ActionListener{
 
 	}
 	
+
 	private void run(){
 		try{
 			sock = new Socket("127.0.0.2", 50000);
@@ -122,6 +127,7 @@ class createBallot3 extends JFrame implements ActionListener{
 			System.out.println("IOException");
 		}catch(NullPointerException npe){
 			System.out.println("null");		
+
 		}
 	}
 
@@ -164,6 +170,7 @@ class createBallot3 extends JFrame implements ActionListener{
 							}
 						}else{
 							JOptionPane.showMessageDialog(this, "Invalid Number of Candidates", "Error with Number of Races", JOptionPane.PLAIN_MESSAGE); 		
+
 						}
 					}
 				break;
@@ -172,9 +179,6 @@ class createBallot3 extends JFrame implements ActionListener{
 			JOptionPane.showMessageDialog(this, "Socket is Closed", "Error", JOptionPane.ERROR_MESSAGE);
 		}
 	}
-		
-
-
 	public static void main(String args[]){
 		new createBallot3();
 	}

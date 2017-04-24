@@ -87,18 +87,18 @@ class createBallot1 extends JFrame implements ActionListener{
 	  	chkRank3.setBackground(bgColor);
 	  	chkRank2.setBackground(bgColor);
 	  	chkCollege1.setBackground(bgColor);
-		chkCollege2.setBackground(bgColor);
-		chkClub.setBackground(bgColor);
+		  chkCollege2.setBackground(bgColor);
+		  chkClub.setBackground(bgColor);
 
 	  	btnCheckVoterElegibility = new ArrayList<JCheckBox>();
 	  	btnCheckVoterElegibility.add(chkRank1);
-		btnCheckVoterElegibility.add(chkRank2);
-		btnCheckVoterElegibility.add(chkRank3);
-		btnCheckVoterElegibility.add(chkRank4);
-		btnCheckVoterElegibility.add(chkRank5);
-		btnCheckVoterElegibility.add(chkRank6);	  	
-		btnCheckVoterElegibility.add(chkCollege1);		
-		btnCheckVoterElegibility.add(chkCollege2);
+		  btnCheckVoterElegibility.add(chkRank2);
+		  btnCheckVoterElegibility.add(chkRank3);
+		  btnCheckVoterElegibility.add(chkRank4);
+		  btnCheckVoterElegibility.add(chkRank5);
+		  btnCheckVoterElegibility.add(chkRank6);	  	
+		  btnCheckVoterElegibility.add(chkCollege1);		
+		  btnCheckVoterElegibility.add(chkCollege2);
 	  	btnCheckVoterElegibility.add(chkClub);
 
 	    pnlElegibilityButtons.add(lblVoterElegibility);
@@ -221,6 +221,5 @@ class createBallot1 extends JFrame implements ActionListener{
 	    return ballot;
 
 	}
-
 }
 
