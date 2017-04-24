@@ -18,12 +18,21 @@ class Client extends JFrame implements ActionListener{
         pnlMain = new JPanel();
         pnlMain.setLayout(new BoxLayout(pnlMain,BoxLayout.PAGE_AXIS));
         Color bgColor = new Color(176,196,222);
-        UIManager.put("OptionPane.background", bgColor);
+        Color bgColorDark = new Color(156,176,202);
+        UIManager.put("OptionPane.background", bgColorDark);
+        UIManager.put("Panel.background", bgColor);
 
         JPanel pnlName = new JPanel();
         JPanel pnlPassword = new JPanel();
         JPanel pnlButtons = new JPanel();
         JPanel pnlRadios = new JPanel();
+        
+        ImageIcon mascot = new ImageIcon("MUmascotSm.gif");
+        ImageIcon script = new ImageIcon("MUscriptSm.gif");
+        JLabel mscLabel = new JLabel();
+        JLabel scrLabel = new JLabel();
+        mscLabel.setIcon(mascot);
+        scrLabel.setIcon(script);
 
         txtName = new JTextField(30);
         JLabel lblName = new JLabel("Name");
@@ -58,7 +67,7 @@ class Client extends JFrame implements ActionListener{
         pnlRadios.add(lblAuthority);
         pnlRadios.add(adminSelect);
         pnlRadios.add(studentSelect);
-
+        
         JButton btnQuit = new JButton("Quit");
         btnQuit.setActionCommand("quit");
         btnQuit.addActionListener(this);
@@ -67,8 +76,11 @@ class Client extends JFrame implements ActionListener{
       	    pnlButtons.add(btnAdd);
       	    pnlMain.add(pnlRadios);
       	}
+      	
+      	pnlButtons.add(mscLabel);
         pnlButtons.add(btnLogin);
         pnlButtons.add(btnQuit);
+        pnlButtons.add(scrLabel);
 
         pnlMain.add(pnlName);
         pnlMain.add(pnlPassword);
@@ -84,7 +96,7 @@ class Client extends JFrame implements ActionListener{
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setTitle("Morgantown University Election Login");
-        setSize(500,150);
+        setSize(500,200);
 
         Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
         int x = (int) ((dimension.getWidth() - this.getWidth()) / 2);
