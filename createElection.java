@@ -98,6 +98,8 @@ class createElection extends JFrame implements ActionListener{
             String strIn = brIn.readLine();
             if(strIn.startsWith("<createdelection>")){
               JOptionPane.showMessageDialog(this,"Successful","Successfully Created Election",JOptionPane.PLAIN_MESSAGE);
+	      setVisible(false);
+	      new HSOMain(pwOut,brIn);
             }
             else{
               JOptionPane.showMessageDialog(this,strIn,"Error Creating Election",JOptionPane.PLAIN_MESSAGE);

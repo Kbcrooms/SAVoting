@@ -4,6 +4,12 @@ class Student{
   String major;
   String rank;
   String college;
+
+  Student(String username, String password){
+    this.username = username;
+    this.password = password;
+  }
+
   Student(  String username,String password,String major,String rank,String college){
     this.username = username;
     this.password = password;

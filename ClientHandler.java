@@ -1,6 +1,6 @@
 import java.io.*;
 import java.net.*;
-
+import java.util.ArrayList;
 
 class ClientHandler extends Thread{
 
@@ -24,48 +24,81 @@ class ClientHandler extends Thread{
         String line = new String();
         try{
             while (true){
-                line = brIn.readLine();
-                System.out.println(line);
-                String [] data = line.split(",");
-                switch (data[0].trim()){
-		case "<add>":
-		    addUser(data);
-                    break;
-		case "<login>":
-		    loginUser(data);
-                    break;
-		case "<election>":
-		    createElection(data);
-		    break;
-		case "<createElection>":
-		    pwOut.println("<createElection>");
-		    break;
-		case "<getElections>":
-		    //pwOut.println(Server.getElections());
-		    break;
+              line = brIn.readLine();
+              System.out.println(line);
+              String [] data = line.split(",");
+              switch (data[0].trim()){
+                case "<add>":
+                  addUser(data);
+                break;
+                case "<login>":
+                  loginUser(data);
+                break;
+                case "<election>":
+                  createElection(data);
+                break;
+                case "<createElection>":
+                  pwOut.println("<createElection>");
+                break;
+                case "<createBallot>":
+                 pwOut.println("<createBallot>");
+                break;
+                case "<CreateBallot2>":
+                 pwOut.println("<CreateBallot2>");
+                break;
+                case "<CreateBallot3>":
+                 pwOut.println("<CreateBallot3>");
+                break;
+                case "<CreateBallot4>":
+                 pwOut.println("<CreateBallot4>");
+                break;
+                case "<CreateBallotEnd>":
+                  pwOut.println("<CreateBallotEnd>");
+                  break;
+                case "<getElections>":
+                  System.out.println("Get Elections Case");
+                  pwOut.println(getElections());
+                break;
+		case "<certifyElection>":
+		  pwOut.println("<certifyElection>");
+		break;
+		case "<HSOMain>":
+		  pwOut.println("<HSOMain>");
+		break;
+		case "<recountElection>":
+		  pwOut.println("<recountElection>");
+		break;
+		case "<turnoutStatistics>":
+		  pwOut.println("<turnoutStatistics>");
+		break;
+		case "<deleteVote>":
+		  pwOut.println("<deleteVote>");		
+		break;
 		case "<die>" :
-		    die();
-		    break;
-		default:
-		    pwOut.println("<error>");
-                }
-		
+                 die();
+                break;
+                default:
+                 pwOut.println("<error>");
+              }
             }
-        }catch(SocketException x){
+        }
+        catch(SocketException x){
             System.out.println("socket disconnected");
-        }catch(Exception e){
+        }
+        catch(Exception e){
             System.out.print("Error: " + line);
         }
     }
     private void addUser(String [] data){
         if (data.length == 4){
-            //if(server.addUser(data[1],data[2],data[3])){
-	    pwOut.println("<added>");
-	}else{
-	    pwOut.println("<error>");
+            if(server.addUser(data[1],data[2],data[3],data[4],data[5],data[6])){
+                pwOut.println("<added>");
+            }
+            else{
+                pwOut.println("<error>");
+            }
         }
     }
-    
     private void loginUser(String [] data){
         String userType;
         if (data.length == 3){
@@ -78,9 +111,21 @@ class ClientHandler extends Thread{
     private void createElection(String [] data){
       if(data.length == 5){
         pwOut.println(server.createElection(data[1].trim(),data[2].trim(),data[3].trim(),data[4]).trim());
+	pwOut.println("<createdelection>");
       }
       else
         pwOut.println("<error>");
+    }
+    private String getElections(){
+      String electionsPayload = "<sendElections>";
+      ArrayList<Election> elections = server.elections;
+      for(int i = 0; i< elections.size();i++){
+        electionsPayload+= "," + elections.get(i).eName;
+      }
+      return electionsPayload;
+    }
+    private void createBallot(){
+
     }
     private void die(){
         try{
