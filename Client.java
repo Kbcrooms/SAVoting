@@ -28,7 +28,7 @@ class Client extends JFrame implements ActionListener{
         JPanel pnlRadios = new JPanel();
         
         ImageIcon mascot = new ImageIcon("MUmascotSm.gif");
-        ImageIcon script = new ImageIcon("MUscriptSm.gif");
+        ImageIcon script = new ImageIcon("MUscriptSm2.gif");
         JLabel mscLabel = new JLabel();
         JLabel scrLabel = new JLabel();
         mscLabel.setIcon(mascot);
@@ -71,14 +71,17 @@ class Client extends JFrame implements ActionListener{
         JButton btnQuit = new JButton("Quit");
         btnQuit.setActionCommand("quit");
         btnQuit.addActionListener(this);
-
+        		
       	if(mode.equals("ADD_DATA")){
+      		pnlButtons.add(mscLabel);
       	    pnlButtons.add(btnAdd);
       	    pnlMain.add(pnlRadios);
       	}
+  		else{
+  			pnlButtons.add(mscLabel);
+		}
       	
-      	pnlButtons.add(mscLabel);
-        pnlButtons.add(btnLogin);
+      	pnlButtons.add(btnLogin);
         pnlButtons.add(btnQuit);
         pnlButtons.add(scrLabel);
 
