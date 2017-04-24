@@ -38,6 +38,7 @@ class StudentElectionsDisplay extends JFrame implements ActionListener{
     catch(Exception e){
 
     }
+
     setVisible(true);
 
   }

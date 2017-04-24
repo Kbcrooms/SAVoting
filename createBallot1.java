@@ -21,12 +21,13 @@ class createBallot1 extends JFrame implements ActionListener{
 	Socket sock;
 	JPanel pnlResultButtons;
 	JPanel pnlElegibilityButtons;
+	Ballot ballot;
 	
 
 	createBallot1(){}
 	createBallot1(PrintWriter pwOut, BufferedReader brIn){
 		this.pwOut = pwOut;
-    		this.brIn = brIn;
+    	this.brIn = brIn;
   		JPanel pnlMain = new JPanel();
   		GroupLayout layout = new GroupLayout(pnlMain);
   		pnlResultButtons = new JPanel();
@@ -86,18 +87,18 @@ class createBallot1 extends JFrame implements ActionListener{
 	  	chkRank3.setBackground(bgColor);
 	  	chkRank2.setBackground(bgColor);
 	  	chkCollege1.setBackground(bgColor);
-		chkCollege2.setBackground(bgColor);	  	
-		chkClub.setBackground(bgColor);
+		  chkCollege2.setBackground(bgColor);
+		  chkClub.setBackground(bgColor);
 
 	  	btnCheckVoterElegibility = new ArrayList<JCheckBox>();
 	  	btnCheckVoterElegibility.add(chkRank1);
-		btnCheckVoterElegibility.add(chkRank2);
-		btnCheckVoterElegibility.add(chkRank3);
-		btnCheckVoterElegibility.add(chkRank4);
-		btnCheckVoterElegibility.add(chkRank5);
-		btnCheckVoterElegibility.add(chkRank6);	  	
-		btnCheckVoterElegibility.add(chkCollege1);		
-		btnCheckVoterElegibility.add(chkCollege2);
+		  btnCheckVoterElegibility.add(chkRank2);
+		  btnCheckVoterElegibility.add(chkRank3);
+		  btnCheckVoterElegibility.add(chkRank4);
+		  btnCheckVoterElegibility.add(chkRank5);
+		  btnCheckVoterElegibility.add(chkRank6);	  	
+		  btnCheckVoterElegibility.add(chkCollege1);		
+		  btnCheckVoterElegibility.add(chkCollege2);
 	  	btnCheckVoterElegibility.add(chkClub);
 
 	    pnlElegibilityButtons.add(lblVoterElegibility);
@@ -163,7 +164,7 @@ class createBallot1 extends JFrame implements ActionListener{
 				String strIn = brIn.readLine();
 				if(strIn.equals("<CreateBallot2>")){
 					setVisible(false);
-					new createBallot2(pwOut, brIn);				
+					new createBallot2(pwOut, brIn, createBallotObj());				
 				}else{
 					JOptionPane.showMessageDialog(this,strIn, "Error",JOptionPane.PLAIN_MESSAGE);
 				}
@@ -190,8 +191,35 @@ class createBallot1 extends JFrame implements ActionListener{
 		}
 	}
 
-	public static void main(String args[]){
-		new createBallot1();
+	public Ballot createBallotObj(){
+		Iterator<JCheckBox> iterCheckButtonsR = btnCheckResults.iterator();
+		Iterator<JCheckBox> iterCheckButtonsE = btnCheckVoterElegibility.iterator();
+		ArrayList<Boolean> resultDisplayed = new ArrayList<Boolean>();
+		ArrayList<Boolean> eligibility = new ArrayList<Boolean>();
+
+		while(iterCheckButtonsR.hasNext()){
+	        JCheckBox nextBox = iterCheckButtonsR.next();
+	        if(nextBox.isSelected()){
+	            resultDisplayed.add(true);               
+	        }else{
+	        	resultDisplayed.add(false);
+	        }
+	    }
+
+	    while(iterCheckButtonsE.hasNext()){
+	        JCheckBox nextBox = iterCheckButtonsE.next();
+	        if(nextBox.isSelected()){
+	            eligibility.add(true);               
+	        }else{
+	        	eligibility.add(false);
+	        }
+	    }
+
+	    Ballot ballot = new Ballot();
+	    ballot.results = resultDisplayed;
+	    ballot.eligibility = eligibility;
+	    return ballot;
+
 	}
 }
 

@@ -18,11 +18,14 @@ class createBallot2 extends JFrame implements ActionListener{
 	private final String numRace = "[0-9]+";
 	public String numberOfRaces;
 	Socket sock;
+	Ballot ballot;
 
 	createBallot2(){}
-	createBallot2(PrintWriter pwOut, BufferedReader brIn){
+	createBallot2(PrintWriter pwOut, BufferedReader brIn, Ballot ballot){
 		this.pwOut = pwOut;
 		this.brIn= brIn;
+		this.ballot = ballot;
+
   		JPanel pnlMain = new JPanel();
   		GroupLayout layout = new GroupLayout(pnlMain);
   		Color bgColor = new Color(176,196,222);
@@ -55,7 +58,7 @@ class createBallot2 extends JFrame implements ActionListener{
 					.addComponent(btnNext))					
 		);
 
-		setSize(650,300);
+		setSize(300,150);
 		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		setTitle("Create An Election");
 		pnlMain.setBackground(bgColor);;
@@ -79,7 +82,7 @@ class createBallot2 extends JFrame implements ActionListener{
 				String strIn = brIn.readLine();
 				if(strIn.equals("<CreateBallot3>")){
 					setVisible(false);
-					new createBallot3(pwOut, brIn, numberOfRaces);		
+					new createBallot3(pwOut, brIn, ballot);		
 				}else{
 					JOptionPane.showMessageDialog(this,strIn, "Error",JOptionPane.PLAIN_MESSAGE);
 				}
@@ -99,6 +102,8 @@ class createBallot2 extends JFrame implements ActionListener{
 			Pattern numPattern = Pattern.compile(numRace);
 			Matcher numElectionMatcher = numPattern.matcher(numElections);
 			numberOfRaces = numElections;
+			ballot.numOfRaces = Integer.valueOf(numberOfRaces);
+
 			if(numElectionMatcher.matches()){		
 				switch(e.getActionCommand()){
 					case "Next":

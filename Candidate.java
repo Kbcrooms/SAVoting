@@ -1,7 +1,7 @@
 class Candidate{
   String stance;
   Student student;
-  Candidate(Student student, String stance){
+  Candidate(Student student){
     this.student= student;
   }
 }

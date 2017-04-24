@@ -52,6 +52,10 @@ class ClientHandler extends Thread{
                 case "<CreateBallot4>":
                  pwOut.println("<CreateBallot4>");
                 break;
+
+                case "<CreateBallotEnd>":
+                  pwOut.println("<CreateBallotEnd>");
+                  break;
                 case "<getElections>":
                   System.out.println("Get Elections Case");
                   pwOut.println(getElections());

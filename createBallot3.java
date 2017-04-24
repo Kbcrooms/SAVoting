@@ -13,28 +13,35 @@ class createBallot3 extends JFrame implements ActionListener{
 	ButtonGroup btnGroupTypeOfRace;
 	PrintWriter pwOut;
 	BufferedReader brIn;
-	String numberOfRaces;
+	//String numberOfRaces;
+
 	Socket sock;
 	private final String numCandidates = "[0-9]+";
 	JRadioButton writeIn;
 	JRadioButton candidate;
 	JTextField txtNumCandidates;
-	String myNumCandidates;
 
+	JTextField txtNameOfRace;
+	String myNumCandidates;
+	Ballot ballot;
+	
 
 	createBallot3(){}
-	createBallot3(PrintWriter pwOut, BufferedReader brIn, String numberOfRaces){
+	createBallot3(PrintWriter pwOut, BufferedReader brIn, Ballot ballot){
 		this.pwOut = pwOut;
 		this.brIn = brIn;
-		this.numberOfRaces = numberOfRaces;
+		this.ballot = ballot;
+		//this.numberOfRaces = numberOfRaces;
+
 		JPanel pnlMain = new JPanel();
 		GroupLayout layout = new GroupLayout(pnlMain);
 		JPanel pnlButtons = new JPanel();
 		Color bgColor = new Color(176,196,222);
 
-		JTextField txtNameOfRace = new JTextField(20);
+		txtNameOfRace = new JTextField(20);
 		JLabel lNameOfRace = new JLabel("Name of Race");
-	        txtNumCandidates = new JTextField(20);
+	    txtNumCandidates = new JTextField(20);
+
 		JLabel lNumCandidates = new JLabel("Number of Candidates");
 
 
@@ -91,9 +98,10 @@ class createBallot3 extends JFrame implements ActionListener{
 		setLocation(x, y);
 		//make sure you can actually see it, starts off false
 	  	setVisible(true);
-		run();
+		run();		
 
 	}
+	
 
 	private void run(){
 		try{
@@ -104,18 +112,22 @@ class createBallot3 extends JFrame implements ActionListener{
 				String strIn = brIn.readLine();
 				if(strIn.equals("<CreateBallot3>")){
 					setVisible(false);
-					new createBallot3(pwOut, brIn, numberOfRaces);
+					new createBallot3(pwOut, brIn, ballot);		
 				}else if(strIn.equals("<CreateBallot4>")){
 					setVisible(false);
-					new createBallot4(pwOut, brIn, numberOfRaces, myNumCandidates);
+					new createBallot4(pwOut, brIn, ballot); //, myNumCandidates);
+				}else if(strIn.equals("<CreateBallotEnd>")){
+					setVisible(false);
+					//new createBallotEnd(pwOut, brIn, ballot);
 				}else{
 					JOptionPane.showMessageDialog(this,strIn, "Error",JOptionPane.PLAIN_MESSAGE);
 				}
-			}
+			}		
 		}catch(IOException e){
 			System.out.println("IOException");
 		}catch(NullPointerException npe){
-			System.out.println("null");
+			System.out.println("null");		
+
 		}
 	}
 
@@ -125,34 +137,40 @@ class createBallot3 extends JFrame implements ActionListener{
 				case "Next":
 					if(btnGroupTypeOfRace.getSelection().getActionCommand().equals("writeIn")){
 					//need to set Candidate Information to NULL
-						int temp = Integer.valueOf(numberOfRaces);
-						temp = temp - 1;
-						numberOfRaces = Integer.toString(temp);
-						if(Integer.valueOf(numberOfRaces) >+ 0){
+						ballot.raceNames.add(txtNameOfRace.getText());
+						ballot.numOfCandidates.add(-1);
+						ballot.numOfRaces--;
+						if(ballot.numOfRaces >= 0){
 							System.out.println("<CreateBallot3>");
-							pwOut.println("<CreateBallot3>");
-						}//else{
+							pwOut.println("<CreateBallot3>");	
+						}else{
 							//Goes to end page
 							//End page should contain all of the information  concerning the Ballot
-						//}
+							System.out.println("<CreateBallotEnd>");
+							pwOut.println("<CreateBallotEnd>");
+						}
 					}
 					if(btnGroupTypeOfRace.getSelection().getActionCommand().equals("candidate")){
 						myNumCandidates = txtNumCandidates.getText();
+						ballot.raceNames.add(txtNameOfRace.getText());
 						Pattern numPattern = Pattern.compile(numCandidates);
 						Matcher numElectionMatcher = numPattern.matcher(myNumCandidates);
 						if(numElectionMatcher.matches()){
-							int temp = Integer.valueOf(numberOfRaces);
-							temp = temp - 1;
-							numberOfRaces = Integer.toString(temp);
-							if(Integer.valueOf(numberOfRaces) >= 0){
+							ballot.numOfCandidates.add(Integer.valueOf(myNumCandidates));
+							ballot.currentNumberOfCandidates = Integer.valueOf(myNumCandidates);
+							ballot.numOfRaces--;
+							if(ballot.numOfRaces >= 0){
 								System.out.println("<CreateBallot4>");
 								pwOut.println("<CreateBallot4>");
-							}//else{
+							}else{
 							//Goes to end page
 							//End page should contain all of the information concerning the Ballot
-							//}
+								System.out.println("<CreateBallotEnd>");
+								pwOut.println("<CreateBallotEnd>");
+							}
 						}else{
-							JOptionPane.showMessageDialog(this, "Invalid Number of Candidates", "Error with Number of Races", JOptionPane.PLAIN_MESSAGE);
+							JOptionPane.showMessageDialog(this, "Invalid Number of Candidates", "Error with Number of Races", JOptionPane.PLAIN_MESSAGE); 		
+
 						}
 					}
 				break;
