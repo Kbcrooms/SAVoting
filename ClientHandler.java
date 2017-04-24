@@ -56,22 +56,25 @@ class ClientHandler extends Thread{
                   System.out.println("Get Elections Case");
                   pwOut.println(getElections());
                 break;
-		case "<certifyElection>":
-		  pwOut.println("<certifyElection>");
-		break;
-		case "<HSOMain>":
-		  pwOut.println("<HSOMain>");
-		break;
-		case "<recountElection>":
-		  pwOut.println("<recountElection>");
-		break;
-		case "<turnoutStatistics>":
-		  pwOut.println("<turnoutStatistics>");
-		break;
-		case "<deleteVote>":
-		  pwOut.println("<deleteVote>");		
-		break;
-		case "<die>" :
+                case "<getElectionInfo>":
+                  pwOut.println(getElectionInfo(data[1].trim()));
+                break;
+            		case "<certifyElection>":
+            		  pwOut.println("<certifyElection>");
+            		break;
+            		case "<HSOMain>":
+            		  pwOut.println("<HSOMain>");
+            		break;
+            		case "<recountElection>":
+            		  pwOut.println("<recountElection>");
+            		break;
+            		case "<turnoutStatistics>":
+            		  pwOut.println("<turnoutStatistics>");
+            		break;
+            		case "<deleteVote>":
+            		  pwOut.println("<deleteVote>");
+            		break;
+            		case "<die>" :
                  die();
                 break;
                 default:
@@ -108,7 +111,7 @@ class ClientHandler extends Thread{
     private void createElection(String [] data){
       if(data.length == 5){
         pwOut.println(server.createElection(data[1].trim(),data[2].trim(),data[3].trim(),data[4]).trim());
-	pwOut.println("<createdelection>");
+	      pwOut.println("<createdelection>");
       }
       else
         pwOut.println("<error>");
@@ -120,6 +123,23 @@ class ClientHandler extends Thread{
         electionsPayload+= "," + elections.get(i).eName;
       }
       return electionsPayload;
+    }
+    private String getElectionInfo(String name){
+      String electionInfo = "<sendElectionInfo>";
+      ArrayList<Election> elections = server.elections;
+      Election e = null;
+      for(int i = 0; i< elections.size();i++){
+        if(elections.get(i).eName.equals(name)){
+          e = elections.get(i);
+        }
+      }
+      if(e==null)
+        return "error";
+      else{
+        electionInfo+=","+e.sDate;
+        electionInfo+=","+e.eDate;
+        return electionInfo;
+      }
     }
     private void createBallot(){
 
