@@ -29,7 +29,7 @@ class ViewTurnoutStat extends JFrame implements ActionListener
 		container.add(pTitle);
 		pTitle.setBackground(new Color(176,196,222));
 
-   int i = 0, numElections = 7/*Actual # goes here*/;
+   int i = 0, numElections = 2/*Actual # goes here*/;
 		JPanel arrayPanels[] = new JPanel[numElections];
 		JLabel electionNames[] = new JLabel[numElections];
 		JButton arrayOfButtons[] = new JButton[numElections];
@@ -45,7 +45,7 @@ class ViewTurnoutStat extends JFrame implements ActionListener
       arrayOfButtons[i].addActionListener(this);
 
 			//Create Labels to go into Panel
-			arrayPanels[i].add(new JLabel("Election Name Here"));
+			arrayPanels[i].add(new JLabel("TestElection" + (i+1)));
 			arrayPanels[i].add(arrayOfButtons[i]);
 
 			//Create Panel + Set color
@@ -90,7 +90,7 @@ class ViewTurnoutStat extends JFrame implements ActionListener
     public void actionPerformed(ActionEvent e){
 			switch(e.getActionCommand()){
 			case "stat":
-				JOptionPane.showMessageDialog(this, "Total number of voters: ", "Turnout Statistics", JOptionPane.PLAIN_MESSAGE);
+				JOptionPane.showMessageDialog(this, "Total number of voters: 1", "Turnout Statistics", JOptionPane.PLAIN_MESSAGE);
 				System.out.println("<HSOMain>");
 				pwOut.println("<HSOMain>");
 				break;

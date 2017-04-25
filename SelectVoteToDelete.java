@@ -32,12 +32,12 @@ class SelectVoteToDelete extends JPanel implements ActionListener, ListSelection
     frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		//Add student ID's here
-		int numElections = 50/*# goes here*/;
+		int numElections = 1/*# goes here*/;
 		int i = 0;
 		listModel = new DefaultListModel();
 		while(i<numElections)
 		{
-			listModel.addElement("Person " + (i+1));	/*ID's go here*/ 
+			listModel.addElement("testuser");	/*ID's go here*/ 
 			++i;
 		}
 		
