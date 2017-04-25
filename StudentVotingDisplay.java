@@ -36,12 +36,13 @@ class StudentVotingDisplay extends JFrame implements ActionListener{
             panelMain.add(new JLabel(race[1]));
             ButtonGroup candidates = new ButtonGroup();
             for(int i = 2; i< race.length;i=i+2){
-              JButton candidateBtn = new JButton(race[i+1]);
+              JRadioButton candidateBtn = new JRadioButton(race[i+1]);
               candidateBtn.setActionCommand(","+race[1]+","+race[i]);
               candidates.add(candidateBtn);
               candidateBtn.addActionListener(this);
               panelMain.add(candidateBtn);
             }
+            panelMain.add(new JSeparator(SwingConstants.HORIZONTAL));
             raceChoices.add(candidates);
             parseLine = brIn.readLine();
           }

@@ -15,6 +15,8 @@ class Ballot{
   //Candidates for that race.
   ArrayList<Integer> numOfCandidates;
   ArrayList<ArrayList<Candidate>> raceCandidates;
+  ArrayList<ArrayList<String>> votes;
+
   ArrayList<String> raceNames;
   int currentNumberOfCandidates;
 
@@ -27,6 +29,7 @@ class Ballot{
     raceCandidates = new ArrayList<ArrayList<Candidate>>();
     raceNames = new ArrayList<String>();
     eligibility = new ArrayList<Boolean>();
+    votes =   new ArrayList<ArrayList<String>>();
   }
   public boolean vote(String candidateID){
     for(int i=0; i<candidates.size();i++){
