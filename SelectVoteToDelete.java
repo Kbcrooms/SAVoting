@@ -1,19 +1,35 @@
 import javax.swing.*;
 import javax.swing.event.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
 import java.awt.event.*;
 import java.awt.event.*;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.awt.Toolkit;
+import java.awt.Dimension;
+import java.net.*;
+import java.io.*;
 
 class SelectVoteToDelete extends JPanel implements ActionListener, ListSelectionListener
 {
 	private JList list;
 	private JButton deleteButton;
 	private DefaultListModel listModel;
-  SelectVoteToDelete()
+   PrintWriter pwOut;
+   BufferedReader brIn;
+   Socket sock;
+   JFrame frame;
+
+  SelectVoteToDelete(){}
+  SelectVoteToDelete(PrintWriter pwOut, BufferedReader brIn)
 	{
 		super(new BorderLayout());
+		this.pwOut = pwOut;
+    		this.brIn = brIn;
+
+		JFrame frame = new JFrame("Vote Deletion");
+    frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		//Add student ID's here
 		int numElections = 50/*# goes here*/;
@@ -46,8 +62,11 @@ class SelectVoteToDelete extends JPanel implements ActionListener, ListSelection
     buttonPanel.setBorder(BorderFactory.createEmptyBorder(20,10,20,10));
 		buttonPanel.setBackground(new Color(176,196,222));
  
-    add(listScrollPane, BorderLayout.CENTER);
-    add(buttonPanel, BorderLayout.PAGE_END);
+		//Add list to frame
+    frame.add(listScrollPane, BorderLayout.CENTER);
+    frame.add(buttonPanel, BorderLayout.PAGE_END);
+    frame.setSize(600, 350);
+    frame.setVisible(true);
 		
    }
     
@@ -78,12 +97,6 @@ class SelectVoteToDelete extends JPanel implements ActionListener, ListSelection
     }
     public static void main(String args[])
 		{
-			JFrame frame = new JFrame("Vote Deletion");
-      frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-    	JComponent mainPane = new SelectVoteToDelete();
-
-			frame.add(mainPane);	//Add list to frame
-			frame.setSize(600, 350);
-    	frame.setVisible(true);
+    	 new SelectVoteToDelete();
     }
 }

@@ -60,6 +60,9 @@ class ClientHandler extends Thread{
                   System.out.println("Get Elections Case");
                   pwOut.println(getElections());
                 break;
+		case "<DeleteSingleVote>":
+		  pwOut.println("<DeleteSingleVote>");
+      		break;
                 case "<getElectionInfo>":
                   pwOut.println(getElectionInfo(data[1].trim()));
                 break;
