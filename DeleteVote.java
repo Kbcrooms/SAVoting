@@ -32,7 +32,7 @@ class DeleteVote extends JFrame implements ActionListener
 		container.add(pTitle);
 		pTitle.setBackground(new Color(176,196,222));
 
-   int i = 0, numElections = 7/*Actual # goes here*/;
+   int i = 0, numElections = 2/*Actual # goes here*/;
 		JPanel arrayPanels[] = new JPanel[numElections];
 		JLabel electionNames[] = new JLabel[numElections];
 		JButton arrayOfButtons[] = new JButton[numElections];
@@ -48,7 +48,7 @@ class DeleteVote extends JFrame implements ActionListener
       arrayOfButtons[i].addActionListener(this);
 
 			//Create Labels to go into Panel
-			arrayPanels[i].add(new JLabel("Election Name Here"));
+			arrayPanels[i].add(new JLabel("TestElection" + (i+1)));
 			arrayPanels[i].add(arrayOfButtons[i]);
 
 			//Create Panel + Set color
