@@ -40,31 +40,34 @@ class UploadCandidateInfo extends JFrame implements ActionListener{
 		layout.setAutoCreateContainerGaps(true);
 
 		layout.setHorizontalGroup(
-			layout.createSequentialGroup()
-				.addGroup(layout.createParallelGroup(GroupLayout.Alignment.CENTER)
-					.addGroup(layout.createParallelGroup()
-						.addComponent(lName)
-						.addComponent(txtName)
-						.addComponent(lMajor)
-						.addComponent(txtMajor)
-						.addComponent(lCollege)
-						.addComponent(txtCollege)
-						.addComponent(lStances)
-						.addComponent(txtStances)))
-		);
+					  layout.createSequentialGroup()
+					  .addGroup(layout.createParallelGroup(GroupLayout.Alignment.CENTER)
+						    .addGroup(layout.createParallelGroup()
+							      .addComponent(lName)
+							      .addComponent(txtName)
+							      .addComponent(lMajor)
+							      .addComponent(txtMajor)
+							      .addComponent(lCollege)
+							      .addComponent(txtCollege)
+							      .addComponent(lStances)
+							      .addComponent(txtStances)
+							      .addComponent(btnSubmit)))
+					  
+					  );
 		layout.setVerticalGroup(
-			layout.createParallelGroup()
-				.addGroup(layout.createParallelGroup()
-					.addGroup(layout.createSequentialGroup()
-						.addComponent(lName)
-						.addComponent(txtName)
-						.addComponent(lMajor)
-						.addComponent(txtMajor)
-						.addComponent(lCollege)
-						.addComponent(txtCollege)
-						.addComponent(lStances)
-						.addComponent(txtStances)))
-		);
+					layout.createParallelGroup()
+					.addGroup(layout.createParallelGroup()
+						  .addGroup(layout.createSequentialGroup()
+							    .addComponent(lName)
+							    .addComponent(txtName)
+							    .addComponent(lMajor)
+							    .addComponent(txtMajor)
+							    .addComponent(lCollege)
+							    .addComponent(txtCollege)
+							    .addComponent(lStances)
+							    .addComponent(txtStances)
+							    .addComponent(btnSubmit)))
+					);
 
 		setSize(650,300);
 		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
