@@ -145,7 +145,7 @@ class ClientHandler extends Thread{
       for(int i = 0; i< elections.size();i++){
         if(elections.get(i).eName.equals(name)){
           e = elections.get(i);
-          System.out.println("Found Election in Question: "+eName);
+          System.out.println("Found Election in Question: "+name);
         }
       }
       if(e==null)
@@ -166,7 +166,7 @@ class ClientHandler extends Thread{
       }
     }
     private void createBallot(String[] data){
-      String username = data[0];
+      String username = data[1];
       Ballot ballot = new Ballot();
       for(int i=2;i<data.length;i++){
         if(data[i].equals("true"))
@@ -193,9 +193,11 @@ class ClientHandler extends Thread{
       }
       ArrayList<Election> elections = server.elections;
       for(int i =0; i< elections.size(); i++){
-        if(elections.get(i).eComID.equals(username))
+        System.out.println(elections.get(i).eComID+" "+username);
+        if(elections.get(i).eComID.equals(username)){
           elections.get(i).ballot = ballot;
-        System.out.println("Added ballot to election");
+          System.out.println(elections.get(i).eName);
+        }
       }
     }
     private void addVote(String[] data){
