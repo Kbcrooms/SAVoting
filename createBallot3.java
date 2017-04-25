@@ -53,6 +53,7 @@ class createBallot3 extends JFrame implements ActionListener{
 		btnGroupTypeOfRace.add(writeIn);
 		candidate = new JRadioButton("Candidate Election");
 		candidate.setActionCommand("candidate");
+		candidate.setSelected(true);
 		btnGroupTypeOfRace.add(candidate);
 		pnlButtons.add(lblTypeOfElection);
 		pnlButtons.add(writeIn);

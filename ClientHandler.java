@@ -64,7 +64,7 @@ class ClientHandler extends Thread{
 		  pwOut.println("<DeleteSingleVote>");
       		break;
                 case "<getElectionInfo>":
-                  pwOut.println(getElectionInfo(data[1].trim()));
+                  getElectionInfo(data[1].trim());
                 break;
             		case "<certifyElection>":
             		  pwOut.println("<certifyElection>");
@@ -83,6 +83,9 @@ class ClientHandler extends Thread{
             		break;
                 case "<startBallot>":
                   createBallot(data);
+                break;
+                case "<vote>":
+                  System.out.println(line);
                 break;
             		case "<die>" :
                  die();
@@ -135,21 +138,31 @@ class ClientHandler extends Thread{
       }
       return electionsPayload;
     }
-    private String getElectionInfo(String name){
-      String electionInfo = "<sendElectionInfo>";
+    private void getElectionInfo(String name){
+      String electionInfo = "<sendElectionInfoStart>";
       ArrayList<Election> elections = server.elections;
       Election e = null;
       for(int i = 0; i< elections.size();i++){
         if(elections.get(i).eName.equals(name)){
           e = elections.get(i);
+          System.out.println("Found Election in Question: "+eName);
         }
       }
       if(e==null)
-        return "error";
+        pwOut.println("error");
       else{
         electionInfo+=","+e.sDate;
         electionInfo+=","+e.eDate;
-        return electionInfo;
+        pwOut.println(electionInfo);
+        Ballot ballot = e.ballot;
+        for(int i=0; i< ballot.raceNames.size();i++){
+  				String race = "<race>,"+ballot.raceNames.get(i);
+  				for(int j=0; j<ballot.raceCandidates.get(i).size();j++){
+  					race+= ","+ ballot.raceCandidates.get(i).get(j).student.username+","+ballot.raceCandidates.get(i).get(j).student.name;
+  				}
+  				pwOut.println(race);
+  			}
+        pwOut.println("<sendElectionInfoEnd>");
       }
     }
     private void createBallot(String[] data){
@@ -164,11 +177,12 @@ class ClientHandler extends Thread{
       try{
         String parseLine = brIn.readLine();
         while(!parseLine.equals("<endBallot>")){
+          System.out.println("Race Adding Running");
           String[] race=parseLine.split(",");
-          ballot.raceNames.add(race[0]);
+          ballot.raceNames.add(race[1]);
           ArrayList<Candidate> candidates = new ArrayList<Candidate>();
-          for(int i = 1; i< race.length;i=i+2){
-            //candidates.add(new Candidate(new Student(race[i],race[i+1])));
+          for(int i = 2; i< race.length;i=i+2){
+            candidates.add(new Candidate(new Student(race[i],race[i+1])));
           }
           ballot.raceCandidates.add(candidates);
           parseLine = brIn.readLine();
@@ -183,6 +197,9 @@ class ClientHandler extends Thread{
           elections.get(i).ballot = ballot;
         System.out.println("Added ballot to election");
       }
+    }
+    private void addVote(String[] data){
+
     }
     private void die(){
         try{
