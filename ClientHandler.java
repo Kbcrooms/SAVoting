@@ -28,70 +28,73 @@ class ClientHandler extends Thread{
               System.out.println(line);
               String [] data = line.split(",");
               switch (data[0].trim()){
-                case "<add>":
+	      case "<add>":
                   addUser(data);
-                break;
-                case "<login>":
+		  break;
+	      case "<login>":
                   loginUser(data);
-                break;
-                case "<election>":
+		  break;
+	      case "<election>":
                   createElection(data);
-                break;
-                case "<createElection>":
+		  break;
+	      case "<createElection>":
                   pwOut.println("<createElection>");
-                break;
-                case "<createBallot>":
-                 pwOut.println("<createBallot>");
-                break;
-                case "<CreateBallot2>":
-                 pwOut.println("<CreateBallot2>");
-                break;
-                case "<CreateBallot3>":
-                 pwOut.println("<CreateBallot3>");
-                break;
-                case "<CreateBallot4>":
-                 pwOut.println("<CreateBallot4>");
-                break;
-
-                case "<CreateBallotEnd>":
+		  break;
+	      case "<createBallot>":
+		  pwOut.println("<createBallot>");
+		  break;
+	      case "<CreateBallot2>":
+		  pwOut.println("<CreateBallot2>");
+		  break;
+	      case "<CreateBallot3>":
+		  pwOut.println("<CreateBallot3>");
+		  break;
+	      case "<CreateBallot4>":
+		  pwOut.println("<CreateBallot4>");
+		  break;
+		  
+	      case "<CreateBallotEnd>":
                   pwOut.println("<CreateBallotEnd>");
                   break;
-                case "<getElections>":
+	      case "<getElections>":
                   System.out.println("Get Elections Case");
                   pwOut.println(getElections());
-                break;
-		case "<DeleteSingleVote>":
+		  break;
+	      case "<DeleteSingleVote>":
 		  pwOut.println("<DeleteSingleVote>");
-      		break;
-                case "<getElectionInfo>":
+		  break;
+	      case "<getElectionInfo>":
                   getElectionInfo(data[1].trim());
-                break;
-            		case "<certifyElection>":
-            		  pwOut.println("<certifyElection>");
-            		break;
-            		case "<HSOMain>":
-            		  pwOut.println("<HSOMain>");
-            		break;
-            		case "<recountElection>":
-            		  pwOut.println("<recountElection>");
-            		break;
-            		case "<turnoutStatistics>":
-            		  pwOut.println("<turnoutStatistics>");
-            		break;
-            		case "<deleteVote>":
-            		  pwOut.println("<deleteVote>");
-            		break;
-                case "<startBallot>":
+		  break;
+	      case "<certifyElection>":
+		  pwOut.println("<certifyElection>");
+		  break;
+	      case "<HSOMain>":
+		  pwOut.println("<HSOMain>");
+		  break;
+	      case "<recountElection>":
+		  pwOut.println("<recountElection>");
+		  break;
+	      case "<turnoutStatistics>":
+		  pwOut.println("<turnoutStatistics>");
+		  break;
+	      case "<deleteVote>":
+		  pwOut.println("<deleteVote>");
+		  break;
+	      case "<startBallot>":
                   createBallot(data);
                 break;
-                case "<vote>":
+	      case "<candidate>":
+		  System.out.println("<candidate>");
+		  break;
+	      case "<vote>":
                   System.out.println(line);
-                break;
-            		case "<die>" :
-                 die();
-                break;
-                default:
-                 pwOut.println("<error>");
+		  break;
+	      case "<die>" :
+		  die();
+		  break;
+	      default:
+		  pwOut.println("<error>");
               }
             }
         }

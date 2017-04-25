@@ -83,19 +83,14 @@ class UploadCandidateInfo extends JFrame implements ActionListener{
 	}
 
 	public void actionPerformed(ActionEvent e){
-		if(!sock.isClosed()){		
-			switch(e.getActionCommand()){
-				case "Next":
-					//System.out.println("<CreateBallot3>");
-					//pwOut.println("<CreateBallot3>");
-				break;				
-			}
+		if(!sock.isClosed()){
+		    setVisible(false);
 		}else{
-			JOptionPane.showMessageDialog(this, "Socket is Closed", "Error", JOptionPane.ERROR_MESSAGE);		
+		    JOptionPane.showMessageDialog(this, "Socket is Closed", "Error", JOptionPane.ERROR_MESSAGE);		
 		}
-
+		
 	}
-
+    
 	public static void main(String args[]){
 		new UploadCandidateInfo();
 	}

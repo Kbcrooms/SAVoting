@@ -144,6 +144,10 @@ class Client extends JFrame implements ActionListener{
 		              new ECMain(pwOut,brIn,username);
 		              setVisible(false);
                 }
+		else if(strIn.startsWith("<candidate>")){
+		    new CandidateMain();
+		    setVisible(false);
+		}
                 else{
                     //JOptionPane.showMessageDialog(this,strIn,"Error",JOptionPane.PLAIN_MESSAGE);
                 }

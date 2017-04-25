@@ -13,6 +13,7 @@ class Server extends Thread{
     ArrayList<Election> elections;
     Election testElection;
     ServerSocket ss;
+    Student testCan;
 
     File f;
     FileOutputStream fileOut = null;
@@ -24,6 +25,7 @@ class Server extends Thread{
     Server(){
         admins = new Hashtable<String,String>();
         students = new Hashtable<String,Student>();
+	testCan = new Student("testCandidate","password");
 	      electionCom = new Hashtable<String,Student>();
         elections = new ArrayList<Election>();
         testElection = new Election();
@@ -115,7 +117,9 @@ class Server extends Thread{
           if (tempPass != null && tempPass.equals(strPass)){
             return "<student>";
           }
-        }
+        }else if(testCan.username.equals(strUser)){
+	    return "<candidate>";
+	}
         return "<invalid>";
     }
     public String createElection(String eName, String eComID, String eStart, String eEnd){
