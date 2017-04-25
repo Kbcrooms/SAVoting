@@ -24,7 +24,7 @@ class VoterDemographics extends JFrame implements ActionListener
 		JPanel pTitle = new JPanel(new FlowLayout(FlowLayout.CENTER));
 		JLabel lTitle = new JLabel("Closed Elections");
 		container.setLayout(new BoxLayout(container, BoxLayout.PAGE_AXIS));
-		
+
 		pTitle.add(lTitle);
 		frame.add(container);
 		container.add(pTitle);
@@ -57,13 +57,13 @@ class VoterDemographics extends JFrame implements ActionListener
 
 		frame.setSize(600, 350);
     frame.setVisible(true);
-		
+
    }
-    
+
     public void actionPerformed(ActionEvent e){
 			switch(e.getActionCommand()){
 			case "demo":
-							JOptionPane.showMessageDialog(this, "Males:  " /*+ # here*/ + "\nFemales: "  /*# here*/ + "\nFreshman: "  /*# here*/ + "\nSophmore: "  /*# here*/+ "\nJunior: "  /*# here*/+ "\nSenior: "  /*# here*/+ "\nGraduate: "  /*# here*/+ "\nProfessional: " /*# here*/ + "\nMedical College: " /*# here*/ + "\nEngineering College: " /*# here*/ + "\nClub/Organization: " /*# here*/, "Demographics Information", JOptionPane.PLAIN_MESSAGE);
+							JOptionPane.showMessageDialog(this, "Males: 1 " /*+ # here* + "\nFemales: "  /*# here*/ + "\nFreshman: 0"  /*# here*/ + "\nSophmore: 0"  /*# here*/+ "\nJunior: 0"  /*# here*/+ "\nSenior: 1"  /*# here*/+ "\nGraduate: 0"  /*# here*/+ "\nProfessional: 0" /*# here*/ + "\nMedical College: 0" /*# here*/ + "\nEngineering College: 1" /*# here*/ + "\nClub/Organization: " /*# here*/, "Demographics Information", JOptionPane.PLAIN_MESSAGE);
 			break;
 							}
     }
