@@ -86,11 +86,8 @@ class UploadCandidateInfo extends JFrame implements ActionListener{
 	}
 
 	public void actionPerformed(ActionEvent e){
-		if(!sock.isClosed()){
-		    setVisible(false);
-		}else{
-		    JOptionPane.showMessageDialog(this, "Socket is Closed", "Error", JOptionPane.ERROR_MESSAGE);		
-		}
+	    setVisible(false);
+	    new CandidateMain();
 		
 	}
     
