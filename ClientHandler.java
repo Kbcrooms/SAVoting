@@ -176,15 +176,19 @@ class ClientHandler extends Thread{
       }
       try{
         String parseLine = brIn.readLine();
+        int raceIndex = 0;
         while(!parseLine.equals("<endBallot>")){
           System.out.println("Race Adding Running");
           String[] race=parseLine.split(",");
           ballot.raceNames.add(race[1]);
           ArrayList<Candidate> candidates = new ArrayList<Candidate>();
+          ballot.votes.add(new ArrayList<ArrayList<String>>());
           for(int i = 2; i< race.length;i=i+2){
             candidates.add(new Candidate(new Student(race[i],race[i+1])));
+            ballot.votes.get(raceIndex).add(new ArrayList<String>());
           }
           ballot.raceCandidates.add(candidates);
+          raceIndex++;
           parseLine = brIn.readLine();
         }
       }
@@ -201,7 +205,13 @@ class ClientHandler extends Thread{
       }
     }
     private void addVote(String[] data){
-
+      ArrayList<Election> elections = server.elections;
+      for(int i =0; i< elections.size(); i++){
+        if(elections.get(i).eName.equals(data[1])){
+          elections.get(i);
+          System.out.println(elections.get(i).eName);
+        }
+      }
     }
     private void die(){
         try{

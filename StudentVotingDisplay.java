@@ -68,8 +68,8 @@ class StudentVotingDisplay extends JFrame implements ActionListener{
     if(e.getActionCommand().equals("submit")){
       pwOut.println();
       for(int i=0;i<raceChoices.size();i++){
-        pwOut.println("<vote>"+raceChoices.get(i).getSelection().getActionCommand());
-        System.out.println("<vote>"+raceChoices.get(i).getSelection().getActionCommand());
+        pwOut.println("<vote>"+","+eName+raceChoices.get(i).getSelection().getActionCommand());
+        System.out.println("<vote>"+","+eName+raceChoices.get(i).getSelection().getActionCommand());
       }
     }
   }
